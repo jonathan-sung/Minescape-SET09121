@@ -61,11 +61,13 @@ void Level3Scene::UnLoad() {
 void Level3Scene::Update(const double& dt) {
   Scene::Update(dt);
   const auto pp = player->getPosition();
+  /*
   if (ls::getTileAt(pp) == ls::END) {
     Engine::ChangeScene((Scene*)&level1);
   } else if (!player->isAlive()) {
     Engine::ChangeScene((Scene*)&level3);
   }
+  */
 
   static float rocktime = 0.0f;
   rocktime -= dt;
