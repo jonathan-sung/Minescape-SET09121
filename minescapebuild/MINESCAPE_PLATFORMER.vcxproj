@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DBF84590-6DA8-3A95-9B2B-A215CBBF9B11}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>MINESCAPE_PLATFORMER</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/GitHub/minescapebuild/bin//$(Configuration)</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHub\minescapebuild\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MINESCAPE_PLATFORMER.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MINESCAPE_PLATFORMER</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/GitHub/minescapebuild/bin//$(Configuration)</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHub\minescapebuild\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MINESCAPE_PLATFORMER.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MINESCAPE_PLATFORMER</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/GitHub/minescapebuild/bin//$(Configuration)</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHub\minescapebuild\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">MINESCAPE_PLATFORMER.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">MINESCAPE_PLATFORMER</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/GitHub/minescapebuild/bin//$(Configuration)</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHub\minescapebuild\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">MINESCAPE_PLATFORMER.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">MINESCAPE_PLATFORMER</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Debug\lib_engine.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;Debug\lib_tile_level_loader.lib;Debug\lib_ecm.lib;Build\bin\Debug\Box2D.lib;lib\sfml\lib\Debug\sfml-graphics-d.lib;lib\sfml\lib\Debug\sfml-window-d.lib;lib\sfml\lib\Debug\sfml-audio-d.lib;lib\sfml\lib\Debug\sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/GitHub/minescapebuild/lib/sfml/lib;D:/GitHub/minescapebuild/lib/sfml/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/minescapebuild/Debug/MINESCAPE_PLATFORMER.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/minescapebuild/bin/Debug/MINESCAPE_PLATFORMER.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Release\lib_engine.lib;lib\sfml\lib\Release\sfml-audio.lib;lib\sfml\lib\Release\sfml-main.lib;Release\lib_tile_level_loader.lib;lib\sfml\lib\Release\sfml-graphics.lib;lib\sfml\lib\Release\sfml-window.lib;lib\sfml\lib\Release\sfml-system.lib;Release\lib_ecm.lib;Build\bin\Release\Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/GitHub/minescapebuild/lib/sfml/lib;D:/GitHub/minescapebuild/lib/sfml/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/minescapebuild/Release/MINESCAPE_PLATFORMER.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/minescapebuild/bin/Release/MINESCAPE_PLATFORMER.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>MinSizeRel\lib_engine.lib;lib\sfml\lib\MinSizeRel\sfml-audio.lib;lib\sfml\lib\MinSizeRel\sfml-main.lib;MinSizeRel\lib_tile_level_loader.lib;lib\sfml\lib\MinSizeRel\sfml-graphics.lib;lib\sfml\lib\MinSizeRel\sfml-window.lib;lib\sfml\lib\MinSizeRel\sfml-system.lib;MinSizeRel\lib_ecm.lib;Build\bin\MinSizeRel\Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/GitHub/minescapebuild/lib/sfml/lib;D:/GitHub/minescapebuild/lib/sfml/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/minescapebuild/MinSizeRel/MINESCAPE_PLATFORMER.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/minescapebuild/bin/MinSizeRel/MINESCAPE_PLATFORMER.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHub\minescape\engine\src;D:\GitHub\minescape\SYSTEM;D:\GitHub\minescape\lib\b2d\Box2D;D:\GitHub\minescape\engine\lib_tile_level_loader;D:\GitHub\minescape\engine\lib_maths;D:\GitHub\minescape\lib\sfml\include;D:\GitHub\minescape\engine\lib_ecm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>RelWithDebInfo\lib_engine.lib;lib\sfml\lib\RelWithDebInfo\sfml-audio.lib;lib\sfml\lib\RelWithDebInfo\sfml-main.lib;RelWithDebInfo\lib_tile_level_loader.lib;lib\sfml\lib\RelWithDebInfo\sfml-graphics.lib;lib\sfml\lib\RelWithDebInfo\sfml-window.lib;lib\sfml\lib\RelWithDebInfo\sfml-system.lib;RelWithDebInfo\lib_ecm.lib;Build\bin\RelWithDebInfo\Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/GitHub/minescapebuild/lib/sfml/lib;D:/GitHub/minescapebuild/lib/sfml/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/minescapebuild/RelWithDebInfo/MINESCAPE_PLATFORMER.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/minescapebuild/bin/RelWithDebInfo/MINESCAPE_PLATFORMER.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\minescape\CMakeLists.txt">
+      <StdOutEncoding>UTF-8</StdOutEncoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHub/minescape/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHub/minescape -BD:/GitHub/minescapebuild --check-stamp-file D:/GitHub/minescapebuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\InstallRequiredSystemLibraries.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.19\Templates\CPackConfig.cmake.in;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCXXCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeRCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHub\minescapebuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHub/minescape/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHub/minescape -BD:/GitHub/minescapebuild --check-stamp-file D:/GitHub/minescapebuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\InstallRequiredSystemLibraries.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.19\Templates\CPackConfig.cmake.in;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCXXCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeRCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHub\minescapebuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHub/minescape/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHub/minescape -BD:/GitHub/minescapebuild --check-stamp-file D:/GitHub/minescapebuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\InstallRequiredSystemLibraries.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.19\Templates\CPackConfig.cmake.in;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCXXCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeRCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHub\minescapebuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHub/minescape/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHub/minescape -BD:/GitHub/minescapebuild --check-stamp-file D:/GitHub/minescapebuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\InstallRequiredSystemLibraries.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.19\Templates\CPackConfig.cmake.in;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeCXXCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeRCCompiler.cmake;D:\GitHub\minescapebuild\CMakeFiles\3.19.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHub\minescapebuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_actor_movement.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_actor_movement.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_bullet.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_bullet.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_enemy_ai.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_enemy_ai.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_enemy_turret.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_enemy_turret.h" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_hurt_player.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_hut_player.cpp" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_physics.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_physics.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_player_physics.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_player_physics.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_sprite.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_sprite.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\components\cmp_text.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\components\cmp_text.h" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\game.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\platformer_main.cpp" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\scenes\scene_level1.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\scenes\scene_level1.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\scenes\scene_level2.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\scenes\scene_level2.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\scenes\scene_level3.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\scenes\scene_level3.h" />
+    <ClCompile Include="D:\GitHub\minescape\minescape\scenes\scene_menu.cpp" />
+    <ClInclude Include="D:\GitHub\minescape\minescape\scenes\scene_menu.h" />
+    <None Include="D:\GitHub\minescape\res\fonts\RobotoMono-Regular.ttf">
+    </None>
+    <None Include="D:\GitHub\minescape\res\level_1.txt">
+    </None>
+    <ClInclude Include="D:\GitHub\minescape\engine\lib_maths\maths.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\GitHub\minescapebuild\ZERO_CHECK.vcxproj">
+      <Project>{36E56C54-7965-3962-A055-A576DA3C8954}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\b2d\Box2D\Box2D.vcxproj">
+      <Project>{44735562-F9FC-3577-9C70-198B7ACB2263}</Project>
+      <Name>Box2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\copy_resources.vcxproj">
+      <Project>{0722BE76-D380-388E-8FB6-8E54EB455BB5}</Project>
+      <Name>copy_resources</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib_ecm.vcxproj">
+      <Project>{E44D665B-ED00-3054-9916-05056FEEA092}</Project>
+      <Name>lib_ecm</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib_engine.vcxproj">
+      <Project>{4156F90C-304F-3763-A327-4963D8E6D0D1}</Project>
+      <Name>lib_engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib_tile_level_loader.vcxproj">
+      <Project>{A0FF690A-689C-33D5-8645-79E4A74B9948}</Project>
+      <Name>lib_tile_level_loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\sfml\src\SFML\Audio\sfml-audio.vcxproj">
+      <Project>{35485D1F-0554-340D-A21C-8E73F5671677}</Project>
+      <Name>sfml-audio</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\sfml\src\SFML\Graphics\sfml-graphics.vcxproj">
+      <Project>{421CF71F-34A3-35EB-B7A6-6B5F983462A5}</Project>
+      <Name>sfml-graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\sfml\src\SFML\Main\sfml-main.vcxproj">
+      <Project>{B8E9DABC-FF16-3D5B-AF28-A08CBA9E4793}</Project>
+      <Name>sfml-main</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\sfml\src\SFML\System\sfml-system.vcxproj">
+      <Project>{0F529E61-5EB6-3020-B2A6-DC2E7E73C569}</Project>
+      <Name>sfml-system</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHub\minescapebuild\lib\sfml\src\SFML\Window\sfml-window.vcxproj">
+      <Project>{73BFA599-4C1D-335A-A44F-12916C16917A}</Project>
+      <Name>sfml-window</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

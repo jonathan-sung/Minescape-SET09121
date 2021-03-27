@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHub\minescape\engine\src\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\minescape\engine\src\system_physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\minescape\engine\src\system_renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\minescape\engine\src\system_resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHub\minescape\engine\src\engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\minescape\engine\src\system_physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\minescape\engine\src\system_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\minescape\engine\src\system_resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\minescape\engine\lib_maths\maths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\minescape\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="D:\GitHub\minescape\res\img\dat_boi.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="D:\GitHub\minescape\res\img\invaders_sheet.png">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\GitHub\minescape\res\fonts\RobotoMono-Regular.ttf">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="D:\GitHub\minescape\res\level_1.txt">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{AE4996D0-A0DC-38BC-8019-26FB557A7897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1F17037A-6EAB-3765-9064-C8BEA29ECBF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{901C2180-77A8-317A-B039-10B1C2106FF3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

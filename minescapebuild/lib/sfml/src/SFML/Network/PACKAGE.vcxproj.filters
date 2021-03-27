@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\minescapebuild\CMakeFiles\86671a5143d2cef8bc57bb6bed359960\PACKAGE_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DEC9EE8A-BB96-3D94-9708-DAD8F402451E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

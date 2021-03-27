@@ -1,0 +1,16 @@
+﻿  Building Custom Rule D:/GitHub/minescape/CMakeLists.txt
+  engine.cpp
+  system_physics.cpp
+  system_renderer.cpp
+  system_resources.cpp
+D:\GitHub\minescape\engine\src\engine.cpp(37,45): warning C4244: 'argument': conversion from 'const _Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\GitHub\minescape\engine\src\engine.cpp(39,39): warning C4244: 'argument': conversion from 'const _Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  lib_engine.vcxproj -> D:\GitHub\minescapebuild\Debug\lib_engine.lib
