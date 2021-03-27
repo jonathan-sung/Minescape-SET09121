@@ -1,2 +1,0 @@
-D:\GitHub\minescapebuild\Debug\lib_ecm.pdb
-D:\GitHub\minescapebuild\lib_ecm.dir\Debug\lib_ecm.pdb

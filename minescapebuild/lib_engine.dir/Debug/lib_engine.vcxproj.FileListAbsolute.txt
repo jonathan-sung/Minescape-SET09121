@@ -1,2 +1,0 @@
-D:\GitHub\minescapebuild\Debug\lib_engine.pdb
-D:\GitHub\minescapebuild\lib_engine.dir\Debug\lib_engine.pdb
