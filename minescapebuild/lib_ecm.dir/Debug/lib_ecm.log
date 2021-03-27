@@ -1,0 +1,6 @@
+﻿  Building Custom Rule D:/GitHub/minescape/CMakeLists.txt
+  ecm.cpp
+D:\GitHub\minescape\engine\lib_ecm\ecm.cpp(68,30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\minescape\engine\lib_ecm\ecm.cpp(76,1): warning C4297: 'Entity::~Entity': function assumed not to throw an exception but does
+D:\GitHub\minescape\engine\lib_ecm\ecm.cpp(76,1): message : destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  lib_ecm.vcxproj -> D:\GitHub\minescapebuild\Debug\lib_ecm.lib

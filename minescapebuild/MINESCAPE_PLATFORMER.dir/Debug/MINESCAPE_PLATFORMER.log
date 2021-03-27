@@ -1,0 +1,27 @@
+﻿  Building Custom Rule D:/GitHub/minescape/CMakeLists.txt
+  cmp_actor_movement.cpp
+  cmp_bullet.cpp
+  cmp_enemy_ai.cpp
+  cmp_enemy_turret.cpp
+  cmp_hut_player.cpp
+  cmp_physics.cpp
+  cmp_player_physics.cpp
+  cmp_sprite.cpp
+  cmp_text.cpp
+  platformer_main.cpp
+  scene_level1.cpp
+  scene_level2.cpp
+  scene_level3.cpp
+  scene_menu.cpp
+D:\GitHub\minescape\minescape\components\cmp_bullet.cpp(6,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\minescape\minescape\components\cmp_physics.cpp(35,32): warning C4305: '=': truncation from 'double' to 'float32'
+D:\GitHub\minescape\minescape\components\cmp_physics.cpp(40,32): warning C4305: '=': truncation from 'double' to 'float32'
+D:\GitHub\minescape\minescape\components\cmp_physics.cpp(133,29): warning C4114: same type qualifier used more than once
+D:\GitHub\minescape\minescape\components\cmp_physics.cpp(134,31): warning C4114: same type qualifier used more than once
+D:\GitHub\minescape\minescape\components\cmp_enemy_turret.cpp(10,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\minescape\minescape\components\cmp_enemy_turret.cpp(16,20): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\minescape\minescape\components\cmp_physics.cpp(111): warning C4700: uninitialized local variable 'bc' used
+D:\GitHub\minescape\minescape\scenes\scene_level3.cpp(71,17): warning C4244: '-=': conversion from 'const double' to 'float', possible loss of data
+D:\GitHub\minescape\minescape\components\cmp_sprite.h(39,24): warning C4244: 'argument': conversion from 'float' to 'size_t', possible loss of data (compiling source file D:\GitHub\minescape\minescape\scenes\scene_level2.cpp)
+D:\GitHub\minescape\minescape\scenes\scene_level2.cpp(45): message : see reference to function template instantiation 'void ShapeComponent::setShape<sf::CircleShape,float,float>(float,float)' being compiled
+  MINESCAPE_PLATFORMER.vcxproj -> D:\GitHub\minescapebuild\bin\Debug\MINESCAPE_PLATFORMER.exe

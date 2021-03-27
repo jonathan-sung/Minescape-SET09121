@@ -1,0 +1,2 @@
+D:\GitHub\minescapebuild\Build\bin\Debug\Box2D.pdb
+D:\GitHub\minescapebuild\lib\b2d\Box2D\Box2D.dir\Debug\Box2D.pdb
