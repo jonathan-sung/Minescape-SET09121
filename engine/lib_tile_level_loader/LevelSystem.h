@@ -49,18 +49,23 @@ public:
 
   static float getTileSize();
 
+  static sf::Vector2i LevelSystem::getSpriteIndexFromTileWalls(Tile up, Tile down, Tile left, Tile right, sf::Vector2i offset);
+
 protected:
   static std::unique_ptr<Tile[]> _tiles;
   static size_t _width;
   static size_t _height;
   static sf::Vector2f _offset;
 
-  static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
+  static std::vector<std::unique_ptr<sf::Sprite>> _sprites;
 
   static void buildSprites(bool optimise = true);
 
   static float _tileSize; // for rendering
   static std::map<Tile, sf::Color> _colours;
+  static void Jonathan();
+  static sf::Texture spritesheet;
+  static sf::Sprite invader;
 
 private:
   LevelSystem() = delete;
