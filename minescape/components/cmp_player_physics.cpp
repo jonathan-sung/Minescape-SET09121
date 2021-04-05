@@ -50,7 +50,7 @@ void PlayerPhysicsComponent::update(double dt) {
     }
   } else {
     // Dampen X axis movement
-    dampen({0.9f, 1.0f});
+    dampen({0.3f, 1.0f});
   }
 
   // Handle Jump
@@ -59,7 +59,7 @@ void PlayerPhysicsComponent::update(double dt) {
     if (_grounded) {
       setVelocity(Vector2f(getVelocity().x, 0.f));
       teleport(Vector2f(pos.x, pos.y - 2.0f));
-      impulse(Vector2f(0, -6.f));
+      impulse(Vector2f(0, -10.f));
     }
   }
 
@@ -87,7 +87,7 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
     : PhysicsComponent(p, true, size) {
   _size = sv2_to_bv2(size, true);
   _maxVelocity = Vector2f(200.f, 400.f);
-  _groundspeed = 30.f;
+  _groundspeed = 50.f;
   _grounded = false;
   _body->SetSleepingAllowed(false);
   _body->SetFixedRotation(true);
