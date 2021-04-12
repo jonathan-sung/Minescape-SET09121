@@ -109,7 +109,7 @@ void Engine::Start(unsigned int width, unsigned int height,
   }
   window.close();
   Physics::shutdown();
-  // Render::shutdown();
+  //Render::shutdown();
 }
 
 std::shared_ptr<Entity> Scene::makeEntity() {

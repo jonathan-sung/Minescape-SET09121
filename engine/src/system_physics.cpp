@@ -1,6 +1,7 @@
 
 #include "system_physics.h"
 #include "Box2D/Box2D.h"
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -17,7 +18,7 @@ void initialise() {
   world.reset(new b2World(gravity));
 }
 
-void shutdown() { world.reset(); }
+void shutdown() { try { world.reset(); } catch (exception e) { cout << "error disposing physics" << endl; } }
 
 void update(const double& dt) {
   world->Step((float)dt, velocityIterations, positionIterations);
