@@ -1,6 +1,7 @@
 #include "scene_level1.h"
 #include "../components/cmp_player_physics.h"
 #include "../components/cmp_sprite.h"
+#include "../components/cmp_camera.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
@@ -11,6 +12,7 @@ using namespace sf;
 #define TILE_SIZE 64.0f
 
 static shared_ptr<Entity> player;
+static shared_ptr<Entity> camera;
 
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
@@ -31,6 +33,17 @@ void Level1Scene::Load() {
 	  // *********************************
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+  }
+
+  // Create camera
+  {
+	  // *********************************
+	  camera = makeEntity();
+	  camera->addTag("camera");
+	  //need to change resolution for variable once settings are made
+	  auto c = camera->addComponent<CameraComponent>(Vector2f(1280.0f, 720.0f), Vector2f(0.0f, 0.0f));
+	  c->setTarget(player);
+	  c->setLayer(0);
   }
 
   // Add physics colliders to level tiles.
