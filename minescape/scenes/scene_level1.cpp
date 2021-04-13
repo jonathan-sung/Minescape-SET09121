@@ -6,6 +6,7 @@
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
+#include "../components/cmp_rope.h"
 using namespace std;
 using namespace sf;
 
@@ -33,6 +34,8 @@ void Level1Scene::Load() {
 	  // *********************************
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+	  // *********************************
+	  player->addComponent<RopeComponent>();
   }
 
   // Create camera
