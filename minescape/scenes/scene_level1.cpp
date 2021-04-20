@@ -35,7 +35,7 @@ void Level1Scene::Load() {
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
 	  // *********************************
-	  player->addComponent<RopeComponent>();
+	  player->addComponent<RopeComponent>(500.0f,200.0f);
   }
 
   // Create camera
