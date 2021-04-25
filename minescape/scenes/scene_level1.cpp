@@ -34,9 +34,6 @@ void Level1Scene::Load() {
 		// *********************************
 		player->addTag("player");
 		auto p = player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
-		p->setMass(1000000.f);
-		p->setRestitution(.1f);
-		p->setFriction(.001f);
 	}
 
 	// Create camera
@@ -98,23 +95,31 @@ void Level1Scene::Update(const double& dt) {
 		Engine::ChangeScene((Scene*)&level1);
 	}
 	*/
+
+	//Do rock stuff
 	static float rocktime = 0.0f;
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
 		rocktime = 5.f;
 		auto rock = makeEntity();
+		rock->addTag("rock");
 		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
 			Vector2f(0, 40));
 		rock->addComponent<BulletComponent>(30.f);
-		auto s = rock->addComponent<ShapeComponent>();
-		s->setShape<sf::CircleShape>(40.f);
-		s->getShape().setFillColor(Color::Cyan);
-		s->getShape().setOrigin(40.f, 40.f);
-		auto p = rock->addComponent<PhysicsComponent>(true, Vector2f(75.f, 75.f));
-		p->setRestitution(.4f);
-		p->setFriction(.0001f);
-		p->impulse(Vector2f(-100.f, 0));
+		auto sc = rock->addComponent<SpriteComponent>();
+		//sc->setSprite(ls::spritesheet, sf::IntRect(0 * TILE_SIZE, 0 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		sc->getSprite().setTexture(ls::spritesheet);
+		sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		sc->getSprite().setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+		//sf::Sprite(LevelSystem::spritesheet, sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		//sp->setPosition(t.p);
+		//sp->setTexture(spritesheet);
+		//sp->setTextureRect(sf::IntRect(t.sprite_index.x * _tileSize, t.sprite_index.y * _tileSize, _tileSize, _tileSize));
+		auto p = rock->addComponent<PhysicsComponent>(true, Vector2f(TILE_SIZE, TILE_SIZE));
+		p->setRestitution(0.0000001f);
+		p->setFriction(0.01f);
+		p->impulse(Vector2f(-1.f, -10.f));
 		p->setMass(1000000000.f);
 		p->setCollidable(true);
 	}

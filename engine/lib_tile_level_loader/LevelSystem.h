@@ -50,6 +50,7 @@ public:
   static float getTileSize();
 
   static sf::Vector2i LevelSystem::getSpriteIndexFromTileWalls(Tile up, Tile down, Tile left, Tile right, sf::Vector2i offset);
+  static sf::Texture spritesheet;
 
 protected:
   static std::unique_ptr<Tile[]> _tiles;
@@ -64,7 +65,6 @@ protected:
   static float _tileSize; // for rendering
   static std::map<Tile, sf::Color> _colours;
   static void Jonathan();
-  static sf::Texture spritesheet;
   static sf::Sprite invader;
 
 private:
