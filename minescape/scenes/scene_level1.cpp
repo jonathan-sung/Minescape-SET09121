@@ -7,13 +7,18 @@
 #include <iostream>
 #include <thread>
 #include "../components/cmp_rope.h"
+#include "../components/cmp_gas.h"
+#include "../components/cmp_hurt_player.h"
 using namespace std;
 using namespace sf;
 
 #define TILE_SIZE 64.0f
 
 static shared_ptr<Entity> player;
+static shared_ptr<Entity> gas;
+sf::Texture gasTex;
 static shared_ptr<Entity> camera;
+
 
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
@@ -37,6 +42,24 @@ void Level1Scene::Load() {
 	  // *********************************
 	  player->addComponent<RopeComponent>(500.0f,200.0f);
   }
+	
+  // Create gas
+  {
+	  if (!gasTex.loadFromFile("res/gas.png")) {
+		  cerr << "Failed to load spritesheet!" << std::endl;
+	  }
+	  else {
+		  std::cout << "Spritesheet load successful!" << std::endl;
+	  }
+
+	  // *********************************
+	  gas = makeEntity();
+	  gas->setPosition(Vector2f(0, 500));
+	  auto s = gas->addComponent<SpriteComponent>();
+	  s->getSprite().setTexture(gasTex);
+	  auto g = gas->addComponent<GasComponent>();
+  }
+
 
   // Create camera
   {
@@ -87,6 +110,7 @@ void Level1Scene::Update(const double& dt) {
   Scene::Update(dt);
   */
 	Scene::Update(dt);
+	
 	/*
 	const auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
