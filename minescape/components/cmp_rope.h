@@ -24,6 +24,10 @@ private:
 	b2RopeJointDef rjDef;
 	b2Joint* ropeJoint;
 
+	bool _usable;
+	float _delay;
+	float delaytimer;
+
 	enum RopeState
 	{
 		Ready,
@@ -41,12 +45,15 @@ private:
 	bool isTouchingWall();
 	void createRopeJoint();
 	void disposeOfDistanceJoint();
+	void updateRopePoints();
 	
 public:
 
-	explicit RopeComponent(Entity* p,float launchspeed,float maxlength);
+	explicit RopeComponent(Entity* p,float maxlength, float delay);
 	RopeComponent() = delete;
 
 	void update(double dt) override;
 	void render() override;
+
+	void setUsable(bool usable);
 };
