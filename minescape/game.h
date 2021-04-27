@@ -5,6 +5,7 @@
 #include "scenes/scene_level3.h"
 #include "scenes/scene_menu.h"
 #include "scenes/scene_options.h"
+#include "scenes/scene_keybinds.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
 
@@ -22,9 +23,15 @@ extern enum keybinds
 //extern const sf::Joystick::Axis contControls[6];
 
 
-extern MenuScene menu;
+//############################################
+//Levels
 extern Level1Scene level1;
+
+//############################################
+//Menus
+extern MenuScene menu;
 extern OptionsScene optionscene;
+extern KeybindsScene keyBindScene;
 
 
 //extern Level2Scene level2;

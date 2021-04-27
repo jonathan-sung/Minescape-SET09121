@@ -5,14 +5,14 @@
 using namespace std;
 using namespace sf;
 
-class OptionsScene : public Scene {
+class KeybindsScene : public Scene {
 private:
 
 	int selection;
-	shared_ptr<Entity> options[3];
+	shared_ptr<Entity> options[7];
 public:
-	OptionsScene() = default;
-	~OptionsScene() override = default;
+	KeybindsScene() = default;
+	~KeybindsScene() override = default;
 
 	void Load() override;
 

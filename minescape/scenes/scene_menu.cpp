@@ -13,25 +13,29 @@ void MenuScene::Load() {
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>("Minescape");
-    
+    t->SetSize(64);
+
     auto op1 = makeEntity();
-    op1->setPosition(Vector2f(0,100));
+    op1->setPosition(Vector2f(0,150));
     t = op1->addComponent<TextComponent>("[ Play ]");
     t->setPosition(op1->getPosition());
+    t->SetSize(45);
     options[0] = op1;
     cout << options[0]->getPosition() << endl;
 
     
     auto op2 = makeEntity();
-    op2->setPosition(Vector2f(0,200));
+    op2->setPosition(Vector2f(0,250));
     t = op2->addComponent<TextComponent>("Options");
     t->setPosition(op2->getPosition());
+    t->SetSize(45);
     options[1] = op2;
 
     auto op3 = makeEntity();
-    op3->setPosition(Vector2f(0,300));
+    op3->setPosition(Vector2f(0,400));
     t = op3->addComponent<TextComponent>("Quit");
     t->setPosition(op3->getPosition());
+    t->SetSize(45);
     options[2] = op3;
     
   }

@@ -19,9 +19,15 @@ const Keyboard::Key keyControls[6] =
 
 bool enterDown;
 
-MenuScene menu;
+//#############
+//Levels
 Level1Scene level1;
+
+//#############
+//Menus
+MenuScene menu;
 OptionsScene optionscene;
+KeybindsScene keyBindScene;
 
 /*
 Level2Scene level2;

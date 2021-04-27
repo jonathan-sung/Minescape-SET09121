@@ -19,6 +19,10 @@ public:
 
   void SetText(const std::string& str);
 
+  void SetFont(std::shared_ptr<sf::Font> font);
+
+  void SetSize(int size);
+
 protected:
   std::shared_ptr<sf::Font> _font;
   std::string _string;
