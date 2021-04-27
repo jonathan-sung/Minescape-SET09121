@@ -10,7 +10,7 @@
 
 class LevelSystem {
 public:
-  static void loadLevelFile(const std::string&, float tileSize = 100.0f);
+  static void loadLevelFile(const std::string&, float tileSize = 64.0f);
   static void unload();
   static void render(sf::RenderWindow& window);
 
