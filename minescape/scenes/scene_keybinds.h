@@ -7,7 +7,7 @@ using namespace sf;
 
 class KeybindsScene : public Scene {
 private:
-
+	bool rebinding;
 	int selection;
 	shared_ptr<Entity> options[7];
 public:

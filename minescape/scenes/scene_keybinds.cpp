@@ -3,11 +3,13 @@
 #include "../game.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 using namespace sf;
 
 void KeybindsScene::Load() {
+
     cout << "Options Loaded";
     KeybindsScene::selection = 0;
     {
@@ -66,7 +68,30 @@ void KeybindsScene::Load() {
         options[6] = op7;
         
     }
+    rebinding = false;
     setLoaded(true);
+}
+
+void RebindKey(int index)
+{
+    Event event;
+    bool done = false;
+    while (!done)
+    {
+        while (Engine::GetWindow().pollEvent(event)) {
+            if (event.type == Event::KeyPressed) {
+                keyControls[index] = event.key.code;
+                cout << "Redbinded:" << index << " to " << to_string(keyControls[index]);
+                done = true;
+            }
+            if (event.type == Event::JoystickButtonPressed) {
+                //change keycontrols to joystickcontrols
+                keyControls[index] = event.key.code;
+                cout << "Redbinded:" << index << " to " << to_string(keyControls[index]);
+                done = true;
+            }
+        }
+    }
 }
 
 void KeybindsScene::Update(const double& dt)
@@ -74,40 +99,58 @@ void KeybindsScene::Update(const double& dt)
     // cout << "Menu Update "<<dt<<"\n";
     static float buttonCD;
 
-    if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
+    if (!rebinding)
     {
-        if (selection == 0) selection = 6;
-        else selection--;
-        buttonCD = 0.25f;
 
-        changeText();
-    }
 
-    if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Down]) && buttonCD <= 0)
-    {
-        if (selection == 6) selection = 0;
-        else selection++;
-        buttonCD = 0.25f;
-        changeText();
-
-    }
-
-    if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !enterDown || sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]) && !enterDown)
-    {
-        switch (selection)
+        if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
         {
-        case(6):
-            Engine::ChangeScene(&optionscene);
-            break;
+            if (selection == 0) selection = 6;
+            else selection--;
+            buttonCD = 0.25f;
+
+            changeText();
+        }
+
+        if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Down]) && buttonCD <= 0)
+        {
+            if (selection == 6) selection = 0;
+            else selection++;
+            buttonCD = 0.25f;
+            changeText();
 
         }
-        enterDown = true;
+
+        if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !enterDown || sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]) && !enterDown)
+        {
+            switch (selection)
+            {
+            case(6):
+                Engine::ChangeScene(&optionscene);
+                break;
+            default:
+                cout << "rebinding" << endl;
+                rebinding = true;
+                break;
+            }
+            enterDown = true;
+        }
+    }
+    else {
+        if (!enterDown)
+        {
+            cout << "press key to rebind" << endl;
+            RebindKey(selection);
+            rebinding = false;
+            enterDown = true;
+        }
     }
 
     if (!sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]))
     {
         enterDown = false;
     }
+
 
     Scene::Update(dt);
     buttonCD -= dt;

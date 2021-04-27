@@ -10,7 +10,9 @@
 #include <SFML/Window/Joystick.hpp>
 
 extern bool enterDown;
-extern const sf::Keyboard::Key keyControls[6];
+
+extern sf::Keyboard::Key keyControls[6];
+
 extern enum keybinds 
 {
 	Up = 0,
