@@ -71,6 +71,15 @@ void PhysicsComponent::setFriction(float r) { _fixture->SetFriction(r); }
 
 void PhysicsComponent::setMass(float m) { _fixture->SetDensity(m); }
 
+void PhysicsComponent::setDynamic(bool b) { 
+    _dynamic = b;
+    _body->SetType(_dynamic ? b2_dynamicBody : b2_staticBody);
+}
+
+void PhysicsComponent::setCollidable(bool b) {
+    _fixture->SetSensor(!b);
+}
+
 void PhysicsComponent::teleport(const sf::Vector2f& v) {
   _body->SetTransform(sv2_to_bv2(invert_height(v)), 0.0f);
 }
