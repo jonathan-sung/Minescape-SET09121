@@ -11,22 +11,16 @@ CameraComponent::CameraComponent(Entity* p, const Vector2f& size, const Vector2f
 
 void CameraComponent::update(double dt) 
 {
-	cout << "target:" << _target->getPosition().y << " position " << _position.y<<endl;
-
 	//check if target above/below max/min y position of layer
 	try
 	{
 		if (_target->getPosition().y < _position.y-_offset.y)
 		{
 			moveToNextLayer();
-
-			cout << "previous layer" << endl;
 		}
 		else if (_target->getPosition().y > (_position.y + _offset.y))
 		{
 			moveToPreviousLayer();
-
-			cout << "next layer" << endl;
 		}
 	}
 	catch(exception e)
