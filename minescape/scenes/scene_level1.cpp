@@ -8,6 +8,7 @@
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
+#include "../components/cmp_hurt_player.h"
 using namespace std;
 using namespace sf;
 
@@ -102,17 +103,14 @@ void Level1Scene::Update(const double& dt) {
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
-		rocktime = 5.f;
+		rocktime = 2.f;
 		auto rock = makeEntity();
 		rock->addTag("rock");
 		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
 			Vector2f(0, 40));
-		//rock->addComponent<BulletComponent>(30.f);
 		rock->addComponent<Rock>();
-		//rock->addComponent<PhysicsComponent>(true, Vector2f(TILE_SIZE, TILE_SIZE));
+		rock->addComponent<HurtComponent>();
 		auto sc = rock->addComponent<SpriteComponent>();
-		//sc->setSprite(ls::spritesheet, sf::IntRect(0 * TILE_SIZE, 0 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		//sc->getSprite().reset
 		sc->getSprite().setTexture(ls::spritesheet);
 		sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));

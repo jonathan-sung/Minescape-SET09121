@@ -17,7 +17,7 @@ void Rock::update(double dt) {
 		impulse(_direction * Vector2f(4, 0));
 	}
 	if (fallTimeElapsed && !falling) impulse(Vector2f(_direction));
-	cout << getVelocity().x << endl;
+	//cout << getVelocity().x << endl;
 	PhysicsComponent::update(dt);
 	if (_parent->getPosition().y >= 450) _parent->setForDelete();
 }
