@@ -1,10 +1,10 @@
 #pragma once
 #include "cmp_physics.h"
 #include <ecm.h>
+#include <SFML/Audio.hpp>
 
 class HurtComponent : public Component {
 protected:
-  void fire() const;
   std::weak_ptr<Entity> _player;
 
 public:
@@ -12,4 +12,6 @@ public:
   void render() override {}
   explicit HurtComponent(Entity* p);
   HurtComponent() = delete;
+  sf::SoundBuffer buffer;
+  sf::Sound sound;
 };

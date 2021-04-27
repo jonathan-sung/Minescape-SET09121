@@ -2,6 +2,7 @@
 #include "system_physics.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
+#include "../components/cmp_animation.h"
 
 using namespace std;
 using namespace sf;
@@ -38,16 +39,19 @@ void PlayerPhysicsComponent::update(double dt) {
 		teleport(ls::getTilePosition(ls::findTiles(ls::START)[0]));
 	}
 	//if (Keyboard::isKeyPressed(Keyboard::S)) stun();
-
+	_parent->get_components<Animation>()[0]->animate = false;
 	if (!stunned) {
 		if (Keyboard::isKeyPressed(Keyboard::Left) ||
 			Keyboard::isKeyPressed(Keyboard::Right)) {
+			_parent->get_components<Animation>()[0]->animate = true;
 			// Moving Either Left or Right
 			if (Keyboard::isKeyPressed(Keyboard::Right)) {
+				_parent->get_components<Animation>()[0]->FlipSprite(true);
 				if (getVelocity().x < _maxVelocity.x)
 					impulse({ (float)(dt * _groundspeed), 0 });
 			}
 			else {
+				_parent->get_components<Animation>()[0]->FlipSprite(false);
 				if (getVelocity().x > -_maxVelocity.x)
 					impulse({ -(float)(dt * _groundspeed), 0 });
 			}

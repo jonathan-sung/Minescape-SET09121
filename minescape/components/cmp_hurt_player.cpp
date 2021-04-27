@@ -7,14 +7,20 @@ using namespace sf;
 
 void HurtComponent::update(double dt) {
 	if (auto pl = _player.lock()) {
-		if (length(pl->getPosition() - _parent->getPosition()) < 64.0) {
-			pl->get_components<PlayerPhysicsComponent>()[0]->stun();
+		if (length(pl->getPosition() - _parent->getPosition()) < 75.0) {
+			//pl->get_components<PlayerPhysicsComponent>()[0]->stun();
 			cout << "Stunned" << endl;
 			//pl->setForDelete();
+			sound.setBuffer(buffer);
+			sound.play();
 			_parent->setForDelete();
 		}
 	}
 }
 
-HurtComponent::HurtComponent(Entity* p)
-	: Component(p), _player(_parent->scene->ents.find("player")[0]) {}
+HurtComponent::HurtComponent(Entity* p) : Component(p), _player(_parent->scene->ents.find("player")[0]) {
+
+	if (buffer.loadFromFile("res/sounds/fx/rock_hit.wav")) {
+		cout << "Sound loaded succesfully" << endl;
+	}
+}
