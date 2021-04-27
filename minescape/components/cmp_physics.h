@@ -7,7 +7,7 @@
 class PhysicsComponent : public Component {
 protected:
   b2Body* _body;
-  const bool _dynamic;
+  bool _dynamic;
   b2Fixture* _fixture;
 
 public:
@@ -21,6 +21,8 @@ public:
   void setRestitution(float r);
   void setFriction(float r);
   void setMass(float m);
+  void setDynamic(bool b);
+  void setCollidable(bool b);
   void update(double dt) override;
   void render() override;
   void impulse(const sf::Vector2f& i);

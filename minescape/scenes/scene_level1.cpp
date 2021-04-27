@@ -2,18 +2,24 @@
 #include "../components/cmp_player_physics.h"
 #include "../components/cmp_sprite.h"
 #include "../components/cmp_camera.h"
+#include "../components/cmp_rock.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
 #include "../components/cmp_rope.h"
+#include "../components/cmp_gas.h"
+#include "../components/cmp_hurt_player.h"
 using namespace std;
 using namespace sf;
 
 #define TILE_SIZE 64.0f
 
 static shared_ptr<Entity> player;
+static shared_ptr<Entity> gas;
+sf::Texture gasTex;
 static shared_ptr<Entity> camera;
+
 
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
@@ -35,8 +41,26 @@ void Level1Scene::Load() {
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
 	  // *********************************
-	  player->addComponent<RopeComponent>(500.0f,200.0f);
+	  //player->addComponent<RopeComponent>(500.0f,200.0f);
   }
+	
+  // Create gas
+  {
+	  if (!gasTex.loadFromFile("res/gas.png")) {
+		  cerr << "Failed to load spritesheet!" << std::endl;
+	  }
+	  else {
+		  std::cout << "Spritesheet load successful!" << std::endl;
+	  }
+
+	  // *********************************
+	  gas = makeEntity();
+	  gas->setPosition(Vector2f(0, 500));
+	  auto s = gas->addComponent<SpriteComponent>();
+	  s->getSprite().setTexture(gasTex);
+	  auto g = gas->addComponent<GasComponent>();
+  }
+
 
   // Create camera
   {
@@ -87,6 +111,7 @@ void Level1Scene::Update(const double& dt) {
   Scene::Update(dt);
   */
 	Scene::Update(dt);
+	
 	/*
 	const auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
@@ -96,6 +121,24 @@ void Level1Scene::Update(const double& dt) {
 		Engine::ChangeScene((Scene*)&level1);
 	}
 	*/
+
+	//Do rock stuff
+	static float rocktime = 0.0f;
+	rocktime -= dt;
+
+	if (rocktime <= 0.f) {
+		rocktime = 2.f;
+		auto rock = makeEntity();
+		rock->addTag("rock");
+		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
+			Vector2f(0, 40));
+		rock->addComponent<Rock>();
+		rock->addComponent<HurtComponent>();
+		auto sc = rock->addComponent<SpriteComponent>();
+		sc->getSprite().setTexture(ls::spritesheet);
+		sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));
+	}
 }
 
 void Level1Scene::Render() {

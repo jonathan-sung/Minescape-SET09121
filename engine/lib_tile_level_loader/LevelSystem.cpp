@@ -36,7 +36,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 	size_t w = 0, h = 0;
 	string buffer;
 
-	if (!spritesheet.loadFromFile("res/platforms.png")) {
+	if (!spritesheet.loadFromFile("res/spritesheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
 	}
 	else {
@@ -283,9 +283,10 @@ const Vector2f& LevelSystem::getOffset() { return _offset; }
 float LevelSystem::getTileSize() { return _tileSize; }
 
 void LevelSystem::Jonathan() {
-	if (!spritesheet.loadFromFile("res/platforms.png")) {
+	if (!spritesheet.loadFromFile("res/spritesheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
 	}
-	invader.setTexture(spritesheet);
-	invader.setTextureRect(sf::IntRect(0, 0, _tileSize, _tileSize));
+	else {
+		std::cout << "Spritesheet load successful!" << std::endl;
+	}
 }
