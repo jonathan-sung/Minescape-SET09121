@@ -7,15 +7,18 @@
 #include <Box2D/Box2D.h>
 #include <system_renderer.h>
 #include "Box2D/Common/b2Math.h"
+#include "LevelSystem.h"
+#include "cmp_player_physics.h"
 
 using namespace std;
 
-RopeComponent::RopeComponent(Entity* p, float launchspeed,float maxlength) :Component(p)
+RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p)
 {
 	buttonPressed = false;
 	ropeState = RopeState::Ready;
-	launchSpeed = launchspeed;
 	ropeMaxLength = maxlength;
+	_usable = true;
+	_delay = delay;
 }
 
 void RopeComponent::updateClickPos()
@@ -66,38 +69,9 @@ void RopeComponent::setDirectionVector(Vector2f initialPos,Vector2f targetPos)
 
 bool RopeComponent::isTouchingWall()
 {
-	vector<const b2Contact const*> ret;
-	b2ContactEdge* edge = ropeJoint->GetBodyB()->GetContactList();
-	
-	while (edge != NULL) {
-		const b2Contact* contact = edge->contact;
-		if (contact->IsTouching()) {
-			cout << "edge touching" << endl;
-			ret.push_back(contact);
-			return true;
-		}
-		else { cout << "edge not touching" << endl; }
-		edge = edge->next;
-	}
-
-	auto touch = ret;
-	const auto& pos = ropeJoint->GetBodyB()->GetPosition();
-	const float halfPlrHeigt =  .5f;
-	const float halfPlrWidth =  .52f;
-
-	//recheck world build
-
-	b2WorldManifold manifold;
-	for (const auto& contact : touch) {
-		contact->GetWorldManifold(&manifold);
-		const int numPoints = contact->GetManifold()->pointCount;
-		// If all contacts are below the player.
-		for (int j = 0; j < numPoints; j++) {
-			cout << "points touched" << numPoints << endl;
-		}
-	}
-	cout << "no touches" << endl;
-	return false;
+	if (ls::getTileAt(finalRopePosition) == ls::WALL)
+		return true;
+	else return false;
 }
 
 void RopeComponent::createRopeJoint()
@@ -118,7 +92,7 @@ void RopeComponent::createRopeJoint()
 		directionBVec.y * (ropeMaxLength * Physics::physics_scale_inv));
 	endbodydef.position = rjDef.bodyA->GetPosition()+ (offset);
 	//make the body static
-	endbodydef.type = b2BodyType::b2_dynamicBody;
+	endbodydef.type = b2BodyType::b2_staticBody;
 	//create second body
 	_endBody = Physics::GetWorld()->CreateBody(&endbodydef);
 	//set the second body
@@ -145,8 +119,36 @@ void RopeComponent::disposeOfDistanceJoint()
 	
 }
 
+void RopeComponent::updateRopePoints()
+{
+	initialRopePosition = _parent->getPosition();
+
+	//set the endpoint to the bodyB point
+	Vector2f dir = Vector2f(
+		ropeJoint->GetBodyB()->GetPosition().x - ropeJoint->GetBodyA()->GetPosition().x,
+		ropeJoint->GetBodyB()->GetPosition().y - ropeJoint->GetBodyA()->GetPosition().y
+	);
+	dir = Vector2f(dir.x * Physics::physics_scale,
+		-dir.y * Physics::physics_scale);
+	finalRopePosition = _parent->getPosition() + dir;
+}
+
 void RopeComponent::update(double dt)
 {
+	if (!_usable)
+	{
+		if (ropeState == RopeState::Latched) ropeState = RopeState::Withdrawing;
+		else
+		{
+			delaytimer = _delay;
+			ropeState = RopeState::Unusable;
+		}
+		auto pl = _parent->get_components<PlayerPhysicsComponent>()[0];
+		if (pl != NULL)
+		{
+			_usable = pl.get()->isCollidable();
+		}
+	}
 	switch (ropeState)
 	{
 		//rope is ready to be used
@@ -162,15 +164,6 @@ void RopeComponent::update(double dt)
 			//create the rope joint
 			createRopeJoint();
 
-			//set the endpoint to the bodyB point
-			Vector2f dir = Vector2f(
-				ropeJoint->GetBodyB()->GetPosition().x - ropeJoint->GetBodyA()->GetPosition().x,
-				ropeJoint->GetBodyB()->GetPosition().y - ropeJoint->GetBodyA()->GetPosition().y
-				);
-			dir = Vector2f(dir.x * Physics::physics_scale,
-				-dir.y * Physics::physics_scale);
-			finalRopePosition = _parent->getPosition() + dir;
-
 			//fire rope
 			ropeState = RopeState::InAir;
 		}
@@ -178,21 +171,13 @@ void RopeComponent::update(double dt)
 	}
 	case RopeState::InAir:
 	{
-		initialRopePosition = _parent->getPosition();
-
-		//set the endpoint to the bodyB point
-		Vector2f dir = Vector2f(
-			ropeJoint->GetBodyB()->GetPosition().x - ropeJoint->GetBodyA()->GetPosition().x,
-			ropeJoint->GetBodyB()->GetPosition().y - ropeJoint->GetBodyA()->GetPosition().y
-		);
-		dir = Vector2f(dir.x * Physics::physics_scale,
-			-dir.y * Physics::physics_scale);
-		finalRopePosition = _parent->getPosition() + dir;
+		updateRopePoints();
 		if (isTouchingWall())
 		{
 			cout << "touched" << endl;
 			ropeState = RopeState::Latched;
 		}
+		else ropeState = RopeState::Withdrawing;
 		//once it touched a wall tile go to latch
 		//if (isTouchingWall()) ropeState = RopeState::Latched;
 		//else ropeState = RopeState::Withdrawing;
@@ -201,6 +186,7 @@ void RopeComponent::update(double dt)
 	}
 	case RopeState::Latched:
 	{
+		updateRopePoints();
 		//once latched make it controllable by player
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
@@ -215,6 +201,7 @@ void RopeComponent::update(double dt)
 		disposeOfDistanceJoint();
 
 		//once it has fully reduced go to unusable
+		delaytimer = _delay;
 		ropeState = RopeState::Unusable;
 
 		break;
@@ -222,11 +209,14 @@ void RopeComponent::update(double dt)
 	case RopeState::Unusable:
 	{
 		//stay here for a bit (cooldown?)
-		//go back to ready
-		ropeState = RopeState::Ready;
-		//reset mouse click for reuse
-		buttonPressed = false;
-
+		delaytimer -= dt;
+		if (delaytimer <= 0)
+		{
+			//go back to ready
+			ropeState = RopeState::Ready;
+			//reset mouse click for reuse
+			buttonPressed = false;
+		}
 		break;
 	}
 	default:
@@ -245,4 +235,9 @@ void RopeComponent::render()
 		//render rope
 		Engine::GetWindow().draw( ropeLines , 2, sf::Lines);
 	}
+}
+
+void RopeComponent::setUsable(bool usable)
+{
+	_usable = usable;
 }

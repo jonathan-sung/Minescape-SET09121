@@ -77,7 +77,13 @@ void PhysicsComponent::setDynamic(bool b) {
 }
 
 void PhysicsComponent::setCollidable(bool b) {
+    iscollidable = b;
     _fixture->SetSensor(!b);
+}
+
+bool PhysicsComponent::isCollidable()
+{
+    return iscollidable;
 }
 
 void PhysicsComponent::teleport(const sf::Vector2f& v) {

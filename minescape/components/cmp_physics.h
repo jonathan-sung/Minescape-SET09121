@@ -9,6 +9,7 @@ protected:
   b2Body* _body;
   bool _dynamic;
   b2Fixture* _fixture;
+  bool iscollidable;
 
 public:
   PhysicsComponent(Entity* p, bool dyn, const sf::Vector2f& size);
@@ -23,6 +24,7 @@ public:
   void setMass(float m);
   void setDynamic(bool b);
   void setCollidable(bool b);
+  bool isCollidable();
   void update(double dt) override;
   void render() override;
   void impulse(const sf::Vector2f& i);
