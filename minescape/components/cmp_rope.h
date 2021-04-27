@@ -1,5 +1,7 @@
 #pragma once
+
 #include "ecm.h"
+#include <Box2D/Box2D.h>
 
 using namespace sf;
 
@@ -14,6 +16,13 @@ private:
 
 	Vector2f initialRopePosition;
 	Vector2f finalRopePosition;
+	
+	b2Body* _endBody;
+	b2Fixture* _endfixture;
+	b2Body* _pbody;
+	b2Fixture* _pfixture;
+	b2RopeJointDef rjDef;
+	b2Joint* ropeJoint;
 
 	enum RopeState
 	{
@@ -28,11 +37,10 @@ private:
 
 	void updateClickPos();
 	bool mouseClick();
-	void setRopePoints(Vector2f initialPoint, Vector2f finalPoint);
-	Vector2f updatedRopePoint(const double dt);
 	void setDirectionVector(Vector2f initialPos, Vector2f targetPos);
-	float getRopeCurrentLength();
 	bool isTouchingWall();
+	void createRopeJoint();
+	void disposeOfDistanceJoint();
 	
 public:
 
