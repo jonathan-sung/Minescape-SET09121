@@ -140,6 +140,8 @@ void KeybindsScene::Update(const double& dt)
         if (!enterDown)
         {
             cout << "press key to rebind" << endl;
+            cout << "Seceltion no: ";
+            cout << selection << endl;
             RebindKey(selection);
             rebinding = false;
             enterDown = true;
