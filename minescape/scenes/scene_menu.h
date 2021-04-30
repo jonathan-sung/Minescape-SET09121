@@ -1,6 +1,7 @@
 #pragma once
 
 #include "engine.h"
+#include <SFML/Audio.hpp>
 
 using namespace std;
 using namespace sf;
@@ -9,13 +10,15 @@ class MenuScene : public Scene {
 private:
 	int selection;
 	shared_ptr<Entity> options[3];
+	Music music;
+
 public:
-  MenuScene() = default;
-  ~MenuScene() override = default;
+	MenuScene() = default;
+	~MenuScene() override = default;
 
-  void Load() override;
+	void Load() override;
 
-  void Update(const double& dt) override;
+	void Update(const double& dt) override;
 
-  void changeText();
+	void changeText();
 };
