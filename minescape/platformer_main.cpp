@@ -7,6 +7,7 @@ using namespace std;
 using namespace sf;
 
 bool enterDown;
+float buttonCD;
 
 //#############
 //Levels

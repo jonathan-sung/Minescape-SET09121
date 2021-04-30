@@ -45,7 +45,7 @@ void MenuScene::Load() {
 void MenuScene::Update(const double& dt)
 {
     // cout << "Menu Update "<<dt<<"\n";
-    static float buttonCD;
+    //static float buttonCD;
 
     if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
     {
