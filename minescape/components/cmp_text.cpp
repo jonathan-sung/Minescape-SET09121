@@ -9,11 +9,26 @@ void TextComponent::render() { Renderer::queue(&_text); }
 TextComponent::TextComponent(Entity* const p, const std::string& str)
     : Component(p), _string(str) {
   _text.setString(_string);
-  _font = Resources::get<sf::Font>("RobotoMono-Regular.ttf");
+  _font = Resources::get<sf::Font>("TR.ttf");
   _text.setFont(*_font);
 }
 
 void TextComponent::SetText(const std::string& str) {
   _string = str;
   _text.setString(_string);
+}
+
+void TextComponent::setPosition(Vector2f pos)
+{
+    _text.setPosition(pos);
+}
+
+void TextComponent::SetFont(std::shared_ptr<sf::Font> font)
+{
+    _font = font;
+}
+
+void TextComponent::SetSize(int size)
+{
+    _text.setCharacterSize(size);
 }

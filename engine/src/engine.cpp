@@ -17,6 +17,7 @@ static bool loading = false;
 static float loadingspinner = 0.f;
 static float loadingTime;
 static RenderWindow* _window;
+static int _volume;
 
 void Loading_update(float dt, const Scene* const scn) {
   //  cout << "Eng: Loading Screen\n";
@@ -87,6 +88,7 @@ void Engine::Start(unsigned int width, unsigned int height,
   Renderer::initialise(window);
   Physics::initialise();
   ChangeScene(scn);
+  setVolume(25);
   while (window.isOpen()) {
     Event event;
     while (window.pollEvent(event)) {
@@ -120,6 +122,8 @@ std::shared_ptr<Entity> Scene::makeEntity() {
 
 void Engine::setVsync(bool b) { _window->setVerticalSyncEnabled(b); }
 
+
+
 void Engine::ChangeScene(Scene* s) {
   cout << "Eng: changing scene: " << s << endl;
   auto old = _activeScene;
@@ -137,6 +141,11 @@ void Engine::ChangeScene(Scene* s) {
     loading = true;
   }
 }
+
+int Engine::_volume;
+
+void Engine::setVolume(int vol) { _volume = vol; }
+int Engine::getVolume() { return _volume; }
 
 void Scene::Update(const double& dt) { ents.update(dt); }
 

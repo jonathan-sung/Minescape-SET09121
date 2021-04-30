@@ -37,10 +37,13 @@ public:
   static sf::RenderWindow& GetWindow();
   static sf::Vector2u getWindowSize();
   static void setVsync(bool b);
+  static void setVolume(int vol);
+  static int getVolume();
 
 private:
   static Scene* _activeScene;
   static std::string _gameName;
+  static int _volume;
   static void Update();
   static void Render(sf::RenderWindow& window);
 };
