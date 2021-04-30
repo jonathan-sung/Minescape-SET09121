@@ -9,7 +9,7 @@ using namespace sf;
 void HurtComponent::update(double dt) {
 	if (auto pl = _player.lock()) {
 		if (length(pl->getPosition() - _parent->getPosition()) < 75.0) {
-			//pl->get_components<PlayerPhysicsComponent>()[0]->stun();
+			pl->get_components<PlayerPhysicsComponent>()[0]->stun();
 			pl->get_components<RopeComponent>()[0]->setUsable(false);
 			cout << "Stunned" << endl;
 			//pl->setForDelete();

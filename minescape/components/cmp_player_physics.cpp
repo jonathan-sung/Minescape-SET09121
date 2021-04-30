@@ -44,6 +44,7 @@ void PlayerPhysicsComponent::update(double dt) {
 	//if (Keyboard::isKeyPressed(Keyboard::S)) stun();
 	_parent->get_components<Animation>()[0]->animate = false;
 	if (!stunned) {
+		/*
 		if (Keyboard::isKeyPressed(Keyboard::Left) ||
 			Keyboard::isKeyPressed(Keyboard::Right)) {
 			_parent->get_components<Animation>()[0]->animate = true;
@@ -64,24 +65,30 @@ void PlayerPhysicsComponent::update(double dt) {
 			dampen({ 0.3f, 1.0f });
 			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
 		}
+		*/
 
-  if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
-      Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
-    // Moving Either Left or Right
-    if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
-      if (getVelocity().x < _maxVelocity.x)
-        impulse({(float)(dt * _groundspeed), 0});
-    } else {
-      if (getVelocity().x > -_maxVelocity.x)
-        impulse({-(float)(dt * _groundspeed), 0});
-    }
-  } else {
-    // Dampen X axis movement
-    dampen({0.3f, 1.0f});
-  }
-  
+		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
+			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+			// Moving Either Left or Right
+			_parent->get_components<Animation>()[0]->animate = true;
+			if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+				_parent->get_components<Animation>()[0]->FlipSprite(true);
+				if (getVelocity().x < _maxVelocity.x)
+					impulse({ (float)(dt * _groundspeed), 0 });
+			}
+			else {
+				_parent->get_components<Animation>()[0]->FlipSprite(false);
+				if (getVelocity().x > -_maxVelocity.x)
+					impulse({ -(float)(dt * _groundspeed), 0 });
+			}
+		}
+		else {
+			// Dampen X axis movement
+			dampen({ 0.3f, 1.0f });
+		}
+
 		// Handle Jump
-		if (Keyboard::isKeyPressed(Keyboard::Up)) {
+		if (Keyboard::isKeyPressed(keyControls[keybinds::Up])) {
 			_grounded = isGrounded();
 			if (_grounded) {
 				setVelocity(Vector2f(getVelocity().x, 0.f));
@@ -102,8 +109,8 @@ void PlayerPhysicsComponent::update(double dt) {
 		setFriction(0.1f);
 	}
 
-//ask jonathan about this
-	// Clamp velocity.
+	//ask jonathan about this
+		// Clamp velocity.
 	auto v = getVelocity();
 	v.x = copysign(min(abs(v.x), _maxVelocity.x), v.x);
 	v.y = copysign(min(abs(v.y), _maxVelocity.y), v.y);
