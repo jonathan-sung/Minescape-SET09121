@@ -87,6 +87,17 @@ void Level1Scene::Load() {
 	  // *********************************
   }
 
+  //Enemies
+  {
+	  // *********************************
+	  auto enemyTiles = ls::findTiles(ls::ENEMY);
+	  for (auto n : enemyTiles) {
+		  auto pos = ls::getTilePosition(n);
+		  pos += Vector2f(TILE_SIZE / 2, TILE_SIZE / 2);
+	  }
+	  // *********************************
+  }
+
   //Simulate long loading times
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
   cout << " Scene 1 Load Done" << endl;
