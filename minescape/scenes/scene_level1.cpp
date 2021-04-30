@@ -27,7 +27,6 @@ sf::Music music;
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
   music.setLoop(true);
-  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
   ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
   //auto ho = 0;
@@ -91,6 +90,7 @@ void Level1Scene::Load() {
 		  e->addComponent<PhysicsComponent>(false, Vector2f(TILE_SIZE, TILE_SIZE));
 	  }
 	  // *********************************
+	  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
   }
 
   //Simulate long loading times
@@ -104,6 +104,7 @@ void Level1Scene::UnLoad() {
   cout << "Scene 1 UnLoad" << endl;
   player.reset();
   ls::unload();
+  music.stop();
   Scene::UnLoad();
 }
 
@@ -133,7 +134,7 @@ void Level1Scene::Update(const double& dt) {
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
-		rocktime = 2.f;
+		rocktime = 5.f;
 		auto rock = makeEntity();
 		rock->addTag("rock");
 		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +

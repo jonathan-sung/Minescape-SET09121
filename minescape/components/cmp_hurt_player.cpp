@@ -9,12 +9,10 @@ using namespace sf;
 void HurtComponent::update(double dt) {
 	if (auto pl = _player.lock()) {
 		if (length(pl->getPosition() - _parent->getPosition()) < 75.0) {
-			pl->get_components<PlayerPhysicsComponent>()[0]->stun();
+			//pl->get_components<PlayerPhysicsComponent>()[0]->stun();
 			pl->get_components<RopeComponent>()[0]->setUsable(false);
 			cout << "Stunned" << endl;
 			//pl->setForDelete();
-			sound.setBuffer(buffer);
-			sound.play();
 			_parent->setForDelete();
 		}
 	}
@@ -22,7 +20,5 @@ void HurtComponent::update(double dt) {
 
 HurtComponent::HurtComponent(Entity* p)
 	: Component(p), _player(_parent->scene->ents.find("player")[0]) {
-	if (buffer.loadFromFile("res/sounds/fx/rock_hit.wav")) {
-		cout << "Sound loaded succesfully" << endl;
-	}
+
 }
