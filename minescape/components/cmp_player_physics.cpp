@@ -3,10 +3,13 @@
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
 #include "../components/cmp_animation.h"
+//#include <ecm.h>
 
 using namespace std;
 using namespace sf;
 using namespace Physics;
+
+#define STUN_TIME 1
 
 bool PlayerPhysicsComponent::isGrounded() const {
 	auto touch = getTouching();
@@ -59,6 +62,7 @@ void PlayerPhysicsComponent::update(double dt) {
 		else {
 			// Dampen X axis movement
 			dampen({ 0.3f, 1.0f });
+			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
 		}
 
 		// Handle Jump
@@ -68,6 +72,7 @@ void PlayerPhysicsComponent::update(double dt) {
 				setVelocity(Vector2f(getVelocity().x, 0.f));
 				teleport(Vector2f(pos.x, pos.y - 2.0f));
 				impulse(Vector2f(0, -10.f));
+				jumpSound.play();
 			}
 		}
 	}
@@ -93,20 +98,25 @@ void PlayerPhysicsComponent::update(double dt) {
 
 void PlayerPhysicsComponent::stun() {
 	if (!stunned) {
-		stun_time = 2;
+		stun_time = STUN_TIME;
 		stunned = true;
 		setCollidable(false);
+		stunSound.play();
 	}
 }
 
 void PlayerPhysicsComponent::stunning(double dt) {
 	if (stunned) {
 		stun_time -= dt;
-		if (stun_time <= 0) {
+		if (stun_time <= 0 && !playerInWall()) {
 			stunned = false;
 			setCollidable(true);
 		}
 	}
+}
+
+bool PlayerPhysicsComponent::playerInWall() {
+	return 	getTouching().size() != 0;
 }
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
@@ -120,6 +130,11 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
 	_body->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
 	_body->SetBullet(true);
-	stun_time = 2;
+	stun_time = STUN_TIME;
 	stunned = false;
+	stunSoundBuffer.loadFromFile("res/sounds/fx/rock_hit.wav");
+	stunSound.setBuffer(stunSoundBuffer);
+
+	jumpSoundBuffer.loadFromFile("res/sounds/fx/jump.wav");
+	jumpSound.setBuffer(jumpSoundBuffer);
 }
