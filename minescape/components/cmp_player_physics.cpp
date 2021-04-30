@@ -3,6 +3,7 @@
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
 #include "../components/cmp_animation.h"
+#include "../game.h"
 
 using namespace std;
 using namespace sf;
@@ -61,6 +62,21 @@ void PlayerPhysicsComponent::update(double dt) {
 			dampen({ 0.3f, 1.0f });
 		}
 
+  if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
+      Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+    // Moving Either Left or Right
+    if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+      if (getVelocity().x < _maxVelocity.x)
+        impulse({(float)(dt * _groundspeed), 0});
+    } else {
+      if (getVelocity().x > -_maxVelocity.x)
+        impulse({-(float)(dt * _groundspeed), 0});
+    }
+  } else {
+    // Dampen X axis movement
+    dampen({0.3f, 1.0f});
+  }
+  
 		// Handle Jump
 		if (Keyboard::isKeyPressed(Keyboard::Up)) {
 			_grounded = isGrounded();
@@ -82,6 +98,7 @@ void PlayerPhysicsComponent::update(double dt) {
 		setFriction(0.1f);
 	}
 
+//ask jonathan about this
 	// Clamp velocity.
 	auto v = getVelocity();
 	v.x = copysign(min(abs(v.x), _maxVelocity.x), v.x);
