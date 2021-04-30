@@ -8,6 +8,8 @@
 using namespace std;
 using namespace sf;
 
+//float KeybindsScene::buttonCD = 0;
+
 void KeybindsScene::Load() {
 
     cout << "Options Loaded";
@@ -72,7 +74,7 @@ void KeybindsScene::Load() {
     setLoaded(true);
 }
 
-void RebindKey(int index)
+void KeybindsScene::RebindKey(int index)
 {
     Event event;
     bool done = false;
@@ -83,25 +85,29 @@ void RebindKey(int index)
                 keyControls[index] = event.key.code;
                 cout << "Redbinded:" << index << " to " << to_string(keyControls[index]);
                 done = true;
+                buttonCD = 0.25f;
+                
             }
             if (event.type == Event::JoystickButtonPressed) {
                 //change keycontrols to joystickcontrols
                 keyControls[index] = event.key.code;
                 cout << "Redbinded:" << index << " to " << to_string(keyControls[index]);
                 done = true;
+                buttonCD = 0.25f;
             }
         }
     }
+    
 }
 
 void KeybindsScene::Update(const double& dt)
 {
     // cout << "Menu Update "<<dt<<"\n";
-    static float buttonCD;
+    
+    //static float buttonCD;
 
     if (!rebinding)
     {
-
 
         if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
         {
@@ -136,7 +142,8 @@ void KeybindsScene::Update(const double& dt)
             enterDown = true;
         }
     }
-    else {
+    else 
+    {
         if (!enterDown)
         {
             cout << "press key to rebind" << endl;
@@ -146,6 +153,7 @@ void KeybindsScene::Update(const double& dt)
             rebinding = false;
             enterDown = true;
         }
+
     }
 
     if (!sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]))

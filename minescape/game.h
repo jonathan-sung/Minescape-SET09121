@@ -11,6 +11,8 @@
 
 extern bool enterDown;
 
+extern float buttonCD;
+
 extern sf::Keyboard::Key keyControls[6];
 
 extern enum keybinds 
