@@ -1,0 +1,116 @@
+#########################
+# project configuration #
+#########################
+# C++ project, but if we specify it, travis overites our CXX ENV variables
+language: generic
+dist: trusty
+sudo: false
+
+before_install:
+  # Install a recent CMake
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      CMAKE_URL="https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz"
+      echo "pulling down cmake" ${CMAKE_URL}  
+      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+      export PATH=${TRAVIS_BUILD_DIR}/cmake/bin:${PATH}
+      echo ${TRAVIS_BUILD_DIR}/cmake/bin
+      ls ${TRAVIS_BUILD_DIR}/cmake/bin
+      export CMAKE=$TRAVIS_BUILD_DIR/cmake/bin/cmake
+      echo cool
+    else
+      brew upgrade cmake || brew install cmake
+      export CMAKE=cmake
+    fi
+  - cmake --version
+  
+   # Set env vars for C++ on mac
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+        export CXX=g++
+        export CC=gcc
+    fi
+    
+cache:
+  directories:
+  - ${TRAVIS_BUILD_DIR}/lib
+  - ${TRAVIS_BUILD_DIR}/build/lib
+  
+################
+# build matrix #
+################
+matrix:
+  include:
+    # OSX / Clang
+    - os: osx
+      env: CACHE_NAME=JOB0
+      osx_image: xcode8.3
+   
+    # Linux / GCC
+    - os: linux
+      env: COMPILER_NAME=gcc COMPILER=g++-6 CXX=g++-6 CC=gcc-6 CACHE_NAME=JOB1
+      addons:
+        apt:
+            sources: &sources
+                - llvm-toolchain-precise-3.8
+                - ubuntu-toolchain-r-test
+            packages:
+                - g++-6
+                - gcc-6
+                - xorg-dev 
+                - libglu1-mesa-dev
+                - freeglut3-dev 
+                - libjpeg-dev 
+                - libfreetype6-dev 
+                - libxrandr-dev 
+                - libglew-dev 
+                - libsndfile1-dev 
+                - libopenal-dev
+                - libudev-dev 
+    # Linux / Clang
+    - os: linux
+      env: COMPILER_NAME=clang CXX=clang++-3.8 CC=clang-3.8 LLVM_VERSION=3.8 CACHE_NAME=JOB2
+      addons:
+        apt:
+          packages:
+            - clang-3.8
+            - g++-6
+            - gcc-6
+            - xorg-dev 
+            - libglu1-mesa-dev
+            - freeglut3-dev 
+            - libjpeg-dev 
+            - libfreetype6-dev 
+            - libxrandr-dev 
+            - libglew-dev 
+            - libsndfile1-dev 
+            - libopenal-dev
+            - libudev-dev 
+          sources: *sources
+
+
+################
+# build script #
+################
+
+script:
+  # show OS/compiler version
+  - uname -a
+  - $CXX --version
+
+  # compile and execute 
+  - $CMAKE --version
+  - git submodule update --init --recursive
+  - mkdir -p build && cd build
+  - $CMAKE ..
+  - $CMAKE --build . --target package --config Release -- -j4
+  - for i in ${TRAVIS_BUILD_DIR}/build/installer/*.zip; do mv "$i" "${i%.*}_${COMPILER_NAME}_${TRAVIS_OS_NAME}.zip"; done
+deploy:
+  provider: releases
+  api_key:
+    secure: "IxzRtw8CrxfFMsA8eImxA6FnNU/HTKYDE4Io5XmyY7FWwBQA8Y8gwAHv9UPWtM7V9bSUCsBlnt9FuO0c+omSpzTWMUhJ0XfNIig/Sn38kZwgJ8zreDo6pS/5ZvlHeXYf6zJ8ZzcKDEtSwxdlqx/PpcmE7biNdFE6+ammykGDf7fxvyxNVIMhP3w9KUOLXZK13TOND4B9VQzi6oAGsNb9Rtj1XYzbUoccuiGFor87fyJG+i7oeeEKNVZLi+Opbu8Jqfn2xzKqf752E7ULCm2fH8zQLRF02my/B6QECU5v4rYIJh7aqizLnpDmVacAvZa3dm+5ErI59rLtsxMYR5vAMYFOUR5rqJPyaFAdM6Sw4PqHXyqCd+zDd2aXnCetJ1cYqsN96f2rxcH7o8zzxaOlhkxNxoPSOfEhbZ824l+n4T7o/MPkAx/YxIKBLo8A6tVdwVBQmb/BKNFiTKwbjNPSqgfp4zoMBB7z0sR3GHF1DIBVyU2Nthn+5Gtd3ZVthbj7B0rgGGYtqzKqXmyloeSewOCVTbNYJ0rHZsSuq47/tlLutsSRvbn74TXmFqxW8tis7YbENNlx5bIgRR1hOvAayZxx65wnd+F+y+HVz7xTTM+TNDEhtIjuBgG1g094fs1eKqI8foDT6Q6Nnd5/Zrv09P+GFZx90zi4JTlFpf0Z2Vc="
+  file_glob: true
+  file: "${TRAVIS_BUILD_DIR}/build/installer/*.zip"
+  skip_cleanup: true
+  on:
+    tags: true
