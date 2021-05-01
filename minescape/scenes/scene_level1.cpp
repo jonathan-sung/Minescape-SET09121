@@ -11,6 +11,7 @@
 #include "../components/cmp_gas.h"
 #include "../components/cmp_hurt_player.h"
 #include "../components/cmp_canary_ai.h"
+#include "../components/cmp_animation.h"
 
 using namespace std;
 using namespace sf;
@@ -21,10 +22,12 @@ static shared_ptr<Entity> player;
 static shared_ptr<Entity> gas;
 sf::Texture gasTex;
 static shared_ptr<Entity> camera;
+sf::Music music;
 
 
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
+  music.setLoop(true);
   ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
   //auto ho = 0;
@@ -35,13 +38,14 @@ void Level1Scene::Load() {
 	  // *********************************
 	  player = makeEntity();
 	  player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-	  auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-	  s->getShape().setFillColor(Color::Yellow);
-	  s->getShape().setOrigin(10.f, 15.f);
+	  //auto s = player->addComponent<ShapeComponent>();
+	  //s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
+	  //s->getShape().setFillColor(Color::Yellow);
+	  //s->getShape().setOrigin(10.f, 15.f);
 	  // *********************************
 	  player->addTag("player");
-	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+	  player->addComponent<PlayerPhysicsComponent>(Vector2f(32.f, 64.f));
+	  player->addComponent<Animation>("res/character_walk.png", 4);
 	  // *********************************
 	  player->addComponent<RopeComponent>(150.0f,1.0f);
   }
@@ -87,6 +91,7 @@ void Level1Scene::Load() {
 		  e->addComponent<PhysicsComponent>(false, Vector2f(TILE_SIZE, TILE_SIZE));
 	  }
 	  // *********************************
+	  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
   }
 
   //Enemies
@@ -119,6 +124,7 @@ void Level1Scene::UnLoad() {
   cout << "Scene 1 UnLoad" << endl;
   player.reset();
   ls::unload();
+  music.stop();
   Scene::UnLoad();
 }
 
@@ -148,17 +154,17 @@ void Level1Scene::Update(const double& dt) {
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
-		rocktime = 2.f;
+		rocktime = 5.f;
 		auto rock = makeEntity();
 		rock->addTag("rock");
 		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
 			Vector2f(0, 40));
 		rock->addComponent<Rock>();
 		rock->addComponent<HurtComponent>();
-		auto sc = rock->addComponent<SpriteComponent>();
-		sc->getSprite().setTexture(ls::spritesheet);
-		sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));
+		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
+		//sc->getSprite().setTexture(ls::spritesheet);
+		//sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		//sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));
 	}
 }
 
