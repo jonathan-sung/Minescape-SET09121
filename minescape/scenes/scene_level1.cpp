@@ -10,6 +10,7 @@
 #include "../components/cmp_rope.h"
 #include "../components/cmp_gas.h"
 #include "../components/cmp_hurt_player.h"
+#include "../components/cmp_canary_ai.h"
 #include "../components/cmp_animation.h"
 
 using namespace std;
@@ -91,6 +92,25 @@ void Level1Scene::Load() {
 	  }
 	  // *********************************
 	  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
+  }
+
+  //Enemies
+  {
+	  //// *********************************
+	  auto enemyTiles = ls::findTiles(ls::ENEMY);
+	  for (auto n : enemyTiles) {
+		  auto pos = ls::getTilePosition(n);
+		  pos += Vector2f(TILE_SIZE / 2, TILE_SIZE / 2);
+		  auto enemy = makeEntity();
+		  enemy->setPosition(pos);
+		  enemy->addComponent<CanaryAIComponent>(150.0f,5.0f, sf::Vector2f(65.0f, 90.0f), sf::Vector2f(250.0f, 65.0f));
+		  enemy->addComponent<HurtComponent>();
+		  auto s = enemy->addComponent<ShapeComponent>();
+		  s->setShape<sf::RectangleShape>(sf::Vector2f(20.f, 30.f));
+		  s->getShape().setFillColor(Color::Red);
+		  s->getShape().setOrigin(10.f, 15.f);
+	  }
+	  // *********************************
   }
 
   //Simulate long loading times
