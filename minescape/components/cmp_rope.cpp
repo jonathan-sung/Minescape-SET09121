@@ -22,7 +22,7 @@ RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p
 	_delay = delay;
 	launchSpeed = 500;
 
-	impulseTime = 0.01f;
+	impulseTime = 0.005f;
 }
 
 void RopeComponent::updateClickPos()
@@ -208,18 +208,18 @@ void RopeComponent::update(double dt)
 				float dir = (xdistanceFromCenter > 0 ? -80 : 80);
 				if (xdistanceFromCenter < -40 || xdistanceFromCenter > 40)
 				{
-					_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(dir * dt, 100.0f * dt));
-					impulse += dir + xdistanceFromCenter / 100;
+					_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(dir * dt, 80.0f * dt));
+					impulse += dir + xdistanceFromCenter / 200;
 				}
 
 				//
 				if (Keyboard::isKeyPressed(keyControls[keybinds::Left]))
 				{
-					impulse -= 5;
+					impulse -= 10;
 				}
 				else if (Keyboard::isKeyPressed(keyControls[keybinds::Right]))
 				{
-					impulse += 5;
+					impulse += 10;
 				}
 				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(impulse * dt, 
 					(initialRopePosition.y<finalRopePosition.y?10.0f : 0.0f)));
