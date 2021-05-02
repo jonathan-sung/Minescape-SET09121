@@ -105,7 +105,7 @@ void PauseMenu::pauseGame()
 		{
 			//tc->setPosition(Vector2f(Engine::GetWindow().mapPixelToCoords(Vector2i(Engine::getWindowSize().x - 750,  Engine::getWindowSize().y - (100 * loop)))));
 			tc->setPosition(Vector2f(_parent->getPosition().x - 450, _parent->getPosition().y - 250 + (100 * loop)));
-			cout << tc->getPosition() << endl;
+			//cout << tc->getPosition() << endl;
 			loop++;
 		}
 	}else
