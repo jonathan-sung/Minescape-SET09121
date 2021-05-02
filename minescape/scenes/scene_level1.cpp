@@ -165,9 +165,6 @@ void Level1Scene::Update(const double& dt) {
 		rock->addComponent<Rock>();
 		rock->addComponent<HurtComponent>();
 		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
-		//sc->getSprite().setTexture(ls::spritesheet);
-		//sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		//sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));
 	}
 }
 
