@@ -11,8 +11,6 @@
 
 extern bool enterDown;
 
-extern bool paused;
-
 extern float buttonCD;
 
 extern sf::Keyboard::Key keyControls[6];

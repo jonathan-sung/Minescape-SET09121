@@ -22,7 +22,7 @@ RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p
 	_delay = delay;
 	launchSpeed = 500;
 
-	impulseTime = 0.01f;
+	impulseTime = 0.005f;
 }
 
 void RopeComponent::updateClickPos()
@@ -188,7 +188,7 @@ void RopeComponent::update(double dt)
 			//create the rope joint
 			createRopeJoint();
 
-			Vector2f addedImpulse = Vector2f(0, 0);
+			impulse = 0;
 
 			ropeState = RopeState::Latched;
 		}
@@ -203,44 +203,26 @@ void RopeComponent::update(double dt)
 		if (!_parent->get_components<PlayerPhysicsComponent>()[0].get()->isGrounded()) {
 			if (impulseTimer < 0) {
 				impulseTimer = impulseTime;
-				//get the direction vector
-				Vector2f directionVector = Vector2f(finalRopePosition.x - initialRopePosition.x,
-					finalRopePosition.y - initialRopePosition.y);
-				//get the angle
-				float angle = asin(directionVector.y / (sqrt(pow(directionVector.x, 2) + pow(directionVector.y, 2))));
-				//take 90 degrees
-				angle += b2_pi / 2;
-				//get atan
-				float angleATan = atan(angle);
-				//calculate force impulse
-				forceImpulse = Vector2f(directionVector.x * angleATan, directionVector.y * -angleATan);
-				if (directionVector.y > 0)forceImpulse.y = -forceImpulse.y;
-				//calculate angular force
-				Vector2f appliedAngularForce = Vector2f(forceImpulse.x * dt*b2_pi,
-					forceImpulse.y * dt*b2_pi);
+				//lean towards center
+				float xdistanceFromCenter = (initialRopePosition.x - finalRopePosition.x);
+				float dir = (xdistanceFromCenter > 0 ? -80 : 80);
+				if (xdistanceFromCenter < -40 || xdistanceFromCenter > 40)
+				{
+					_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(dir * dt, 80.0f * dt));
+					impulse += dir + xdistanceFromCenter / 200;
+				}
 
-				bool keyPressed = false;
-				//create added impulse
+				//
 				if (Keyboard::isKeyPressed(keyControls[keybinds::Left]))
 				{
-					keyPressed = true;
-					addedImpulse+= Vector2f((directionVector.x>0?-directionVector.x:directionVector.x) * angleATan*3, 
-						(directionVector.y<0?-directionVector.y:directionVector.y) * -angleATan*3);
+					impulse -= 10;
 				}
 				else if (Keyboard::isKeyPressed(keyControls[keybinds::Right]))
 				{
-					keyPressed = true;
-					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan*3,
-						(directionVector.y < 0 ? -directionVector.y : directionVector.y) * -angleATan*3);
+					impulse += 10;
 				}
-				//minimise vector
-				addedImpulse = Vector2f(addedImpulse.x*dt, addedImpulse.y*dt);
-				//reduce vector
-				addedImpulse -= Vector2f(addedImpulse.x/20, addedImpulse.y/20);
-				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(
-					(keyPressed? 
-						appliedAngularForce + addedImpulse:
-						Vector2f(appliedAngularForce.x*10,appliedAngularForce.y*10)));
+				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(impulse * dt, 
+					(initialRopePosition.y<finalRopePosition.y?10.0f : 0.0f)));
 			}
 			else
 			{

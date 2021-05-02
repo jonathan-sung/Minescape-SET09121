@@ -3,7 +3,6 @@
 #include "../components/cmp_sprite.h"
 #include "../components/cmp_camera.h"
 #include "../components/cmp_rock.h"
-#include "../components/cmp_pausemenu.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
@@ -21,13 +20,9 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 static shared_ptr<Entity> gas;
-
-static shared_ptr<Entity> pauseMenu;
-
 sf::Texture gasTex;
 static shared_ptr<Entity> camera;
 sf::Music music;
-
 
 void Level1Scene::Load() 
 {
@@ -136,7 +131,7 @@ void Level1Scene::Load()
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
   cout << " Scene 1 Load Done" << endl;
 
-  
+	timer = 0;  
 
   setLoaded(true);
 }
@@ -152,6 +147,7 @@ void Level1Scene::UnLoad() {
 void Level1Scene::Update(const double& dt) 
 {
 	float delta = dt;
+	timer += dt;
 	if (paused) delta = 0;
 	Scene::Update(delta);
 	
@@ -166,7 +162,6 @@ void Level1Scene::Update(const double& dt)
 	//Do rock stuff
 	static float rocktime = 0.0f;
 	rocktime -= dt;
-
 	if (rocktime <= 0.f) {
 		rocktime = 5.f;
 		auto rock = makeEntity();
@@ -175,8 +170,41 @@ void Level1Scene::Update(const double& dt)
 			Vector2f(0, 40));
 		rock->addComponent<Rock>();
 		rock->addComponent<HurtComponent>();
-		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
+		rock->addComponent<Animation>("res/rock.png", 1);
 	}
+	auto pp = player->getPosition();
+	if (ls::getTileAt(pp) == ls::END) {
+		string score = to_string(timer);
+		cout << "Level completed in:" + score << endl;
+
+		//ofstream MyFile("scores.txt");
+		//MyFile << score + "\n";
+		//MyFile.close();
+
+		ofstream outfile;
+		outfile.open("scores.txt", ios_base::app); // append instead of overwrite
+		outfile << score + "\n";
+		outfile.close();
+
+		Engine::ChangeScene((Scene*)&score_board);
+	}
+	/*
+	  if (ls::getTileAt(player->getPosition()) == ls::END) {
+		Engine::ChangeScene((Scene*)&level2);
+	  }
+	  Scene::Update(dt);
+	  */
+	Scene::Update(dt);
+
+	/*
+	const auto pp = player->getPosition();
+	if (ls::getTileAt(pp) == ls::END) {
+		Engine::ChangeScene((Scene*)&level2);
+	}
+	else if (!player->isAlive()) {
+		Engine::ChangeScene((Scene*)&level1);
+	}
+	*/
 	buttonCD -= dt;
 }
 

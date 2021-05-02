@@ -7,7 +7,6 @@ using namespace std;
 using namespace sf;
 
 bool enterDown;
-bool paused = false;
 float buttonCD;
 
 //#############
