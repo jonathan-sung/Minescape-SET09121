@@ -64,6 +64,8 @@ protected:
 
   static float _tileSize; // for rendering
   static std::map<Tile, sf::Color> _colours;
+  static void Jonathan();
+  static sf::Sprite invader;
 
 private:
   LevelSystem() = delete;
