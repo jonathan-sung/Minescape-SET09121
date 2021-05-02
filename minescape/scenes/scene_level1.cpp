@@ -153,6 +153,7 @@ void Level1Scene::UnLoad() {
 
 void Level1Scene::Update(const double& dt)
 {
+	timer += dt;
 	float delta = dt;
 	if (paused) delta = 0;
 
