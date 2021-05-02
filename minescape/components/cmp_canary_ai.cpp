@@ -18,7 +18,6 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 void CanaryAIComponent::update(double dt) {
 	try {
 		if (auto pl = _player.lock()) {
-			cout << state << endl;
 			switch (state)
 			{
 			case CanaryAIComponent::Waiting: {
@@ -40,17 +39,19 @@ void CanaryAIComponent::update(double dt) {
 			}
 			case CanaryAIComponent::PlayerDetected: {
 				_initialPos = _parent->getPosition();
+				angle = 0;
 				state = State::Moving;
 				break;
 			}
 			case CanaryAIComponent::Moving: {
-				sf::Vector2f mov = sf::Vector2f(_speed.x * dt*_direction.x, _speed.y * dt*_direction.y) + _parent->getPosition();
 
-				if ((mov.y < _initialPos.y - _movementRect.y) ||
-					(mov.y > _initialPos.y + _movementRect.y))
+				if (angle > 90 || angle < -90)
 				{
 					_direction.y = -_direction.y;
 				}
+				angle += _direction.y*dt*3;
+
+				sf::Vector2f mov = sf::Vector2f(_speed.x * dt*_direction.x, sin(angle)*_speed.y * dt*_direction.y) + _parent->getPosition();
 
 				if (!validMove(mov)) {
 					waitTimeTick = waitTime / 2;
@@ -58,7 +59,7 @@ void CanaryAIComponent::update(double dt) {
 				}
 				else
 				{
-					move(sf::Vector2f(_speed.x * dt*_direction.x, _speed.y * dt*_direction.y));
+					move(sf::Vector2f(_speed.x * dt*_direction.x, sin(angle) * _speed.y * dt * _direction.y));
 
 					//ActorMovementComponent::update(dt);
 
