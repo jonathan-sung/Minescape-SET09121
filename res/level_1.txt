@@ -1,11 +1,11 @@
 wwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwww
 ww      r          ww
-ww              e  ww
 ww                 ww
 ww                 ww
 ww                 ww
-ww              e  ww
+ww                 ww
+ww                 ww
 ww       www   www ww
 ww       www   www ww
 ww       www       ww
@@ -40,7 +40,7 @@ ww                 ww
 ww        www      ww
 ww        www      ww
 ww          n      ww
-ww               s ww
+ww                 ww
 ww  wwwwwwwwwwwwwwwww
 ww  wwwwwwwwwwwwwwwww
 ww                 ww
@@ -62,16 +62,10 @@ wwwwwwwwwwwwwwww   ww
 wwwwwwwwwwwwwwww   ww
 ww                 ww
 ww                 ww
-ww        s        ww
+ww     e  s        ww
 wwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
-ww                 ww
+wwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwww
