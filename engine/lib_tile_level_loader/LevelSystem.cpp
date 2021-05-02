@@ -8,7 +8,7 @@ sf::Texture LevelSystem::spritesheet;
 sf::Sprite LevelSystem::invader;
 //remove
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, Color::White}, {END, Color::Blue} };
+	{WALL, Color::White} };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
 	auto it = _colours.find(t);
@@ -119,79 +119,16 @@ void LevelSystem::buildSprites(bool optimise) {
 	}
 
 	const auto nonempty = tps.size();
-	/*
-	// If tile of the same type are next to each other,
-	// We can use one large sprite instead of two.
-	if (optimise && nonempty) {
-
-	  vector<tp> tpo;
-	  tp last = tps[0];
-	  size_t samecount = 0;
-
-	  for (size_t i = 1; i < nonempty; ++i) {
-		// Is this tile compressible with the last?
-		bool same = ((tps[i].p.y == last.p.y) &&
-					 (tps[i].p.x == last.p.x + (tls.x * (1 + samecount))) &&
-					 (tps[i].c == last.c));
-		if (same) {
-		  ++samecount; // Yes, keep going
-		  // tps[i].c = Color::Green;
-		} else {
-		  if (samecount) {
-			last.s.x = (1 + samecount) * tls.x; // Expand tile
-		  }
-		  // write tile to list
-		  tpo.push_back(last);
-		  samecount = 0;
-		  last = tps[i];
-		}
-	  }
-	  // catch the last tile
-	  if (samecount) {
-		last.s.x = (1 + samecount) * tls.x;
-		tpo.push_back(last);
-	  }
-
-	  // No scan down Y, using different algo now that compressible blocks may
-	  // not be contiguous
-	  const auto xsave = tpo.size();
-	  samecount = 0;
-	  vector<tp> tpox;
-	  for (size_t i = 0; i < tpo.size(); ++i) {
-		last = tpo[i];
-		for (size_t j = i + 1; j < tpo.size(); ++j) {
-		  bool same = ((tpo[j].p.x == last.p.x) && (tpo[j].s == last.s) &&
-					   (tpo[j].p.y == last.p.y + (tls.y * (1 + samecount))) &&
-					   (tpo[j].c == last.c));
-		  if (same) {
-			++samecount;
-			tpo.erase(tpo.begin() + j);
-			--j;
-		  }
-		}
-		if (samecount) {
-		  last.s.y = (1 + samecount) * tls.y; // Expand tile
-		}
-		// write tile to list
-		tpox.push_back(last);
-		samecount = 0;
-	  }
-
-	  tps.swap(tpox);
-	}
-	*/
 
 	for (auto& t : tps) {
-		//auto s = make_unique<sf::RectangleShape>();
-		//s->setPosition(t.p);
-		//s->setSize(t.s);
-		//s->setFillColor(t.c);
 		std::cout << t.p << std::endl;
-		auto sp = make_unique<sf::Sprite>();
-		sp->setPosition(t.p);
-		sp->setTexture(spritesheet);
-		sp->setTextureRect(sf::IntRect(t.sprite_index.x * _tileSize, t.sprite_index.y * _tileSize, _tileSize, _tileSize));
-		_sprites.push_back(move(sp));
+		if (t.c != sf::Color::Transparent) {
+			auto sp = make_unique<sf::Sprite>();
+			sp->setPosition(t.p);
+			sp->setTexture(spritesheet);
+			sp->setTextureRect(sf::IntRect(t.sprite_index.x* _tileSize, t.sprite_index.y* _tileSize, _tileSize, _tileSize));
+			_sprites.push_back(move(sp));
+		}
 	}
 
 	cout << "Level with " << (_width * _height) << " Tiles, With " << nonempty
