@@ -15,31 +15,6 @@ extern bool paused;
 
 extern float buttonCD;
 
-extern sf::Keyboard::Key keyControls[6];
-
-
-extern enum keybinds 
-{
-	Up = 0,
-	Left = 2,
-	Down = 1,
-	Right = 3,
-	Action1 = 4,
-	Action2 = 5
-};
-
-extern float musicVolume;
-extern float sfxVolume;
-
-extern vector<Vector2f> resolutions{
-Vector2f(800,600),
-Vector2f(1280,720),
-Vector2f(1920,1080),
-Vector2f(3840,2160)
-};
-
-extern bool windowed;
-extern bool Gamepad;
 
 //############################################
 //Levels

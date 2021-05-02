@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <ecm.h>
 #include <future>
 #include <maths.h>
@@ -30,6 +31,27 @@ private:
 
 class Engine {
 public:
+
+	static sf::Keyboard::Key keyControls[6];
+
+	static enum keybinds
+	{
+		Up = 0,
+		Down = 1,
+		Left = 2,
+		Right = 3,
+		Action1 = 4,
+		Action2 = 5
+	};
+
+	static float musicVolume;
+	static float sfxVolume;
+
+	static sf::Vector2f _resolution;
+
+	static bool _windowed;
+	static bool _gamepad;
+
   Engine() = delete;
   static void Start(unsigned int width, unsigned int height,
                     const std::string& gameName, Scene* scn);
@@ -37,13 +59,17 @@ public:
   static sf::RenderWindow& GetWindow();
   static sf::Vector2u getWindowSize();
   static void setVsync(bool b);
-  static void setVolume(int vol);
-  static int getVolume();
+  static void setMusicVolume(int vol);
+  static int getMusicVolume();
+  static void setFXVolume(int vol);
+  static int getFXVolume();
+  static void setResolution(int x, int y);
+  static void setWindowMode(bool iswindow);
+  static void setUseGamepad(bool gamepad);
 
 private:
   static Scene* _activeScene;
   static std::string _gameName;
-  static int _volume;
   static void Update();
   static void Render(sf::RenderWindow& window);
 };
