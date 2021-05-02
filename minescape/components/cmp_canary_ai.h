@@ -12,6 +12,7 @@ protected:
 	sf::Vector2f _movementRect;
 	float waitTime;
 	float waitTimeTick;
+	float angle;
 
 	enum State {
 		Waiting,

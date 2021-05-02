@@ -12,9 +12,12 @@ private:
 	bool buttonPressed;
 
 	float launchSpeed;
+	float ropeCurrentLength;
 	float ropeMaxLength;
+	float impulse;
 
 	Vector2f initialRopePosition;
+	Vector2f currentEndPointPosition;
 	Vector2f finalRopePosition;
 	
 	b2Body* _endBody;
@@ -45,7 +48,6 @@ private:
 	bool isTouchingWall();
 	void createRopeJoint();
 	void disposeOfDistanceJoint();
-	void updateRopePoints();
 	
 public:
 

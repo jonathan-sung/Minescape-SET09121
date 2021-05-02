@@ -10,7 +10,6 @@ protected:
   bool _grounded;
   float _groundspeed;
 
-  bool isGrounded() const;
   bool stunned;
   float stun_time;
   void stunning(double dt);
@@ -26,6 +25,7 @@ public:
   
   void stun();
 
+  bool isGrounded() const;
   explicit PlayerPhysicsComponent(Entity* p, const sf::Vector2f& size);
 
   PlayerPhysicsComponent() = delete;

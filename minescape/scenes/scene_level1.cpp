@@ -103,7 +103,7 @@ void Level1Scene::Load() {
 		  pos += Vector2f(TILE_SIZE / 2, TILE_SIZE / 2);
 		  auto enemy = makeEntity();
 		  enemy->setPosition(pos);
-		  enemy->addComponent<CanaryAIComponent>(150.0f,5.0f, sf::Vector2f(65.0f, 90.0f), sf::Vector2f(250.0f, 65.0f));
+		  enemy->addComponent<CanaryAIComponent>(150.0f,5.0f, sf::Vector2f(85.0f, 100.0f), sf::Vector2f(250.0f, 65.0f));
 		  enemy->addComponent<HurtComponent>();
 		  auto s = enemy->addComponent<ShapeComponent>();
 		  s->setShape<sf::RectangleShape>(sf::Vector2f(20.f, 30.f));
