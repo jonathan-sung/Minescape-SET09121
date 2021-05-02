@@ -2,6 +2,7 @@
 #include "game.h"
 #include "scenes/scene_menu.h"
 #include "SFML/Graphics.hpp"
+#include "scenes/scene_score.h"
 
 using namespace std;
 using namespace sf;
@@ -18,6 +19,7 @@ Level1Scene level1;
 MenuScene menu;
 OptionsScene optionscene;
 KeybindsScene keyBindScene;
+ScoreScene score_board;
 
 /*
 Level2Scene level2;
