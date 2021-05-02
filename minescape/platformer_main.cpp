@@ -37,5 +37,5 @@ int main() {
     keyControls[keybinds::Right] = Keyboard::D;
     keyControls[keybinds::Action1] = Keyboard::Space;
     keyControls[keybinds::Action2] = Keyboard::Enter;
-	Engine::Start(1280, 720, "Minescape", &score_board);
+	Engine::Start(1280, 720, "Minescape", &menu);
 }
