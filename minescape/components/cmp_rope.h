@@ -14,10 +14,9 @@ private:
 	float launchSpeed;
 	float ropeCurrentLength;
 	float ropeMaxLength;
+	float impulse;
 	float impulseTime;
 	float impulseTimer;
-	Vector2f forceImpulse; 
-	Vector2f addedImpulse;
 
 	Vector2f initialRopePosition;
 	Vector2f currentEndPointPosition;

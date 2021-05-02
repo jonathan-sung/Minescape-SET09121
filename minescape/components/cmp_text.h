@@ -12,7 +12,7 @@ public:
   void update(double dt) override;
 
   void setPosition(Vector2f pos);
-  Vector2f getPosition();
+
   void render() override;
 
   ~TextComponent() override = default;
