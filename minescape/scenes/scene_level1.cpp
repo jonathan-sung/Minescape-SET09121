@@ -27,6 +27,7 @@ sf::Music music;
 
 void Level1Scene::Load() {
   cout << "Scene 1 Load" << endl;
+  music.setVolume(20);
   music.setLoop(true);
   ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
@@ -105,10 +106,12 @@ void Level1Scene::Load() {
 		  enemy->setPosition(pos);
 		  enemy->addComponent<CanaryAIComponent>(150.0f,5.0f, sf::Vector2f(85.0f, 100.0f), sf::Vector2f(250.0f, 65.0f));
 		  enemy->addComponent<HurtComponent>();
-		  auto s = enemy->addComponent<ShapeComponent>();
-		  s->setShape<sf::RectangleShape>(sf::Vector2f(20.f, 30.f));
-		  s->getShape().setFillColor(Color::Red);
-		  s->getShape().setOrigin(10.f, 15.f);
+		  auto a = enemy->addComponent<Animation>("res/canary.png", 5);
+		  a->animate = true;
+		  //auto s = enemy->addComponent<ShapeComponent>();
+		  //s->setShape<sf::RectangleShape>(sf::Vector2f(20.f, 30.f));
+		  //s->getShape().setFillColor(Color::Red);
+		  //s->getShape().setOrigin(10.f, 15.f);
 	  }
 	  // *********************************
   }

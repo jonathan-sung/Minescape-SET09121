@@ -8,6 +8,7 @@ using namespace std;
 using namespace sf;
 
 void MenuScene::Load() {
+	music.setVolume(20);
 	music.setLoop(true);
 	cout << "Menu Load";
 	MenuScene::selection = 0;
