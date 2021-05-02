@@ -200,25 +200,25 @@ void RopeComponent::update(double dt)
 		//not touching the ground
 		if (!_parent->get_components<PlayerPhysicsComponent>()[0].get()->isGrounded()) {
 			//lean towards center
-			float xforce = (initialRopePosition.x - finalRopePosition.x);
-			cout << xforce << endl;
-			float dir = (xforce > 0 ? -100 : 100);
-			if (xforce < -40 || xforce > 40)
+			float xdistanceFromCenter = (initialRopePosition.x - finalRopePosition.x);
+			cout << xdistanceFromCenter << endl;
+			float dir = (xdistanceFromCenter > 0 ? -80 : 80);
+			if (xdistanceFromCenter < -40 || xdistanceFromCenter > 40)
 			{
 				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(dir * dt, 0.0f));
+				impulse += dir;
 			}
 
-			////
-			//if (Keyboard::isKeyPressed(keyControls[keybinds::Left])&&dir<0)
-			//{
-			//	impulse -= 1;
-			//	_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(impulse * dt, 0.0f));
-			//}
-			//else if (Keyboard::isKeyPressed(keyControls[keybinds::Right])&&dir>0)
-			//{
-			//	impulse += 1;
-			//	_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(impulse * dt, 0.0f));
-			//}
+			//
+			if (Keyboard::isKeyPressed(keyControls[keybinds::Left])&&dir>0)
+			{
+				impulse -= 10;
+			}
+			else if (Keyboard::isKeyPressed(keyControls[keybinds::Right])&&dir<0)
+			{
+				impulse += 10;
+			}
+			_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(impulse* dt, 0.0f));
 		}
 
 		//once latched make it controllable by player

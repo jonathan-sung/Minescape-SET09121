@@ -13,6 +13,7 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 	_initialPos = p->getPosition();
 	_direction = sf::Vector2f(1, 1);
 	state = State::Waiting;
+	turnedLeft = false;
 }
 
 void CanaryAIComponent::update(double dt) {
@@ -31,6 +32,8 @@ void CanaryAIComponent::update(double dt) {
 						(_parent->getPosition().x > pl->getPosition().x && _direction.x > 0))
 					{
 						_direction.x = -_direction.x;
+						if (_direction.x > 0) turnedLeft = false;
+						else turnedLeft = true;
 					}
 
 					state = State::PlayerDetected;
@@ -78,6 +81,7 @@ void CanaryAIComponent::update(double dt) {
 				waitTimeTick -= dt;
 				if (waitTimeTick <= 0)
 				{
+					turnedLeft = -turnedLeft;
 					state = State::Returning;
 				}
 				break;
@@ -111,4 +115,9 @@ void CanaryAIComponent::update(double dt) {
 
 void CanaryAIComponent::render()
 {
+}
+
+bool CanaryAIComponent::isTurnedLeft()
+{
+	return turnedLeft;
 }

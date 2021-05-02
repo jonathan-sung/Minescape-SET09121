@@ -13,6 +13,7 @@ protected:
 	float waitTime;
 	float waitTimeTick;
 	float angle;
+	bool turnedLeft;
 
 	enum State {
 		Waiting,
@@ -27,6 +28,7 @@ protected:
 public:
 	void update(double dt) override;
 	void render() override;
+	bool isTurnedLeft();
 
 	explicit CanaryAIComponent(Entity* p, float visionRadius, float wait,sf::Vector2f speed,sf::Vector2f movementRect);
 	CanaryAIComponent() = delete;
