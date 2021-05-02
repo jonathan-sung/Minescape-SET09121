@@ -23,6 +23,11 @@ void TextComponent::setPosition(Vector2f pos)
 	_text.setPosition(pos);
 }
 
+Vector2f TextComponent::getPosition()
+{
+    return _text.getPosition();
+}
+
 void TextComponent::SetFont(std::shared_ptr<sf::Font> font)
 {
 	_font = font;

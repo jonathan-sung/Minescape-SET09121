@@ -44,12 +44,11 @@ void PlayerPhysicsComponent::update(double dt) {
 	//if (Keyboard::isKeyPressed(Keyboard::S)) stun();
 	_parent->get_components<Animation>()[0]->animate = false;
 	if (!stunned) {
-		/*
-		if (Keyboard::isKeyPressed(Keyboard::Left) ||
-			Keyboard::isKeyPressed(Keyboard::Right)) {
+		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
+			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
 			_parent->get_components<Animation>()[0]->animate = true;
 			// Moving Either Left or Right
-			if (Keyboard::isKeyPressed(Keyboard::Right)) {
+			if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
 				_parent->get_components<Animation>()[0]->FlipSprite(true);
 				if (getVelocity().x < _maxVelocity.x)
 					impulse({ (float)(dt * _groundspeed), 0 });
@@ -65,7 +64,7 @@ void PlayerPhysicsComponent::update(double dt) {
 			dampen({ 0.3f, 1.0f });
 			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
 		}
-		*/
+		
 
 		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
 			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {

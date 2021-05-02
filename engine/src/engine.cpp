@@ -7,6 +7,7 @@
 #include <future>
 #include <iostream>
 #include <stdexcept>
+#include "../minescape/game.h"
 
 using namespace sf;
 using namespace std;
@@ -46,9 +47,11 @@ void Loading_render() {
 float frametimes[256] = {};
 uint8_t ftc = 0;
 
-void Engine::Update() {
+void Engine::Update() 
+{
   static sf::Clock clock;
   float dt = clock.restart().asSeconds();
+  if (paused) dt = 0;
   {
     frametimes[++ftc] = dt;
     static string avg = _gameName + " FPS:";
