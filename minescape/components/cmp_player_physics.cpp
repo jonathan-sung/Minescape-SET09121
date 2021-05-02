@@ -9,6 +9,8 @@ using namespace std;
 using namespace sf;
 using namespace Physics;
 
+#define STUN_TIME 1
+
 bool PlayerPhysicsComponent::isGrounded() const {
 	auto touch = getTouching();
 	const auto& pos = _body->GetPosition();
@@ -60,23 +62,30 @@ void PlayerPhysicsComponent::update(double dt) {
 		else {
 			// Dampen X axis movement
 			dampen({ 0.3f, 1.0f });
+			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
+		}
+		*/
+
+		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
+			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+			// Moving Either Left or Right
+			_parent->get_components<Animation>()[0]->animate = true;
+			if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+				_parent->get_components<Animation>()[0]->FlipSprite(true);
+				if (getVelocity().x < _maxVelocity.x)
+					impulse({ (float)(dt * _groundspeed), 0 });
+			}
+			else {
+				_parent->get_components<Animation>()[0]->FlipSprite(false);
+				if (getVelocity().x > -_maxVelocity.x)
+					impulse({ -(float)(dt * _groundspeed), 0 });
+			}
+		}
+		else {
+			// Dampen X axis movement
+			dampen({ 0.3f, 1.0f });
 		}
 
-  if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
-      Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
-    // Moving Either Left or Right
-    if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
-      if (getVelocity().x < _maxVelocity.x)
-        impulse({(float)(dt * _groundspeed), 0});
-    } else {
-      if (getVelocity().x > -_maxVelocity.x)
-        impulse({-(float)(dt * _groundspeed), 0});
-    }
-  } else {
-    // Dampen X axis movement
-    dampen({0.3f, 1.0f});
-  }
-  
 		// Handle Jump
 		if (Keyboard::isKeyPressed(keyControls[keybinds::Up])) {
 			_grounded = isGrounded();
@@ -84,6 +93,7 @@ void PlayerPhysicsComponent::update(double dt) {
 				setVelocity(Vector2f(getVelocity().x, 0.f));
 				teleport(Vector2f(pos.x, pos.y - 2.0f));
 				impulse(Vector2f(0, -10.f));
+				jumpSound.play();
 			}
 		}
 	}
@@ -98,8 +108,8 @@ void PlayerPhysicsComponent::update(double dt) {
 		setFriction(0.1f);
 	}
 
-//ask jonathan about this
-	// Clamp velocity.
+	//ask jonathan about this
+		// Clamp velocity.
 	auto v = getVelocity();
 	v.x = copysign(min(abs(v.x), _maxVelocity.x), v.x);
 	v.y = copysign(min(abs(v.y), _maxVelocity.y), v.y);
@@ -110,20 +120,25 @@ void PlayerPhysicsComponent::update(double dt) {
 
 void PlayerPhysicsComponent::stun() {
 	if (!stunned) {
-		stun_time = 2;
+		stun_time = STUN_TIME;
 		stunned = true;
 		setCollidable(false);
+		stunSound.play();
 	}
 }
 
 void PlayerPhysicsComponent::stunning(double dt) {
 	if (stunned) {
 		stun_time -= dt;
-		if (stun_time <= 0) {
+		if (stun_time <= 0 && !playerInWall()) {
 			stunned = false;
 			setCollidable(true);
 		}
 	}
+}
+
+bool PlayerPhysicsComponent::playerInWall() {
+	return 	getTouching().size() != 0;
 }
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
@@ -137,6 +152,11 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
 	_body->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
 	_body->SetBullet(true);
-	stun_time = 2;
+	stun_time = STUN_TIME;
 	stunned = false;
+	stunSoundBuffer.loadFromFile("res/sounds/fx/rock_hit.wav");
+	stunSound.setBuffer(stunSoundBuffer);
+
+	jumpSoundBuffer.loadFromFile("res/sounds/fx/jump.wav");
+	jumpSound.setBuffer(jumpSoundBuffer);
 }

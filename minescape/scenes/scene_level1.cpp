@@ -11,6 +11,7 @@
 #include "../components/cmp_rope.h"
 #include "../components/cmp_gas.h"
 #include "../components/cmp_hurt_player.h"
+#include "../components/cmp_canary_ai.h"
 #include "../components/cmp_animation.h"
 
 using namespace std;
@@ -32,8 +33,8 @@ void Level1Scene::Load()
 {
   paused = false;
   cout << "Scene 1 Load" << endl;
+  music.setVolume(20);
   music.setLoop(true);
-  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
   ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
   //auto ho = 0;
@@ -53,8 +54,7 @@ void Level1Scene::Load()
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(32.f, 64.f));
 	  player->addComponent<Animation>("res/character_walk.png", 4);
 	  // *********************************
-	  player->addComponent<RopeComponent>(150.0f,1.0f);
-	  cout << player->getPosition() << endl;
+	  player->addComponent<RopeComponent>(200.0f,1.0f);
   }
 	
   // Create gas
@@ -98,6 +98,28 @@ void Level1Scene::Load()
 		  e->addComponent<PhysicsComponent>(false, Vector2f(TILE_SIZE, TILE_SIZE));
 	  }
 	  // *********************************
+	  if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
+  }
+
+  //Enemies
+  {
+	  //// *********************************
+	  auto enemyTiles = ls::findTiles(ls::ENEMY);
+	  for (auto n : enemyTiles) {
+		  auto pos = ls::getTilePosition(n);
+		  pos += Vector2f(TILE_SIZE / 2, TILE_SIZE / 2);
+		  auto enemy = makeEntity();
+		  enemy->setPosition(pos);
+		  enemy->addComponent<CanaryAIComponent>(150.0f,5.0f, sf::Vector2f(85.0f, 100.0f), sf::Vector2f(250.0f, 65.0f));
+		  enemy->addComponent<HurtComponent>();
+		  auto a = enemy->addComponent<Animation>("res/canary.png", 5);
+		  a->animate = true;
+		  //auto s = enemy->addComponent<ShapeComponent>();
+		  //s->setShape<sf::RectangleShape>(sf::Vector2f(20.f, 30.f));
+		  //s->getShape().setFillColor(Color::Red);
+		  //s->getShape().setOrigin(10.f, 15.f);
+	  }
+	  // *********************************
   }
 
 //Create Pause Menu
@@ -123,6 +145,7 @@ void Level1Scene::UnLoad() {
   cout << "Scene 1 UnLoad" << endl;
   player.reset();
   ls::unload();
+  music.stop();
   Scene::UnLoad();
 }
 
@@ -145,7 +168,7 @@ void Level1Scene::Update(const double& dt)
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
-		rocktime = 2.f;
+		rocktime = 5.f;
 		auto rock = makeEntity();
 		rock->addTag("rock");
 		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
@@ -153,9 +176,6 @@ void Level1Scene::Update(const double& dt)
 		rock->addComponent<Rock>();
 		rock->addComponent<HurtComponent>();
 		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
-		//sc->getSprite().setTexture(ls::spritesheet);
-		//sc->getSprite().setTextureRect(sf::IntRect(0 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		//sc->getSprite().setOrigin(Vector2f((TILE_SIZE / 2), TILE_SIZE / 2));
 	}
 	buttonCD -= dt;
 }

@@ -32,6 +32,11 @@ void Animation::FlipSprite(bool flipped) {
 
 }
 
+void Animation::ResetDefaultFrame()
+{
+	currentFrame = 0;
+}
+
 Animation::Animation(Entity* p, string filepath, int maxFrame) : SpriteComponent(p) {
 	currentFrame = 0;
 	currentTime = 0;
@@ -45,3 +50,5 @@ Animation::Animation(Entity* p, string filepath, int maxFrame) : SpriteComponent
 	getSprite().setTexture(spritesheet);
 
 }
+
+

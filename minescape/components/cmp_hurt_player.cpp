@@ -13,8 +13,6 @@ void HurtComponent::update(double dt) {
 			pl->get_components<RopeComponent>()[0]->setUsable(false);
 			cout << "Stunned" << endl;
 			//pl->setForDelete();
-			sound.setBuffer(buffer);
-			sound.play();
 			_parent->setForDelete();
 		}
 	}
@@ -22,7 +20,5 @@ void HurtComponent::update(double dt) {
 
 HurtComponent::HurtComponent(Entity* p)
 	: Component(p), _player(_parent->scene->ents.find("player")[0]) {
-	if (buffer.loadFromFile("res/sounds/fx/rock_hit.wav")) {
-		cout << "Sound loaded succesfully" << endl;
-	}
+
 }

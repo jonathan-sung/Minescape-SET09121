@@ -8,7 +8,9 @@ using namespace std;
 using namespace sf;
 
 void MenuScene::Load() {
-  cout << "Menu Load";
+	music.setVolume(20);
+	music.setLoop(true);
+	cout << "Menu Load";
   Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(1280, 720)));
   paused = false;
   MenuScene::selection = 0;
@@ -40,14 +42,14 @@ void MenuScene::Load() {
     t->setPosition(op3->getPosition());
     t->SetSize(45);
     options[2] = op3;
-    
-  }
-  setLoaded(true);
+
+	}
+	setLoaded(true);
+	if (music.openFromFile("res/sounds/music/minescape_menu_theme.ogg")) music.play();
 }
 
 void MenuScene::Update(const double& dt)
 {
-
     if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
     {
         if (selection == 0) selection = 2;
@@ -100,27 +102,27 @@ void MenuScene::Update(const double& dt)
 
 void MenuScene::changeText()
 {
-    auto t = options[0]->GetCompatibleComponent<TextComponent>();
+	auto t = options[0]->GetCompatibleComponent<TextComponent>();
 
-    t[0]->SetText("Play");
-    t = options[1]->GetCompatibleComponent<TextComponent>();
-    t[0]->SetText("Options");
-    t = options[2]->GetCompatibleComponent<TextComponent>();
-    t[0]->SetText("Quit");
+	t[0]->SetText("Play");
+	t = options[1]->GetCompatibleComponent<TextComponent>();
+	t[0]->SetText("Options");
+	t = options[2]->GetCompatibleComponent<TextComponent>();
+	t[0]->SetText("Quit");
 
-    switch (selection)
-    {
-    case(0):
-        t = options[0]->GetCompatibleComponent<TextComponent>();
-        t[0]->SetText("[ Play ]");
-        break;
-    case(1):
-        t = options[1]->GetCompatibleComponent<TextComponent>();
-        t[0]->SetText("[ Options ]");
-        break;
-    case(2):
-        t = options[2]->GetCompatibleComponent<TextComponent>();
-        t[0]->SetText("[ Quit ]");
-        break;
-    }
+	switch (selection)
+	{
+	case(0):
+		t = options[0]->GetCompatibleComponent<TextComponent>();
+		t[0]->SetText("[ Play ]");
+		break;
+	case(1):
+		t = options[1]->GetCompatibleComponent<TextComponent>();
+		t[0]->SetText("[ Options ]");
+		break;
+	case(2):
+		t = options[2]->GetCompatibleComponent<TextComponent>();
+		t[0]->SetText("[ Quit ]");
+		break;
+	}
 }

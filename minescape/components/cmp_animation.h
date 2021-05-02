@@ -20,6 +20,7 @@ public:
 	void update(double dt) override;
 	void ChangeFrame();
 	void FlipSprite(bool flipped);
+	void ResetDefaultFrame();
 	bool animate = true;
 	explicit Animation(Entity* p, std::string filepath, int maxFrame);
 	Animation() = delete;

@@ -1,7 +1,6 @@
 #pragma once
 #include "cmp_physics.h"
 #include <ecm.h>
-#include <SFML/Audio.hpp>
 
 class HurtComponent : public Component {
 protected:
@@ -12,6 +11,4 @@ public:
   void render() override {}
   explicit HurtComponent(Entity* p);
   HurtComponent() = delete;
-  sf::SoundBuffer buffer;
-  sf::Sound sound;
 };
