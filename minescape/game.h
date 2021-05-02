@@ -6,7 +6,6 @@
 #include "scenes/scene_menu.h"
 #include "scenes/scene_options.h"
 #include "scenes/scene_keybinds.h"
-#include "scenes/scene_score.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
 
@@ -39,7 +38,6 @@ extern Level1Scene level1;
 extern MenuScene menu;
 extern OptionsScene optionscene;
 extern KeybindsScene keyBindScene;
-extern ScoreScene score_board;
 
 
 //extern Level2Scene level2;

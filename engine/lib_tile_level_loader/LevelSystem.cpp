@@ -5,9 +5,10 @@ using namespace std;
 using namespace sf;
 
 sf::Texture LevelSystem::spritesheet;
+sf::Sprite LevelSystem::invader;
 //remove
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, Color::White}, {END, Color::Blue} };
+	{WALL, Color::White} };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
 	auto it = _colours.find(t);
@@ -125,15 +126,8 @@ void LevelSystem::buildSprites(bool optimise) {
 			auto sp = make_unique<sf::Sprite>();
 			sp->setPosition(t.p);
 			sp->setTexture(spritesheet);
-			if (t.c != Color::Blue) {
-				sp->setTextureRect(sf::IntRect(t.sprite_index.x * _tileSize, t.sprite_index.y * _tileSize, _tileSize, _tileSize));
-
-			}
-			else {
-				sp->setTextureRect(sf::IntRect(0, 3 * _tileSize, _tileSize, _tileSize));
-			}
+			sp->setTextureRect(sf::IntRect(t.sprite_index.x* _tileSize, t.sprite_index.y* _tileSize, _tileSize, _tileSize));
 			_sprites.push_back(move(sp));
-
 		}
 	}
 
@@ -224,3 +218,12 @@ void LevelSystem::unload() {
 const Vector2f& LevelSystem::getOffset() { return _offset; }
 
 float LevelSystem::getTileSize() { return _tileSize; }
+
+void LevelSystem::Jonathan() {
+	if (!spritesheet.loadFromFile("res/spritesheet.png")) {
+		cerr << "Failed to load spritesheet!" << std::endl;
+	}
+	else {
+		std::cout << "Spritesheet load successful!" << std::endl;
+	}
+}

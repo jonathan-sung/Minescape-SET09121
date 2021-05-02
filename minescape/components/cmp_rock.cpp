@@ -31,7 +31,7 @@ void Rock::update(double dt) {
 
 	//cout << getVelocity().x << endl;
 	PhysicsComponent::update(dt);
-	if (_parent->getPosition().y >= 450 || _fallTime <= -LIFE_TIME) _parent->setForDelete();
+	if (_parent->getPosition().y >= 450 || _fallTime <= -20) _parent->setForDelete();
 }
 
 Rock::Rock(Entity* p) : PhysicsComponent(p, true, Vector2f(TILE_SIZE, TILE_SIZE)) {
