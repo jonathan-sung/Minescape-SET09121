@@ -9,11 +9,14 @@ using namespace sf;
 
 void MenuScene::Load() {
   cout << "Menu Load";
+  Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(1280, 720)));
+  paused = false;
   MenuScene::selection = 0;
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>("Minescape");
     t->SetSize(64);
+    cout << t->getPosition() << endl;
 
     auto op1 = makeEntity();
     op1->setPosition(Vector2f(0,150));
@@ -44,8 +47,6 @@ void MenuScene::Load() {
 
 void MenuScene::Update(const double& dt)
 {
-    // cout << "Menu Update "<<dt<<"\n";
-    //static float buttonCD;
 
     if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
     {
