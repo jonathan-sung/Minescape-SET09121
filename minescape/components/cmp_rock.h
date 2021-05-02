@@ -7,6 +7,7 @@
 #define TILE_SIZE 64.0f
 #define DEFAULT_DIRECTION_TIME 2
 #define MAX_SPEED 200
+#define LIFE_TIME 30
 
 class Rock : public PhysicsComponent {
 protected:
