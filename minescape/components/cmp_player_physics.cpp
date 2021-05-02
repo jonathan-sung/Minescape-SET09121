@@ -64,7 +64,7 @@ void PlayerPhysicsComponent::update(double dt) {
 			dampen({ 0.3f, 1.0f });
 			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
 		}
-		*/
+		
 
 		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
 			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {

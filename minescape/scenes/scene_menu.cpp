@@ -7,7 +7,8 @@
 using namespace std;
 using namespace sf;
 
-void MenuScene::Load() {
+void MenuScene::Load() 
+{
 	music.setVolume(20);
 	music.setLoop(true);
 	cout << "Menu Load";
@@ -48,6 +49,11 @@ void MenuScene::Load() {
 	if (music.openFromFile("res/sounds/music/minescape_menu_theme.ogg")) music.play();
 }
 
+void MenuScene::UnLoad()
+{
+    music.stop();
+}
+
 void MenuScene::Update(const double& dt)
 {
     if (sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
@@ -77,6 +83,7 @@ void MenuScene::Update(const double& dt)
         switch (selection)
         {
         case(0):
+
             Engine::ChangeScene(&level1);
             break;
         case(1):
