@@ -18,7 +18,22 @@ static bool loading = false;
 static float loadingspinner = 0.f;
 static float loadingTime;
 static RenderWindow* _window;
-static int _volume;
+
+sf::Keyboard::Key Engine::keyControls[6] = {
+    Keyboard::W,
+    Keyboard::S,
+    Keyboard::A,
+    Keyboard::D,
+    Keyboard::Space,
+    Keyboard::Enter
+};
+float Engine::musicVolume;
+float Engine::sfxVolume;
+
+sf::Vector2f Engine::_resolution;
+
+bool Engine::_windowed;
+bool Engine::_gamepad;
 
 void Loading_update(float dt, const Scene* const scn) {
   //  cout << "Eng: Loading Screen\n";
@@ -85,13 +100,16 @@ void Engine::Render(RenderWindow& window) {
 
 void Engine::Start(unsigned int width, unsigned int height,
                    const std::string& gameName, Scene* scn) {
+
+    setMusicVolume(100);
+    setFXVolume(100);
+    //window and scenes
   RenderWindow window(VideoMode(width, height), gameName);
   _gameName = gameName;
   _window = &window;
   Renderer::initialise(window);
   Physics::initialise();
   ChangeScene(scn);
-  setVolume(25);
   while (window.isOpen()) {
     Event event;
     while (window.pollEvent(event)) {
@@ -145,10 +163,17 @@ void Engine::ChangeScene(Scene* s) {
   }
 }
 
-int Engine::_volume;
+void Engine::setMusicVolume(int vol) { musicVolume = vol; }
+int Engine::getMusicVolume() { return musicVolume; }
 
-void Engine::setVolume(int vol) { _volume = vol; }
-int Engine::getVolume() { return _volume; }
+void Engine::setFXVolume(int vol) { sfxVolume = vol; }
+int Engine::getFXVolume() { return sfxVolume; }
+
+void Engine::setResolution(int x, int y) { _resolution = sf::Vector2f(x,y); }
+
+void Engine::setWindowMode(const bool iswindow) { _windowed = iswindow; }
+
+void Engine::setUseGamepad(const bool gamepad) { _gamepad = gamepad; }
 
 void Scene::Update(const double& dt) { ents.update(dt); }
 

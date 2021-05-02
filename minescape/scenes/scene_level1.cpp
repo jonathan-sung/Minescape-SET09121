@@ -28,7 +28,6 @@ sf::Texture gasTex;
 static shared_ptr<Entity> camera;
 sf::Music music;
 
-
 void Level1Scene::Load() 
 {
   paused = false;

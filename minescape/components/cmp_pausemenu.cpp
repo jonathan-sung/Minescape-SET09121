@@ -42,14 +42,14 @@ void PauseMenu::update(double dt)
 	
 	if (paused) 
 	{
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Down]) && buttonCD <= 0)
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Down]) && buttonCD <= 0)
 		{
 			if (selection == 2) selection = 0;
 			else selection++;
 			changeText();
 			buttonCD = 0.25f;
 		}
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Up]) && buttonCD <= 0)
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Up]) && buttonCD <= 0)
 		{
 			if (selection == 0) selection = 2;
 			else selection--;
@@ -57,7 +57,8 @@ void PauseMenu::update(double dt)
 			buttonCD = 0.25;
 		}
 
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !enterDown || Keyboard::isKeyPressed(keyControls[keybinds::Action2]) && !enterDown)
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) && !enterDown || 
+			Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]) && !enterDown)
 		{
 			cout << "ENTER PRESSED" << endl;
 			switch (selection)
@@ -79,7 +80,8 @@ void PauseMenu::update(double dt)
 			enterDown = true;
 		}
 
-		if (!sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]) && !sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]))
+		if (!sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) &&
+			!sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]))
 		{
 			enterDown = false;
 		}

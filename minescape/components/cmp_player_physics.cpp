@@ -44,11 +44,11 @@ void PlayerPhysicsComponent::update(double dt) {
 	//if (Keyboard::isKeyPressed(Keyboard::S)) stun();
 	_parent->get_components<Animation>()[0]->animate = false;
 	if (!stunned) {
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
-			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]) ||
+			Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right])) {
 			_parent->get_components<Animation>()[0]->animate = true;
 			// Moving Either Left or Right
-			if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+			if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right])) {
 				_parent->get_components<Animation>()[0]->FlipSprite(true);
 				if (getVelocity().x < _maxVelocity.x)
 					impulse({ (float)(dt * _groundspeed), 0 });
@@ -66,11 +66,11 @@ void PlayerPhysicsComponent::update(double dt) {
 		}
 		
 
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Left]) ||
-			Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]) ||
+			Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right])) {
 			// Moving Either Left or Right
 			_parent->get_components<Animation>()[0]->animate = true;
-			if (Keyboard::isKeyPressed(keyControls[keybinds::Right])) {
+			if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right])) {
 				_parent->get_components<Animation>()[0]->FlipSprite(true);
 				if (getVelocity().x < _maxVelocity.x)
 					impulse({ (float)(dt * _groundspeed), 0 });
@@ -87,7 +87,7 @@ void PlayerPhysicsComponent::update(double dt) {
 		}
 
 		// Handle Jump
-		if (Keyboard::isKeyPressed(keyControls[keybinds::Up])) {
+		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Up])) {
 			_grounded = isGrounded();
 			if (_grounded) {
 				setVelocity(Vector2f(getVelocity().x, 0.f));

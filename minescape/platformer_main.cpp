@@ -25,16 +25,15 @@ Level2Scene level2;
 Level3Scene level3;
 */
 
-sf::Keyboard::Key keyControls[6];
 
 int main() {
 
-    //set initial keybinds
-    keyControls[keybinds::Up] = Keyboard::W;
-    keyControls[keybinds::Left] = Keyboard::A;
-    keyControls[keybinds::Down] = Keyboard::S;
-    keyControls[keybinds::Right] = Keyboard::D;
-    keyControls[keybinds::Action1] = Keyboard::Space;
-    keyControls[keybinds::Action2] = Keyboard::Enter;
+    ////set initial keybinds
+    //Engine::keyControls[Engine::keybinds::Up] = Keyboard::W;
+    //Engine::keyControls[Engine::keybinds::Down] = Keyboard::S;
+    //Engine::keyControls[Engine::keybinds::Left] = Keyboard::A;
+    //Engine::keyControls[Engine::keybinds::Right] = Keyboard::D;
+    //Engine::keyControls[Engine::keybinds::Action1] = Keyboard::Space;
+    //Engine::keyControls[Engine::keybinds::Action2] = Keyboard::Enter;
 	Engine::Start(1280, 720, "Minescape", &menu);
 }

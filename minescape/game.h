@@ -15,19 +15,6 @@ extern bool paused;
 
 extern float buttonCD;
 
-extern sf::Keyboard::Key keyControls[6];
-
-extern enum keybinds 
-{
-	Up = 0,
-	Left = 2,
-	Down = 1,
-	Right = 3,
-	Action1 = 4,
-	Action2 = 5
-};
-//extern const sf::Joystick::Axis contControls[6];
-
 
 //############################################
 //Levels

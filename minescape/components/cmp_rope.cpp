@@ -221,13 +221,13 @@ void RopeComponent::update(double dt)
 
 				bool keyPressed = false;
 				//create added impulse
-				if (Keyboard::isKeyPressed(keyControls[keybinds::Left]))
+				if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]))
 				{
 					keyPressed = true;
 					addedImpulse+= Vector2f((directionVector.x>0?-directionVector.x:directionVector.x) * angleATan*3, 
 						(directionVector.y<0?-directionVector.y:directionVector.y) * -angleATan*3);
 				}
-				else if (Keyboard::isKeyPressed(keyControls[keybinds::Right]))
+				else if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right]))
 				{
 					keyPressed = true;
 					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan*3,
