@@ -32,7 +32,7 @@ float Engine::sfxVolume;
 
 sf::Vector2f Engine::_resolution;
 
-bool Engine::_windowed;
+bool Engine::_windowed = false;
 bool Engine::_gamepad;
 
 void Loading_update(float dt, const Scene* const scn) {
@@ -105,6 +105,7 @@ void Engine::Start(unsigned int width, unsigned int height,
     setFXVolume(100);
     //window and scenes
   RenderWindow window(VideoMode(width, height), gameName);
+  bool style = false;
   _gameName = gameName;
   _window = &window;
   Renderer::initialise(window);
@@ -112,6 +113,23 @@ void Engine::Start(unsigned int width, unsigned int height,
   ChangeScene(scn);
   while (window.isOpen()) {
     Event event;
+    if(_windowed != style)
+    {
+        if (_windowed) 
+        {
+            
+            window.create(VideoMode(width, height), gameName, sf::Style::Fullscreen);
+            style = _windowed;
+            cout << "Fullscreen" << endl;
+        }else
+        {
+            
+            window.create(VideoMode(width, height), gameName, sf::Style::Fullscreen);
+            cout << "Windowed" << endl;
+            style = _windowed;
+        }
+    }
+   
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed) {
         window.close();
@@ -171,7 +189,11 @@ int Engine::getFXVolume() { return sfxVolume; }
 
 void Engine::setResolution(int x, int y) { _resolution = sf::Vector2f(x,y); }
 
-void Engine::setWindowMode(const bool iswindow) { _windowed = iswindow; }
+void Engine::setWindowMode(const bool iswindow) 
+{
+    _windowed = iswindow; 
+    
+}
 
 void Engine::setUseGamepad(const bool gamepad) { _gamepad = gamepad; }
 
