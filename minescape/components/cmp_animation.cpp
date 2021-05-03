@@ -7,10 +7,19 @@ void Animation::update(double dt) {
 		currentTime += dt;
 		if (currentTime >= changeFrameTime) {
 			currentTime = 0;
-			currentFrame++;
+			if (reverse) {
+				currentFrame--;
+			}
+			else {
+				currentFrame++;
+			}
 			if (currentFrame >= maxFrame) {
 				currentFrame = 0;
 			}
+			else if (currentFrame < 0) {
+				currentFrame = maxFrame- 1;
+			}
+
 			ChangeFrame();
 		}
 	}
@@ -40,6 +49,7 @@ void Animation::ResetDefaultFrame()
 Animation::Animation(Entity* p, string filepath, int maxFrame) : SpriteComponent(p) {
 	currentFrame = 0;
 	currentTime = 0;
+	reverse = false;
 	this->maxFrame = maxFrame;
 	animate = true;
 	if (!spritesheet.loadFromFile(filepath)) {

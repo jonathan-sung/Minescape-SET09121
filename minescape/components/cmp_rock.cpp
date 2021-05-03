@@ -10,7 +10,7 @@ void Rock::update(double dt) {
 	bool falling = (getVelocity().y * getVelocity().y) >= 1.0f;
 	bool moving = abs(getVelocity().x) > 0;
 	//cout << getVelocity().x << endl;
-	if (!fallTimeElapsed && _fallTime <= 0) {
+	if (!fallTimeElapsed && _fallTime <= 0 && getTouching().size() == 0) {
 		fallTimeElapsed = true;
 		setCollidable(true);
 	}
@@ -19,13 +19,16 @@ void Rock::update(double dt) {
 		pushing_counter += dt;
 		if (pushing_counter >= DEFAULT_DIRECTION_TIME + ((rand() % 10)) / 10) {
 			_direction = -_direction;
+			(_direction.x < 0) ? _parent->get_components<Animation>()[0]->reverse = false :
+				_parent->get_components<Animation>()[0]->reverse = true;
 			pushing_counter = 0;
 		}
 	}
 
 	if (fallTimeElapsed && !falling && abs(getVelocity().x) < MAX_SPEED) {
 		impulse(Vector2f(_direction));
-		_parent->get_components<Animation>()[0]->getSprite().rotate(_direction.x * 10);
+
+		//_parent->get_components<Animation>()[0]->getSprite().rotate(_direction.x * 10);
 		//setVelocity(_direction);
 	}
 
