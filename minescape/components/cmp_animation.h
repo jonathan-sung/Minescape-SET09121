@@ -15,6 +15,7 @@ protected:
 	const float changeFrameTime = 0.1f;
 	float currentTime;
 	sf::Texture spritesheet;
+	bool isTitle;
 	
 public:
 	void update(double dt) override;
@@ -23,6 +24,7 @@ public:
 	void ResetDefaultFrame();
 	bool animate = true;
 	explicit Animation(Entity* p, std::string filepath, int maxFrame);
+	explicit Animation(Entity* p, std::string filepath, int maxFrame, bool title);
 	Animation() = delete;
 	bool reverse;
 };
