@@ -69,11 +69,12 @@ void PauseMenu::update(double dt)
 				break;
 			case(1):
 				_parent->scene->UnLoad();
+				paused = false;
 				_parent->scene->Load();
 				break;
 			case(2):
 				_parent->scene->UnLoad();
-				
+				paused = false;
 				Engine::ChangeScene(&menu);
 				break;
 			}
