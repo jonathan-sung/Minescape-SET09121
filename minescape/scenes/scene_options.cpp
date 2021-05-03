@@ -102,7 +102,7 @@ void OptionsScene::Update(const double& dt)
         enterDown = false;
     }
 
-    if (Engine::keyPressed[Engine::keybinds::Left]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Left] && buttonCD <= 0)
     {
         switch (selection)
         {
@@ -126,7 +126,7 @@ void OptionsScene::Update(const double& dt)
         buttonCD = 0.2f;
     }
 
-    if (Engine::keyPressed[Engine::keybinds::Right]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Right] && buttonCD <= 0)
     {
         switch (selection) 
         {
