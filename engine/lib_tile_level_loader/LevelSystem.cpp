@@ -118,7 +118,7 @@ void LevelSystem::buildSprites(bool optimise) {
 	const auto nonempty = tps.size();
 
 	for (auto& t : tps) {
-		std::cout << t.p << std::endl;
+		//std::cout << t.p << std::endl;
 		//if (t.c != sf::Color::Transparent) {
 		auto sp = make_unique<sf::Sprite>();
 		sp->setPosition(t.p);

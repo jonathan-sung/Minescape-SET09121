@@ -13,4 +13,6 @@ public:
   void togglePause();
 
   void Render() override;
+
+  std::vector<sf::Vector2ul> ar;
 };

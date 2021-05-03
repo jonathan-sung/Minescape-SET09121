@@ -24,4 +24,5 @@ public:
 	bool animate = true;
 	explicit Animation(Entity* p, std::string filepath, int maxFrame);
 	Animation() = delete;
+	bool reverse;
 };
