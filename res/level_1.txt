@@ -8,38 +8,38 @@ ww                www
 ww              e www
 ww       www   wwwwww
 ww       www   wwwwww
-ww       www      www
+ww       www   wwwwww
 ww                www
 ww                www
 ww                www
-ww      n         www
+ww                www
 ww                www
 ww     www        www
 ww     www        www
+ww     www        www
 ww                www
 ww                www
 ww                www
-ww                www
-ww           n    www
 ww                www
 ww          www   www
 ww          www   www
+ww          www   www
 ww                www
 ww                www
-ww     n          www
+ww                www
 ww                www
 ww    www         www
-ww    www      n  www
-ww                www
-ww            www www
-ww    n       www www
-ww                www
+ww    www         www
+ww    www         www
+ww            wwwwwww
+ww            wwwwwww
+ww            wwwwwww
 ww   www          www
-ww   www   n      www
-ww                www
+ww   www          www
+ww   www          www
 ww        www     www
 ww        www     www
-ww                www
+ww        www     www
 ww                www
 ww                www
 ww                www
@@ -50,7 +50,7 @@ wwwwwwwwwwwwww    www
 wwwwwwwwwwwwww    www
 ww                www
 ww                www
-ww            s  nwww
+ww               nwww
 ww     wwwwwwwwwwwwww
 ww     wwwwwwwwwwwwww
 ww     wwwwwwwwwwwwww
@@ -61,8 +61,8 @@ wwwwwwwwwwwww     www
 wwwwwwwwwwwww     www
 wwwwwwwwwwwww     www
 ww                www
-ww             n  www
 ww                www
+ww   s            www
 wwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwww

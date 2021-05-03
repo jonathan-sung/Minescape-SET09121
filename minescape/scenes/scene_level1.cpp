@@ -165,7 +165,7 @@ void Level1Scene::Update(const double& dt)
 		buttonCD = 0.2f;
 	}
 
-	//Do rock stuff
+	//Rock spawning
 	static float rocktime = 0.0f;
 	rocktime -= dt;
 
@@ -173,8 +173,7 @@ void Level1Scene::Update(const double& dt)
 		rocktime = 5.f;
 		auto rock = makeEntity();
 		rock->addTag("rock");
-		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
-			Vector2f(0, 40));
+		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]));
 		rock->addComponent<Rock>();
 		rock->addComponent<HurtComponent>();
 		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
