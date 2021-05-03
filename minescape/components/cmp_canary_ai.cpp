@@ -5,9 +5,9 @@
 using namespace std;
 using namespace sf;
 
-CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, sf::Vector2f speed,sf::Vector2f movementRect) :
+CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, sf::Vector2f speed, sf::Vector2f movementRect) :
 	EnemyAIComponent(p),
-	_visionRadius(visionRadius), waitTime(wait), waitTimeTick(waitTime), 
+	_visionRadius(visionRadius), waitTime(wait), waitTimeTick(waitTime),
 	_speed(speed), _movementRect(movementRect)
 {
 	_player = _parent->scene->ents.find("player")[0];
@@ -15,6 +15,8 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 	_direction = sf::Vector2f(1, 1);
 	state = State::Waiting;
 	turnedLeft = false;
+	goingLeft = false;
+	roamLimitx = 50.0f;
 }
 
 void CanaryAIComponent::update(double dt) {
@@ -38,6 +40,20 @@ void CanaryAIComponent::update(double dt) {
 					}
 
 					state = State::PlayerDetected;
+					break;
+				}
+
+				if (length(_parent->getPosition() - _initialPos) > roamLimitx) goingLeft = !goingLeft;
+				sf::Vector2f roamUnitVector = Vector2f((goingLeft ? -1 : 1), 0);
+				_direction.x = roamUnitVector.x;
+				Vector2f mov=Vector2f(roamUnitVector.x * _speed.x * dt, roamUnitVector.y * _speed.y * dt);
+				if (!validMove(mov+_parent->getPosition())) {
+					waitTimeTick = waitTime / 2;
+					state = State::PauseAfterMove;
+				}
+				else 
+				{
+					move(mov);
 				}
 				break;
 			}
@@ -53,9 +69,9 @@ void CanaryAIComponent::update(double dt) {
 				{
 					_direction.y = -_direction.y;
 				}
-				angle += _direction.y*dt*3;
+				angle += _direction.y * dt * 3;
 
-				sf::Vector2f mov = sf::Vector2f(_speed.x * dt*_direction.x, sin(angle)*_speed.y * dt*_direction.y) + _parent->getPosition();
+				sf::Vector2f mov = sf::Vector2f(_speed.x * dt * _direction.x, sin(angle) * _speed.y * dt * _direction.y) + _parent->getPosition();
 
 				if (!validMove(mov)) {
 					waitTimeTick = waitTime / 2;
@@ -63,7 +79,7 @@ void CanaryAIComponent::update(double dt) {
 				}
 				else
 				{
-					move(sf::Vector2f(_speed.x * dt*_direction.x, sin(angle) * _speed.y * dt * _direction.y));
+					move(sf::Vector2f(_speed.x * dt * _direction.x, sin(angle) * _speed.y * dt * _direction.y));
 
 					//ActorMovementComponent::update(dt);
 
@@ -89,7 +105,7 @@ void CanaryAIComponent::update(double dt) {
 			}
 			case CanaryAIComponent::Returning: {
 				sf::Vector2f distanceToInitialVector = _initialPos - _parent->getPosition();
-				
+
 				if (length(distanceToInitialVector) < 0.5f)
 				{
 					state = State::Waiting;
@@ -98,7 +114,7 @@ void CanaryAIComponent::update(double dt) {
 				{
 					sf::Vector2f unitVector = normalize(distanceToInitialVector);
 					_direction.x = unitVector.x;
-					move(sf::Vector2f(unitVector.x * dt* _speed.x, unitVector.y * dt* _speed.y));
+					move(sf::Vector2f(unitVector.x * dt * _speed.x, unitVector.y * dt * _speed.y));
 				}
 
 				break;
@@ -108,7 +124,7 @@ void CanaryAIComponent::update(double dt) {
 			}
 		}
 	}
-	catch(exception e)
+	catch (exception e)
 	{
 		cout << "CanaryAIComponent::update::ERROR" << endl;
 		return;

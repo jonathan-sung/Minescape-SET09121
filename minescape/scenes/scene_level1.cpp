@@ -59,22 +59,6 @@ void Level1Scene::Load()
 		player->addComponent<RopeComponent>(200.0f, 0.25f);
 	}
 
-	// Create gas
-	{
-		if (!gasTex.loadFromFile("res/gas.png")) {
-			cerr << "Failed to load spritesheet!" << std::endl;
-		}
-		else {
-			std::cout << "Spritesheet load successful!" << std::endl;
-		}
-
-		// *********************************
-		gas = makeEntity();
-		gas->setPosition(Vector2f(0, Engine::getResolution().y));
-		auto s = gas->addComponent<SpriteComponent>();
-		s->getSprite().setTexture(gasTex);
-		auto g = gas->addComponent<GasComponent>();
-	}
 
 
 	// Create camera
@@ -112,7 +96,7 @@ void Level1Scene::Load()
 			pos += Vector2f(TILE_SIZE / 2, TILE_SIZE / 2);
 			auto enemy = makeEntity();
 			enemy->setPosition(pos);
-			enemy->addComponent<CanaryAIComponent>(150.0f, 5.0f, sf::Vector2f(85.0f, 100.0f), sf::Vector2f(250.0f, 65.0f));
+			enemy->addComponent<CanaryAIComponent>(150.0f, 2.0f, sf::Vector2f(85.0f, 100.0f), sf::Vector2f(250.0f, 65.0f));
 			enemy->addComponent<HurtComponent>();
 			auto a = enemy->addComponent<Animation>("res/canary.png", 5);
 			a->animate = true;
@@ -122,6 +106,23 @@ void Level1Scene::Load()
 			//s->getShape().setOrigin(10.f, 15.f);
 		}
 		// *********************************
+	}
+
+	// Create gas
+	{
+		if (!gasTex.loadFromFile("res/gas.png")) {
+			cerr << "Failed to load spritesheet!" << std::endl;
+		}
+		else {
+			std::cout << "Spritesheet load successful!" << std::endl;
+		}
+
+		// *********************************
+		gas = makeEntity();
+		gas->setPosition(Vector2f(0, Engine::getResolution().y));
+		auto s = gas->addComponent<SpriteComponent>();
+		s->getSprite().setTexture(gasTex);
+		auto g = gas->addComponent<GasComponent>();
 	}
 
 	//Create Pause Menu

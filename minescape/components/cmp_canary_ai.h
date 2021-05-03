@@ -9,6 +9,8 @@ protected:
 	sf::Vector2f _initialPos;
 	sf::Vector2f _speed;
 	sf::Vector2f _direction;
+	bool goingLeft;
+	float roamLimitx;
 	sf::Vector2f _movementRect;
 	float waitTime;
 	float waitTimeTick;
