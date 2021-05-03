@@ -56,7 +56,7 @@ void Level1Scene::Load()
 		player->addComponent<PlayerPhysicsComponent>(Vector2f(30.f, 60.f));
 		player->addComponent<Animation>("res/character_walk.png", 4);
 		// *********************************
-		player->addComponent<RopeComponent>(200.0f, 0.5f);
+		player->addComponent<RopeComponent>(200.0f, 0.25f);
 	}
 
 	// Create gas

@@ -89,7 +89,7 @@ void CanaryAIComponent::update(double dt) {
 			}
 			case CanaryAIComponent::Returning: {
 				sf::Vector2f distanceToInitialVector = _initialPos - _parent->getPosition();
-
+				
 				if (length(distanceToInitialVector) < 0.5f)
 				{
 					state = State::Waiting;
@@ -97,6 +97,7 @@ void CanaryAIComponent::update(double dt) {
 				else
 				{
 					sf::Vector2f unitVector = normalize(distanceToInitialVector);
+					_direction.x = unitVector.x;
 					move(sf::Vector2f(unitVector.x * dt* _speed.x, unitVector.y * dt* _speed.y));
 				}
 
