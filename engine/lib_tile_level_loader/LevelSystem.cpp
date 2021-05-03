@@ -110,9 +110,7 @@ void LevelSystem::buildSprites(bool optimise) {
 			}
 			if (x > 0) left_t = getTile({ x - 1, y });
 			if (x + 1 < _width) right_t = getTile({ x + 1, y });
-			if (t == EMPTY) {
-				continue;
-			}
+			//if (t == EMPTY) continue;
 			tps.push_back({ getTilePosition({x, y}), tls, getColor(t), getSpriteIndexFromTileWalls(up_t, down_t, left_t, right_t, Vector2i(1, 1)) });
 		}
 	}
@@ -120,21 +118,23 @@ void LevelSystem::buildSprites(bool optimise) {
 	const auto nonempty = tps.size();
 
 	for (auto& t : tps) {
-		std::cout << t.p << std::endl;
-		if (t.c != sf::Color::Transparent) {
-			auto sp = make_unique<sf::Sprite>();
-			sp->setPosition(t.p);
-			sp->setTexture(spritesheet);
-			if (t.c != Color::Blue) {
-				sp->setTextureRect(sf::IntRect(t.sprite_index.x * _tileSize, t.sprite_index.y * _tileSize, _tileSize, _tileSize));
-
-			}
-			else {
-				sp->setTextureRect(sf::IntRect(0, 3 * _tileSize, _tileSize, _tileSize));
-			}
-			_sprites.push_back(move(sp));
-
+		//std::cout << t.p << std::endl;
+		//if (t.c != sf::Color::Transparent) {
+		auto sp = make_unique<sf::Sprite>();
+		sp->setPosition(t.p);
+		sp->setTexture(spritesheet);
+		if (t.c == Color::White) {
+			sp->setTextureRect(sf::IntRect(t.sprite_index.x * _tileSize, t.sprite_index.y * _tileSize, _tileSize, _tileSize));
 		}
+		else if (t.c == Color::Blue) {
+			sp->setTextureRect(sf::IntRect(0, 3 * _tileSize, _tileSize, _tileSize));
+		}
+		else {
+			sp->setTextureRect(sf::IntRect(1 * _tileSize, 3 * _tileSize, _tileSize, _tileSize));
+		}
+		_sprites.push_back(move(sp));
+
+		//}
 	}
 
 	cout << "Level with " << (_width * _height) << " Tiles, With " << nonempty

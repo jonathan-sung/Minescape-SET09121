@@ -30,13 +30,29 @@ void OptionsScene::Load() {
         options[1] = op2;
 
         auto op3 = makeEntity();
-        op3->setPosition(Vector2f(10, 450));
-        t = op3->addComponent<TextComponent>("Return");
+        op3->setPosition(Vector2f(10, 400));
+        t = op3->addComponent<TextComponent>("Windowed");
         t->setPosition(op3->getPosition());
         t->SetSize(45);
         options[2] = op3;
 
+        auto op4 = makeEntity();
+        op4->setPosition(Vector2f(10, 500));
+        string buttonText = to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y);
+        t = op4->addComponent<TextComponent>(buttonText);
+        t->setPosition(op4->getPosition());
+        t->SetSize(45);
+        options[3] = op4;
+
+        auto op5 = makeEntity();
+        op5->setPosition(Vector2f(10, 600));
+        t = op5->addComponent<TextComponent>("Return");
+        t->setPosition(op5->getPosition());
+        t->SetSize(45);
+        options[4] = op5;
+
     }
+    changeText();
     setLoaded(true);
 }
 
@@ -47,7 +63,7 @@ void OptionsScene::Update(const double& dt)
 
     if (Engine::keyPressed[Engine::keybinds::Up] && buttonCD <= 0)
     {
-        if (selection == 0) selection = 2;
+        if (selection == 0) selection = 4;
         else selection--;
         buttonCD = 0.25f;
 
@@ -56,7 +72,7 @@ void OptionsScene::Update(const double& dt)
 
     if (Engine::keyPressed[Engine::keybinds::Down] && buttonCD <= 0)
     {
-        if (selection == 2) selection = 0;
+        if (selection == 4) selection = 0;
         else selection++;
         buttonCD = 0.25f;
         changeText();
@@ -71,6 +87,8 @@ void OptionsScene::Update(const double& dt)
             Engine::ChangeScene(&keyBindScene);
             break;
         case(2):
+            break;
+        case(4):
             Engine::ChangeScene(&menu);
             break;
 
@@ -84,19 +102,50 @@ void OptionsScene::Update(const double& dt)
         enterDown = false;
     }
 
-    if (Engine::keyPressed[Engine::keybinds::Left]
-        && buttonCD <= 0 && selection == 0 && Engine::getMusicVolume() > 0)
+    if (Engine::keyPressed[Engine::keybinds::Left]) && buttonCD <= 0)
     {
-        Engine::setMusicVolume(Engine::getMusicVolume() - 5);
-        changeText();
+        switch (selection)
+        {
+        case(0):
+            if (Engine::getMusicVolume() > 0) {
+                Engine::setMusicVolume(Engine::getMusicVolume() - 5);
+                changeText();
+            }
+            break;
+        case(2):
+            cout << Engine::_windowed << endl;
+            Engine::setWindowMode(!Engine::_windowed);
+            changeText();
+            break;
+        case(3):
+            Engine::setResolution(false);
+            changeText();
+            break;
+        }
+        
         buttonCD = 0.2f;
     }
 
-    if (Engine::keyPressed[Engine::keybinds::Right] && buttonCD <= 0 &&
-        selection == 0 && Engine::getMusicVolume() < 100)
+    if (Engine::keyPressed[Engine::keybinds::Right]) && buttonCD <= 0)
     {
-        Engine::setMusicVolume(Engine::getMusicVolume() + 5);
-        changeText();
+        switch (selection) 
+        {
+        case(0):
+            if (Engine::getMusicVolume() < 100) {
+                Engine::setMusicVolume(Engine::getMusicVolume() + 5);
+                changeText();
+            }
+            break;
+        case(2):
+            cout << Engine::_windowed << endl;
+            Engine::setWindowMode(!Engine::_windowed);
+            changeText();
+            break;
+        case(3):
+            Engine::setResolution(true);
+            changeText();
+            break;
+        }
         buttonCD = 0.2f;
     }
 
@@ -112,7 +161,16 @@ void OptionsScene::changeText()
     t[0]->SetText("Volume\n" + to_string(Engine::getMusicVolume()));
     t = options[1]->GetCompatibleComponent<TextComponent>();
     t[0]->SetText("Key Bindings");
+
     t = options[2]->GetCompatibleComponent<TextComponent>();
+    if (Engine::_windowed) t[0]->SetText("Fullscreen");
+    else t[0]->SetText("Windowed");
+
+    t = options[3]->GetCompatibleComponent<TextComponent>();
+    string buttonText = to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y);
+    t[0]->SetText(buttonText);
+
+    t = options[4]->GetCompatibleComponent<TextComponent>();
     t[0]->SetText("Return");
 
     switch (selection)
@@ -127,6 +185,16 @@ void OptionsScene::changeText()
           break;
       case(2):
           t = options[2]->GetCompatibleComponent<TextComponent>();
+          if (Engine::_windowed) t[0]->SetText("< Fullscreen >");
+          else t[0]->SetText("< Windowed >");
+          break;
+      case(3):
+          t = options[3]->GetCompatibleComponent<TextComponent>();
+          buttonText = "< " + to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y) + " >";
+          t[0]->SetText(buttonText);
+          break;
+      case(4):
+          t = options[4]->GetCompatibleComponent<TextComponent>();
           t[0]->SetText("[ Return ]");
           break;
     }
