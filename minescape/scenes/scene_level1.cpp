@@ -159,7 +159,7 @@ void Level1Scene::Update(const double& dt)
 
 
 	//Pause Menu
-	if (Keyboard::isKeyPressed(Keyboard::Escape) && buttonCD <= 0)
+	if ((Keyboard::isKeyPressed(Keyboard::Escape)||sf::Joystick::isButtonPressed(0,7)) && buttonCD <= 0)
 	{
 		togglePause();
 		buttonCD = 0.2f;
