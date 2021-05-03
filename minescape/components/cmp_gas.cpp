@@ -18,8 +18,8 @@ void GasComponent::update(double dt)
 		if (pos.y < _parent->scene->ents.find("player")[0]->getPosition().y - 25) 
 		{
 			cout << "BE DEAD NOW!!!" << endl;
-			Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
-			Engine::ChangeScene(&menu);
+			//Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
+			Engine::ChangeScene(&score_board);
 		}
 		
 		ActorMovementComponent::update(dt);
