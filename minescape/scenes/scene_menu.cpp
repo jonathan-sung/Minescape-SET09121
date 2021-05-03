@@ -12,7 +12,7 @@ void MenuScene::Load()
 	music.setVolume(20);
 	music.setLoop(true);
 	cout << "Menu Load";
-    Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(1280, 720)));
+    Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
     paused = false;
     MenuScene::selection = 0;
   {

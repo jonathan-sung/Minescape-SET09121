@@ -64,7 +64,10 @@ void PauseMenu::update(double dt)
 			switch (selection)
 			{
 			case(0):
-				_parent->setPosition(Vector2f(-1000, 1000));
+				for each (shared_ptr<TextComponent> op in options)
+				{
+					op->setPosition(Vector2f(-10000, 10000));
+				}
 				paused = false;
 				break;
 			case(1):
@@ -75,6 +78,7 @@ void PauseMenu::update(double dt)
 			case(2):
 				_parent->scene->UnLoad();
 				paused = false;
+				Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
 				Engine::ChangeScene(&menu);
 				break;
 			}

@@ -11,7 +11,7 @@ using namespace std;
 using namespace sf;
 
 void ScoreScene::Load() {
-	Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(1280, 720)));
+	Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
 	auto title = makeEntity();
 	auto t = title->addComponent<TextComponent>("Times");
 	t->setPosition(Vector2f(0, 0));

@@ -18,7 +18,7 @@ void GasComponent::update(double dt)
 		if (pos.y < _parent->scene->ents.find("player")[0]->getPosition().y - 25) 
 		{
 			cout << "BE DEAD NOW!!!" << endl;
-			Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(1280, 720)));
+			Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
 			Engine::ChangeScene(&menu);
 		}
 		
@@ -28,6 +28,6 @@ void GasComponent::update(double dt)
 GasComponent::GasComponent(Entity* p) : ActorMovementComponent(p)
 {
 	_direction = Vector2f(0, -1.0f);
-	_speed = -25.0f;
+	_speed = -40.0f;
 }
 
