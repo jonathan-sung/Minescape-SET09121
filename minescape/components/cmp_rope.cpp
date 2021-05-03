@@ -13,7 +13,7 @@
 
 using namespace std;
 
-RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p)
+RopeComponent::RopeComponent(Entity* p, float maxlength, float delay) :Component(p)
 {
 	buttonPressed = false;
 	ropeState = RopeState::Ready;
@@ -32,7 +32,7 @@ void RopeComponent::updateClickPos()
 	clickPos = Engine::GetWindow().mapPixelToCoords(mousePos);
 }
 
-bool RopeComponent::mouseClick() 
+bool RopeComponent::mouseClick()
 {
 	if (Mouse::isButtonPressed(Mouse::Button::Left))
 	{
@@ -46,7 +46,7 @@ bool RopeComponent::mouseClick()
 			return false;
 		}
 	}
-	else 
+	else
 	{
 		if (buttonPressed)
 		{
@@ -56,19 +56,19 @@ bool RopeComponent::mouseClick()
 	}
 }
 
-void RopeComponent::setDirectionVector(Vector2f initialPos,Vector2f targetPos)
+void RopeComponent::setDirectionVector(Vector2f initialPos, Vector2f targetPos)
 {
 	//set distance to direction vector
 	directionVector = Vector2f(
-		targetPos.x- initialPos.x,
-		targetPos.y- initialPos.y);
+		targetPos.x - initialPos.x,
+		targetPos.y - initialPos.y);
 
 	//get the length
 	float directionVectorLength = length(directionVector);
 
 	//divide by the length to get size 1 vector
-	directionVector = Vector2f(directionVector.x/directionVectorLength,
-		directionVector.y/directionVectorLength);
+	directionVector = Vector2f(directionVector.x / directionVectorLength,
+		directionVector.y / directionVectorLength);
 }
 
 bool RopeComponent::isTouchingWall()
@@ -94,7 +94,7 @@ void RopeComponent::createRopeJoint()
 	//set position to player + direction 
 	b2Vec2 offset = b2Vec2(directionBVec.x * (ropeCurrentLength * Physics::physics_scale_inv),
 		directionBVec.y * (ropeCurrentLength * Physics::physics_scale_inv));
-	endbodydef.position = rjDef.bodyA->GetPosition()+ (offset);
+	endbodydef.position = rjDef.bodyA->GetPosition() + (offset);
 	//make the body static
 	endbodydef.type = b2BodyType::b2_staticBody;
 	//create second body
@@ -108,7 +108,7 @@ void RopeComponent::createRopeJoint()
 	rjDef.localAnchorB = b2Vec2(0, 0);
 	rjDef.collideConnected = false;
 	//set the maximum length
-	rjDef.maxLength = ropeMaxLength*Physics::physics_scale_inv;
+	rjDef.maxLength = ropeMaxLength * Physics::physics_scale_inv;
 
 	//create joint in world
 	auto joint = Physics::GetWorld().get()->CreateJoint(&rjDef);
@@ -166,10 +166,11 @@ void RopeComponent::update(double dt)
 			//fire rope
 			ropeState = RopeState::InAir;
 		}
-		else if (Engine::keyPressed[Engine::Action2]&&sf::Joystick::isConnected(0))
+		else if (Engine::keyPressed[Engine::Action2] && sf::Joystick::isConnected(0))
 		{
 			Vector2i joystickpos = Vector2i(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::U),
 				sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::V));
+
 			clickPos = Vector2f(joystickpos.x * ropeMaxLength, joystickpos.y * ropeMaxLength);
 
 			//set the direction vector
@@ -227,31 +228,31 @@ void RopeComponent::update(double dt)
 				forceImpulse = Vector2f(directionVector.x * angleATan, directionVector.y * -angleATan);
 				if (directionVector.y > 0)forceImpulse.y = -forceImpulse.y;
 				//calculate angular force
-				Vector2f appliedAngularForce = Vector2f(forceImpulse.x * dt*b2_pi,
-					forceImpulse.y * dt*b2_pi);
+				Vector2f appliedAngularForce = Vector2f(forceImpulse.x * dt * b2_pi,
+					forceImpulse.y * dt * b2_pi);
 
 				bool keyPressed = false;
 				//create added impulse
 				if (Engine::keyPressed[Engine::keybinds::Left])
 				{
 					keyPressed = true;
-					addedImpulse+= Vector2f((directionVector.x>0?-directionVector.x:directionVector.x) * angleATan*3, 
-						(directionVector.y<0?-directionVector.y:directionVector.y) * -angleATan*3);
+					addedImpulse += Vector2f((directionVector.x > 0 ? -directionVector.x : directionVector.x) * angleATan * 3,
+						(directionVector.y < 0 ? -directionVector.y : directionVector.y) * -angleATan * 3);
 				}
 				else if (Engine::keyPressed[Engine::keybinds::Right])
 				{
 					keyPressed = true;
-					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan*3,
-						(directionVector.y < 0 ? -directionVector.y : directionVector.y) * -angleATan*3);
+					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan * 3,
+						(directionVector.y < 0 ? -directionVector.y : directionVector.y) * -angleATan * 3);
 				}
 				//minimise vector
-				addedImpulse = Vector2f(addedImpulse.x*dt, addedImpulse.y*dt);
+				addedImpulse = Vector2f(addedImpulse.x * dt, addedImpulse.y * dt);
 				//reduce vector
-				addedImpulse -= Vector2f(addedImpulse.x/20, addedImpulse.y/20);
+				addedImpulse -= Vector2f(addedImpulse.x / 20, addedImpulse.y / 20);
 				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(
-					(keyPressed? 
-						appliedAngularForce + addedImpulse:
-						Vector2f(appliedAngularForce.x*10,appliedAngularForce.y*10)));
+					(keyPressed ?
+						appliedAngularForce + addedImpulse :
+						Vector2f(appliedAngularForce.x * 10, appliedAngularForce.y * 10)));
 			}
 			else
 			{
@@ -307,16 +308,16 @@ void RopeComponent::update(double dt)
 	}
 }
 
-void RopeComponent::render() 
+void RopeComponent::render()
 {
 	//only render if rope is out
 	if (ropeState == RopeState::InAir || ropeState == RopeState::Latched || ropeState == RopeState::Withdrawing) {
-		
+
 		//create vertex array (this should be a temporary solution)
 		sf::Vertex ropeLines[] = { sf::Vertex(initialRopePosition),
-			sf::Vertex(currentEndPointPosition)};
+			sf::Vertex(currentEndPointPosition) };
 		//render rope
-		Engine::GetWindow().draw( ropeLines , 2, sf::Lines);
+		Engine::GetWindow().draw(ropeLines, 2, sf::Lines);
 	}
 }
 

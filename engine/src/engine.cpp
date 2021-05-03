@@ -88,11 +88,11 @@ void Engine::Update()
 	////joystick
 	if (sf::Joystick::isConnected(0))
 	{
-		keyPressed[keybinds::Up] = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -50.0f;
+		keyPressed[keybinds::Up] = false;// sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -50.0f;
 		keyPressed[keybinds::Down] = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > 50.0f;
 		keyPressed[keybinds::Left] = sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -50.0f;
 		keyPressed[keybinds::Right] = sf::Joystick::getAxisPosition(0, sf::Joystick::X) > 50.0f;
-		keyPressed[keybinds::Action1] = sf::Joystick::isButtonPressed(0, joypadControls[0]);
+		keyPressed[keybinds::Action1] = sf::Joystick::isButtonPressed(0, joypadControls[0]) || sf::Joystick::isButtonPressed(0, 4);
 		keyPressed[keybinds::Action2] = sf::Joystick::isButtonPressed(0, joypadControls[1]);
 
 		//check if joystick was used to avoid overwrite
