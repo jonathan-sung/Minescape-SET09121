@@ -53,7 +53,7 @@ void Level1Scene::Load()
 		//s->getShape().setOrigin(10.f, 15.f);
 		// *********************************
 		player->addTag("player");
-		player->addComponent<PlayerPhysicsComponent>(Vector2f(32.f, 64.f));
+		player->addComponent<PlayerPhysicsComponent>(Vector2f(30.f, 60.f));
 		player->addComponent<Animation>("res/character_walk.png", 4);
 		// *********************************
 		player->addComponent<RopeComponent>(200.0f, 1.0f);
@@ -139,7 +139,7 @@ void Level1Scene::Load()
 	cout << " Scene 1 Load Done" << endl;
 
 
-
+	ar = ls::findTiles('r');
 	setLoaded(true);
 }
 
@@ -171,13 +171,14 @@ void Level1Scene::Update(const double& dt)
 
 	if (rocktime <= 0.f) {
 		rocktime = 5.f;
-		auto rock = makeEntity();
-		rock->addTag("rock");
-		rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
-			Vector2f(0, 40));
-		rock->addComponent<Rock>();
-		rock->addComponent<HurtComponent>();
-		auto sc = rock->addComponent<Animation>("res/rock.png", 1);
+		for (sf::Vector2ul cr : ar) {
+			auto rock = makeEntity();
+			rock->addTag("rock");
+			rock->setPosition(ls::getTilePosition(cr));
+			rock->addComponent<Rock>();
+			rock->addComponent<HurtComponent>();
+			auto sc = rock->addComponent<Animation>("res/rock.png", 4);
+		}
 	}
 	buttonCD -= dt;
 
