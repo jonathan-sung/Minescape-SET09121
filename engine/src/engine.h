@@ -48,6 +48,8 @@ public:
 	static float sfxVolume;
 
 	static sf::Vector2f _resolution;
+	static sf::Vector2f resolutions[4];
+	static int resSelection;
 
 	static bool _windowed;
 	static bool _gamepad;
@@ -63,7 +65,8 @@ public:
   static int getMusicVolume();
   static void setFXVolume(int vol);
   static int getFXVolume();
-  static void setResolution(int x, int y);
+  static void setResolution(bool direction);
+  static sf::Vector2f getResolution();
   static void setWindowMode(bool iswindow);
   static void setUseGamepad(bool gamepad);
 

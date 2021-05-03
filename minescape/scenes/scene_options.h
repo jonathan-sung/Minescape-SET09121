@@ -9,7 +9,7 @@ class OptionsScene : public Scene {
 private:
 
 	int selection;
-	shared_ptr<Entity> options[4];
+	shared_ptr<Entity> options[5];
 public:
 	OptionsScene() = default;
 	~OptionsScene() override = default;

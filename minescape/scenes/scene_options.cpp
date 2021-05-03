@@ -30,18 +30,26 @@ void OptionsScene::Load() {
         options[1] = op2;
 
         auto op3 = makeEntity();
-        op3->setPosition(Vector2f(10, 450));
+        op3->setPosition(Vector2f(10, 400));
         t = op3->addComponent<TextComponent>("Windowed");
         t->setPosition(op3->getPosition());
         t->SetSize(45);
         options[2] = op3;
 
         auto op4 = makeEntity();
-        op4->setPosition(Vector2f(10, 600));
-        t = op4->addComponent<TextComponent>("Return");
+        op4->setPosition(Vector2f(10, 500));
+        string buttonText = to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y);
+        t = op4->addComponent<TextComponent>(buttonText);
         t->setPosition(op4->getPosition());
         t->SetSize(45);
         options[3] = op4;
+
+        auto op5 = makeEntity();
+        op5->setPosition(Vector2f(10, 600));
+        t = op5->addComponent<TextComponent>("Return");
+        t->setPosition(op5->getPosition());
+        t->SetSize(45);
+        options[4] = op5;
 
     }
     changeText();
@@ -55,7 +63,7 @@ void OptionsScene::Update(const double& dt)
 
     if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Up]) && buttonCD <= 0)
     {
-        if (selection == 0) selection = 3;
+        if (selection == 0) selection = 4;
         else selection--;
         buttonCD = 0.25f;
 
@@ -64,7 +72,7 @@ void OptionsScene::Update(const double& dt)
 
     if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Down]) && buttonCD <= 0)
     {
-        if (selection == 3) selection = 0;
+        if (selection == 4) selection = 0;
         else selection++;
         buttonCD = 0.25f;
         changeText();
@@ -80,7 +88,7 @@ void OptionsScene::Update(const double& dt)
             break;
         case(2):
             break;
-        case(3):
+        case(4):
             Engine::ChangeScene(&menu);
             break;
 
@@ -109,6 +117,10 @@ void OptionsScene::Update(const double& dt)
             Engine::setWindowMode(!Engine::_windowed);
             changeText();
             break;
+        case(3):
+            Engine::setResolution(false);
+            changeText();
+            break;
         }
         
         buttonCD = 0.2f;
@@ -127,6 +139,10 @@ void OptionsScene::Update(const double& dt)
         case(2):
             cout << Engine::_windowed << endl;
             Engine::setWindowMode(!Engine::_windowed);
+            changeText();
+            break;
+        case(3):
+            Engine::setResolution(true);
             changeText();
             break;
         }
@@ -151,6 +167,10 @@ void OptionsScene::changeText()
     else t[0]->SetText("Windowed");
 
     t = options[3]->GetCompatibleComponent<TextComponent>();
+    string buttonText = to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y);
+    t[0]->SetText(buttonText);
+
+    t = options[4]->GetCompatibleComponent<TextComponent>();
     t[0]->SetText("Return");
 
     switch (selection)
@@ -170,6 +190,11 @@ void OptionsScene::changeText()
           break;
       case(3):
           t = options[3]->GetCompatibleComponent<TextComponent>();
+          buttonText = "< " + to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y) + " >";
+          t[0]->SetText(buttonText);
+          break;
+      case(4):
+          t = options[4]->GetCompatibleComponent<TextComponent>();
           t[0]->SetText("[ Return ]");
           break;
     }

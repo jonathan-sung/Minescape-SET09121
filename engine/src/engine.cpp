@@ -31,6 +31,8 @@ float Engine::musicVolume;
 float Engine::sfxVolume;
 
 sf::Vector2f Engine::_resolution;
+sf::Vector2f Engine::resolutions[4];
+int Engine::resSelection;
 
 bool Engine::_windowed = false;
 bool Engine::_gamepad;
@@ -104,31 +106,40 @@ void Engine::Start(unsigned int width, unsigned int height,
     setMusicVolume(100);
     setFXVolume(100);
     //window and scenes
-  RenderWindow window(VideoMode(width, height), gameName);
-  bool style = false;
-  _gameName = gameName;
-  _window = &window;
-  Renderer::initialise(window);
-  Physics::initialise();
-  ChangeScene(scn);
-  while (window.isOpen()) {
-    Event event;
-    if(_windowed != style)
-    {
+    resSelection = 1;
+    resolutions[0] = Vector2f(800, 600);
+    resolutions[1] = Vector2f(1280, 720);
+    resolutions[2] = Vector2f(1366, 768);
+    resolutions[3] = Vector2f(1920, 1080);
+    _resolution = resolutions[resSelection];
+    Vector2f oldRes = _resolution;
+    
+    RenderWindow window(VideoMode(_resolution.x, _resolution.y), gameName);
+    bool style = false;
+    _gameName = gameName;
+    _window = &window;
+    Renderer::initialise(window);
+    Physics::initialise();
+    ChangeScene(scn);
+    while (window.isOpen()) {
+      Event event;
+      if(_windowed != style || oldRes != _resolution)
+      {
         if (_windowed) 
         {
-            
-            window.create(VideoMode(width, height), gameName, sf::Style::Fullscreen);
+            window.create(VideoMode(_resolution.x, _resolution.y), gameName, sf::Style::Fullscreen);
             style = _windowed;
             cout << "Fullscreen" << endl;
+            oldRes = _resolution;
         }else
         {
             
-            window.create(VideoMode(width, height), gameName, sf::Style::Fullscreen);
+            window.create(VideoMode(_resolution.x, _resolution.y), gameName);
             cout << "Windowed" << endl;
             style = _windowed;
+            oldRes = _resolution;
         }
-    }
+      }
    
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed) {
@@ -187,7 +198,20 @@ int Engine::getMusicVolume() { return musicVolume; }
 void Engine::setFXVolume(int vol) { sfxVolume = vol; }
 int Engine::getFXVolume() { return sfxVolume; }
 
-void Engine::setResolution(int x, int y) { _resolution = sf::Vector2f(x,y); }
+void Engine::setResolution(bool direction) 
+{
+    if (resSelection == 0 && !direction) resSelection = 3;
+    else if (resSelection == 3 && direction) resSelection = 0;
+    else if (direction) resSelection++;
+    else if (!direction) resSelection--;
+    
+    _resolution = resolutions[resSelection];
+}
+
+Vector2f Engine::getResolution()
+{
+    return _resolution;
+}
 
 void Engine::setWindowMode(const bool iswindow) 
 {

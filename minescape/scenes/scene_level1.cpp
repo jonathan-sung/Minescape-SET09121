@@ -70,7 +70,7 @@ void Level1Scene::Load()
 
 		// *********************************
 		gas = makeEntity();
-		gas->setPosition(Vector2f(0, 500));
+		gas->setPosition(Vector2f(0, Engine::getResolution().y));
 		auto s = gas->addComponent<SpriteComponent>();
 		s->getSprite().setTexture(gasTex);
 		auto g = gas->addComponent<GasComponent>();
@@ -83,7 +83,7 @@ void Level1Scene::Load()
 		camera = makeEntity();
 		camera->addTag("camera");
 		//need to change resolution for variable once settings are made
-		auto c = camera->addComponent<CameraComponent>(Vector2f(1280.0f, 720.0f), Vector2f(0.0f, 0.0f));
+		auto c = camera->addComponent<CameraComponent>(Vector2f(1280, Engine::getResolution().y), Vector2f(0.0f, 0.0f));
 		c->setTarget(player);
 		c->setLayer(0);
 	}
