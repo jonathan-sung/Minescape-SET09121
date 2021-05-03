@@ -22,7 +22,7 @@ RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p
 	_delay = delay;
 	launchSpeed = 500;
 
-	impulseTime = 0.01f;
+	impulseTime = 0.001f;
 }
 
 void RopeComponent::updateClickPos()
@@ -108,7 +108,7 @@ void RopeComponent::createRopeJoint()
 	rjDef.localAnchorB = b2Vec2(0, 0);
 	rjDef.collideConnected = false;
 	//set the maximum length
-	rjDef.maxLength = ropeMaxLength*Physics::physics_scale_inv;
+	rjDef.maxLength = ropeCurrentLength *Physics::physics_scale_inv;
 
 	//create joint in world
 	auto joint = Physics::GetWorld().get()->CreateJoint(&rjDef);
@@ -188,7 +188,9 @@ void RopeComponent::update(double dt)
 			//create the rope joint
 			createRopeJoint();
 
-			Vector2f addedImpulse = Vector2f(0, 0);
+			forceImpulseVelocity = Vector2f(0.0f, 0.0f);
+			addedImpulseAcceleration = Vector2f(0.0f, 0.0f);
+			swingTimer = 0;
 
 			ropeState = RopeState::Latched;
 		}
@@ -204,43 +206,95 @@ void RopeComponent::update(double dt)
 			if (impulseTimer < 0) {
 				impulseTimer = impulseTime;
 				//get the direction vector
-				Vector2f directionVector = Vector2f(finalRopePosition.x - initialRopePosition.x,
-					finalRopePosition.y - initialRopePosition.y);
+				Vector2f directionVector = Vector2f(finalRopePosition.x - _parent->getPosition().x,
+					finalRopePosition.y - _parent->getPosition().y);
+				directionVector = normalize(directionVector);
+				Vector2f directionVectorPerpendicular = Vector2f(-directionVector.x,
+					(directionVector.y < 0 ? -directionVector.y : directionVector.y));
 				//get the angle
 				float angle = asin(directionVector.y / (sqrt(pow(directionVector.x, 2) + pow(directionVector.y, 2))));
 				//take 90 degrees
 				angle += b2_pi / 2;
 				//get atan
 				float angleATan = atan(angle);
-				//calculate force impulse
-				forceImpulse = Vector2f(directionVector.x * angleATan, directionVector.y * -angleATan);
-				if (directionVector.y > 0)forceImpulse.y = -forceImpulse.y;
-				//calculate angular force
-				Vector2f appliedAngularForce = Vector2f(forceImpulse.x * dt*b2_pi,
-					forceImpulse.y * dt*b2_pi);
-
-				bool keyPressed = false;
+				cout << "angle" << angleATan << endl;
 				//create added impulse
-				if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]))
-				{
-					keyPressed = true;
-					addedImpulse+= Vector2f((directionVector.x>0?-directionVector.x:directionVector.x) * angleATan*3, 
-						(directionVector.y<0?-directionVector.y:directionVector.y) * -angleATan*3);
+				if (angleATan < 1) {
+
+					if (angleATan < 0.5f)angleATan = 0.5f;
+					else if (angleATan > 0.7f)angleATan = 0.7f;
+
+					if (swingTimer <= 0) {
+						if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]))
+						{
+							if (directionVector.x < 0)
+							{
+								addedImpulseAcceleration += Vector2f(-directionVectorPerpendicular.x  * dt * 500,
+									directionVectorPerpendicular.y  * dt * 500);
+							}
+							else
+							{
+								addedImpulseAcceleration += Vector2f(directionVectorPerpendicular.x  * dt * 500,
+									-directionVectorPerpendicular.y  * dt * 500);
+							}
+							swingTimer = 0.05f;
+						}
+						else if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right]))
+						{
+							if (directionVector.x > 0)
+							{
+								addedImpulseAcceleration += Vector2f(-directionVectorPerpendicular.x  * dt * 500,
+									directionVectorPerpendicular.y  * dt * 500);
+							}
+							else
+							{
+								addedImpulseAcceleration += Vector2f(directionVectorPerpendicular.x  * dt * 500,
+									-directionVectorPerpendicular.y  * dt * 500);
+							}
+							swingTimer = 0.05f;
+						}
+					}
+					swingTimer -= dt;
+
+
+					addedImpulseAcceleration += Vector2f(
+						dt * -directionVectorPerpendicular.x * angleATan * 10,
+						dt * -directionVectorPerpendicular.y * -angleATan * 10);
+
+					if (addedImpulseAcceleration.x < -ropeCurrentLength )addedImpulseAcceleration.x = -ropeCurrentLength ;
+					else if (addedImpulseAcceleration.x > ropeCurrentLength )addedImpulseAcceleration.x = ropeCurrentLength ;
+				
+					if (addedImpulseAcceleration.y < -ropeCurrentLength)addedImpulseAcceleration.y = -ropeCurrentLength;
+					else if (addedImpulseAcceleration.y > ropeCurrentLength)addedImpulseAcceleration.y = ropeCurrentLength;
+
+
+					cout << "directionVectorPerpendicular: " << directionVectorPerpendicular.x << " " <<
+						directionVectorPerpendicular.y << endl;
+
+					forceImpulseVelocity += addedImpulseAcceleration;
+
+					if (forceImpulseVelocity.x < -ropeCurrentLength * 3)forceImpulseVelocity.x = -ropeCurrentLength * 3;
+					else if (forceImpulseVelocity.x > ropeCurrentLength * 3)forceImpulseVelocity.x = ropeCurrentLength * 3;
+					if (forceImpulseVelocity.y > ropeCurrentLength * 1.1f)forceImpulseVelocity.y = ropeCurrentLength * 1.1f;
+					else if (forceImpulseVelocity.y < -ropeCurrentLength / 5)forceImpulseVelocity.y = ropeCurrentLength;
+
+					cout << "impulse" << forceImpulseVelocity.x << " " <<
+						forceImpulseVelocity.y << endl;
+					_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(forceImpulseVelocity);
+
 				}
-				else if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right]))
+				else 
 				{
-					keyPressed = true;
-					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan*3,
-						(directionVector.y < 0 ? -directionVector.y : directionVector.y) * -angleATan*3);
+					//get the direction vector
+					Vector2f directionVector = Vector2f(finalRopePosition.x - _parent->getPosition().x,
+						finalRopePosition.y - _parent->getPosition().y);
+					directionVector = normalize(directionVector);
+					Vector2f directionVectorPerpendicular = Vector2f(-directionVector.x,
+						(directionVector.y < 0 ? -directionVector.y : directionVector.y));
+
+					forceImpulseVelocity = Vector2f(directionVectorPerpendicular.x*ropeCurrentLength, ropeCurrentLength*1.5f);
+					addedImpulseAcceleration = Vector2f(forceImpulseVelocity.x*0.75f, forceImpulseVelocity.y*0.75f);
 				}
-				//minimise vector
-				addedImpulse = Vector2f(addedImpulse.x*dt, addedImpulse.y*dt);
-				//reduce vector
-				addedImpulse -= Vector2f(addedImpulse.x/20, addedImpulse.y/20);
-				_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(
-					(keyPressed? 
-						appliedAngularForce + addedImpulse:
-						Vector2f(appliedAngularForce.x*10,appliedAngularForce.y*10)));
 			}
 			else
 			{
@@ -252,7 +306,8 @@ void RopeComponent::update(double dt)
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			cout << "changing states" << endl;
-			_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(0, -5.0f));
+			forceImpulseVelocity = Vector2f(forceImpulseVelocity.x, -forceImpulseVelocity.y);
+			_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(forceImpulseVelocity);
 			disposeOfDistanceJoint();
 			ropeState = RopeState::Withdrawing;
 		}

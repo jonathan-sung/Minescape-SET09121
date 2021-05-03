@@ -111,6 +111,7 @@ void Engine::Start(unsigned int width, unsigned int height,
   Physics::initialise();
   ChangeScene(scn);
   while (window.isOpen()) {
+      
     Event event;
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed) {

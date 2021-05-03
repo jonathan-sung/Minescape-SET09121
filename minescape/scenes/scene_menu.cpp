@@ -9,6 +9,7 @@ using namespace sf;
 
 void MenuScene::Load() 
 {
+    paused = false;
 	music.setVolume(20);
 	music.setLoop(true);
 	cout << "Menu Load";
