@@ -39,7 +39,7 @@ void Level1Scene::Load()
 	music.setLoop(true);
 	ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
 	auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
-	//auto ho = 0;
+	//ho = 0;
 	ls::setOffset(Vector2f(0, ho));
 
 	// Create player

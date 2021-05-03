@@ -10,6 +10,8 @@ using namespace sf;
 using namespace Physics;
 
 #define STUN_TIME 1
+#define LEFT_EDGE 2 * ls::getTileSize() + 20
+#define RIGHT_EDGE (ls::getWidth() - 3) * ls::getTileSize() - 20
 
 bool PlayerPhysicsComponent::isGrounded() const {
 	auto touch = getTouching();
@@ -41,6 +43,15 @@ void PlayerPhysicsComponent::update(double dt) {
 	if (pos.y > ls::getHeight() * ls::getTileSize()) {
 		teleport(ls::getTilePosition(ls::findTiles(ls::START)[0]));
 	}
+	//Teleport if too close to edge
+	if (pos.x > RIGHT_EDGE) {
+		teleport(Vector2f(RIGHT_EDGE, _parent->getPosition().y));
+	}
+	else if (pos.x < LEFT_EDGE) {
+		//_parent->setPosition(Vector2f(2 * ls::getTileSize(), _parent->getPosition().y));
+		teleport(Vector2f(LEFT_EDGE, _parent->getPosition().y));
+		//teleport(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+	}
 	//if (Keyboard::isKeyPressed(Keyboard::S)) stun();
 	_parent->get_components<Animation>()[0]->animate = false;
 	if (!stunned) {
@@ -64,7 +75,7 @@ void PlayerPhysicsComponent::update(double dt) {
 			dampen({ 0.3f, 1.0f });
 			//_parent->get_components<Animation>()[0]->ResetDefaultFrame();
 		}
-		
+
 
 		if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]) ||
 			Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right])) {
