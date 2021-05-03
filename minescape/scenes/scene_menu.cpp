@@ -61,8 +61,12 @@ void MenuScene::Load()
 void MenuScene::UnLoad()
 {
 	cout << "Main menu unloaded" << endl;
-	music.stop();
 	Scene::UnLoad();
+}
+
+void MenuScene::stopMenuMusic()
+{
+	music.stop();
 }
 
 void MenuScene::Update(const double& dt)
@@ -97,7 +101,7 @@ void MenuScene::Update(const double& dt)
 		switch (selection)
 		{
 		case(0):
-
+			stopMenuMusic();
 			Engine::ChangeScene((Scene*)&level1);
 			break;
 		case(1):

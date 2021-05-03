@@ -22,6 +22,8 @@ public:
 
 	void UnLoad() override;
 
+	void stopMenuMusic();
+
 	void Update(const double& dt) override;
 
 	void changeText();
