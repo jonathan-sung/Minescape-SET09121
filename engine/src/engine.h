@@ -44,13 +44,16 @@ public:
 		Action2 = 5
 	};
 
+	static int joypadControls[2];
+
+	static bool keyPressed[6];
+
 	static float musicVolume;
 	static float sfxVolume;
 
 	static sf::Vector2f _resolution;
 
 	static bool _windowed;
-	static bool _gamepad;
 
   Engine() = delete;
   static void Start(unsigned int width, unsigned int height,
@@ -65,7 +68,6 @@ public:
   static int getFXVolume();
   static void setResolution(int x, int y);
   static void setWindowMode(bool iswindow);
-  static void setUseGamepad(bool gamepad);
 
 private:
   static Scene* _activeScene;

@@ -56,7 +56,7 @@ void MenuScene::UnLoad()
 
 void MenuScene::Update(const double& dt)
 {
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Up]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Up] && buttonCD <= 0)
     {
         if (selection == 0) selection = 2;
         else selection--;
@@ -67,7 +67,7 @@ void MenuScene::Update(const double& dt)
         changeText();
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Down]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Down] && buttonCD <= 0)
     {
         if (selection == 2) selection = 0;
         else selection++;
@@ -78,8 +78,8 @@ void MenuScene::Update(const double& dt)
         
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) && !enterDown ||
-        sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]) && !enterDown)
+    if (Engine::keyPressed[Engine::keybinds::Action1] && !enterDown ||
+        Engine::keyPressed[Engine::keybinds::Action2] && !enterDown)
     {
         switch (selection)
         {
@@ -97,8 +97,8 @@ void MenuScene::Update(const double& dt)
         enterDown = true;
     }
 
-    if (!sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) && 
-        !sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]))
+    if (!Engine::keyPressed[Engine::keybinds::Action1] &&
+        !Engine::keyPressed[Engine::keybinds::Action2])
     {
         enterDown = false;
     }

@@ -27,9 +27,17 @@ RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p
 
 void RopeComponent::updateClickPos()
 {
-	//get window relative mouse coordinates
-	Vector2i mousePos = Mouse::getPosition(Engine::GetWindow());
-	clickPos = Engine::GetWindow().mapPixelToCoords(mousePos);
+	if (mouseClick()) {
+		//get window relative mouse coordinates
+		Vector2i mousePos = Mouse::getPosition(Engine::GetWindow());
+		clickPos = Engine::GetWindow().mapPixelToCoords(mousePos);
+	}
+	else
+	{
+		Vector2i joystickpos = Vector2i(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::U),
+			sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::V));
+		clickPos = Vector2f(joystickpos.x * ropeMaxLength, joystickpos.y * ropeMaxLength);
+	}
 }
 
 bool RopeComponent::mouseClick() 
@@ -156,7 +164,7 @@ void RopeComponent::update(double dt)
 		currentEndPointPosition = _parent->getPosition();
 
 		//on mouse click
-		if (mouseClick())
+		if (mouseClick()||Engine::keyPressed[Engine::Action2])
 		{
 			//handle calculation for rope firing
 			updateClickPos();
@@ -221,13 +229,13 @@ void RopeComponent::update(double dt)
 
 				bool keyPressed = false;
 				//create added impulse
-				if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]))
+				if (Engine::keyPressed[Engine::keybinds::Left])
 				{
 					keyPressed = true;
 					addedImpulse+= Vector2f((directionVector.x>0?-directionVector.x:directionVector.x) * angleATan*3, 
 						(directionVector.y<0?-directionVector.y:directionVector.y) * -angleATan*3);
 				}
-				else if (Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right]))
+				else if (Engine::keyPressed[Engine::keybinds::Right])
 				{
 					keyPressed = true;
 					addedImpulse += Vector2f((directionVector.x > 0 ? directionVector.x : -directionVector.x) * angleATan*3,
@@ -249,7 +257,7 @@ void RopeComponent::update(double dt)
 		}
 
 		//once latched make it controllable by player
-		if (Keyboard::isKeyPressed(Keyboard::Space))
+		if (Engine::keyPressed[Engine::keybinds::Action1])
 		{
 			cout << "changing states" << endl;
 			_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(0, -5.0f));
