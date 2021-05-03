@@ -71,9 +71,8 @@ void PauseMenu::update(double dt)
 				paused = false;
 				break;
 			case(1):
-				_parent->scene->UnLoad();
+				Engine::ChangeScene(Engine::restartSceneRef);
 				paused = false;
-				_parent->scene->Load();
 				break;
 			case(2):
 				_parent->scene->UnLoad();

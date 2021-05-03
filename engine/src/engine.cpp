@@ -51,6 +51,8 @@ int Engine::resSelection;
 
 bool Engine::_windowed = false;
 
+Scene* Engine::restartSceneRef;
+
 void Loading_update(float dt, const Scene* const scn) {
 	//  cout << "Eng: Loading Screen\n";
 	if (scn->isLoaded()) {
@@ -229,7 +231,7 @@ void Engine::ChangeScene(Scene* s) {
 	cout << "Eng: changing scene: " << s << endl;
 	auto old = _activeScene;
 	_activeScene = s;
-
+	restartSceneRef = s;
 	if (old != nullptr) {
 		old->UnLoad(); // todo: Unload Async
 	}

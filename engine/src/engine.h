@@ -55,6 +55,8 @@ public:
 	static sf::Vector2f resolutions[4];
 	static int resSelection;
 
+	static Scene* restartSceneRef;
+
 	static bool _windowed;
 
   Engine() = delete;
