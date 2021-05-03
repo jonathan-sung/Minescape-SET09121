@@ -4,7 +4,7 @@
 CameraComponent::CameraComponent(Entity* p, const Vector2f& size, const Vector2f& position) :
 	Component(p), _size(size)
 {
-	_offset = Vector2f(size.x / 2.0f, size.y / 2.0f);
+	_offset = Vector2f(size.x / 2.0f, size.y / (2.0f));
 	_position = position + _offset;
 	_layer = 0;
 }

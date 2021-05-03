@@ -50,7 +50,7 @@ private:
 	void setDirectionVector(Vector2f initialPos, Vector2f targetPos);
 	bool isTouchingWall();
 	void createRopeJoint();
-	void disposeOfDistanceJoint();
+	void disposeOfJoint();
 	
 public:
 

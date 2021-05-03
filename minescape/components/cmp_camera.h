@@ -12,6 +12,7 @@ protected:
 	Vector2f _offset;
 	shared_ptr<Entity> _target;
 	int _layer;
+	const Vector2f screenRatio = Vector2f(2.0f, 1.5f);
 
 public:
 	explicit CameraComponent(Entity* p,const Vector2f& size,const Vector2f& position);

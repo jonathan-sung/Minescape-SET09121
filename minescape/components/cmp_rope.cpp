@@ -27,17 +27,9 @@ RopeComponent::RopeComponent(Entity* p,float maxlength,float delay) :Component(p
 
 void RopeComponent::updateClickPos()
 {
-	if (mouseClick()) {
-		//get window relative mouse coordinates
-		Vector2i mousePos = Mouse::getPosition(Engine::GetWindow());
-		clickPos = Engine::GetWindow().mapPixelToCoords(mousePos);
-	}
-	else
-	{
-		Vector2i joystickpos = Vector2i(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::U),
-			sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::V));
-		clickPos = Vector2f(joystickpos.x * ropeMaxLength, joystickpos.y * ropeMaxLength);
-	}
+	//get window relative mouse coordinates
+	Vector2i mousePos = Mouse::getPosition(Engine::GetWindow());
+	clickPos = Engine::GetWindow().mapPixelToCoords(mousePos);
 }
 
 bool RopeComponent::mouseClick() 
@@ -124,7 +116,7 @@ void RopeComponent::createRopeJoint()
 	ropeJoint = joint;
 }
 
-void RopeComponent::disposeOfDistanceJoint()
+void RopeComponent::disposeOfJoint()
 {
 	try {
 		Physics::GetWorld().get()->DestroyJoint(ropeJoint);
@@ -141,7 +133,7 @@ void RopeComponent::update(double dt)
 	{
 		if (ropeState == RopeState::Latched)
 		{
-			disposeOfDistanceJoint();
+			disposeOfJoint();
 			ropeState = RopeState::Withdrawing;
 		}
 		else
@@ -164,13 +156,24 @@ void RopeComponent::update(double dt)
 		currentEndPointPosition = _parent->getPosition();
 
 		//on mouse click
-		if (mouseClick()||Engine::keyPressed[Engine::Action2])
+		if (mouseClick())
 		{
 			//handle calculation for rope firing
 			updateClickPos();
 			//set the direction vector
 			setDirectionVector(_parent->getPosition(), clickPos);
 
+			//fire rope
+			ropeState = RopeState::InAir;
+		}
+		else if (Engine::keyPressed[Engine::Action2]&&sf::Joystick::isConnected(0))
+		{
+			Vector2i joystickpos = Vector2i(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::U),
+				sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::V));
+			clickPos = Vector2f(joystickpos.x * ropeMaxLength, joystickpos.y * ropeMaxLength);
+
+			//set the direction vector
+			setDirectionVector(_parent->getPosition(), clickPos);
 
 			//fire rope
 			ropeState = RopeState::InAir;
@@ -261,7 +264,7 @@ void RopeComponent::update(double dt)
 		{
 			cout << "changing states" << endl;
 			_parent->get_components<PlayerPhysicsComponent>()[0].get()->impulse(Vector2f(0, -5.0f));
-			disposeOfDistanceJoint();
+			disposeOfJoint();
 			ropeState = RopeState::Withdrawing;
 		}
 		//when player presses jump button go to withdraw and make player jump
