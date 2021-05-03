@@ -50,6 +50,7 @@ void CanaryAIComponent::update(double dt) {
 				if (!validMove(mov+_parent->getPosition())) {
 					waitTimeTick = waitTime / 2;
 					state = State::PauseAfterMove;
+					break;
 				}
 				else 
 				{
@@ -76,6 +77,7 @@ void CanaryAIComponent::update(double dt) {
 				if (!validMove(mov)) {
 					waitTimeTick = waitTime / 2;
 					state = State::PauseAfterMove;
+					break;
 				}
 				else
 				{
@@ -89,6 +91,7 @@ void CanaryAIComponent::update(double dt) {
 					{
 						waitTimeTick = waitTime;
 						state = State::PauseAfterMove;
+						break;
 					}
 				}
 
@@ -100,6 +103,7 @@ void CanaryAIComponent::update(double dt) {
 				{
 					turnedLeft = -turnedLeft;
 					state = State::Returning;
+					break;
 				}
 				break;
 			}
@@ -109,6 +113,7 @@ void CanaryAIComponent::update(double dt) {
 				if (length(distanceToInitialVector) < 0.5f)
 				{
 					state = State::Waiting;
+					break;
 				}
 				else
 				{
