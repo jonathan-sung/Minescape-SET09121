@@ -2,11 +2,8 @@
 #include <engine.h>
 
 CameraComponent::CameraComponent(Entity* p, const Vector2f& size, const Vector2f& position) :
-	Component(p)
+	Component(p),_size(size)
 {
-	_size = size;
-	/*float extraSpace = (((size.x / 4) * 3)- size.y)/2;
-	_size = size + Vector2f(0, extraSpace);*/
 	_offset = Vector2f(size.x / 2.0f, size.y / 2.0f);
 	_position = position + _offset;
 	_layer = 0;
