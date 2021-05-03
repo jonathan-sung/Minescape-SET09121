@@ -16,7 +16,7 @@ ww                www
 ww            n   www
 wwwwwwwwwww       www
 wwwwwwwwwww       www
-ww r          n   www
+ww            n   www
 ww       n        www
 ww            n   www
 ww                www
@@ -127,8 +127,8 @@ ww              wwwww
 ww            wwwwwww
 ww            wwwwwww
 ww        ww      www
-ww        ww      www
-ww    ww          www
+ww  n     ww      www
+ww    ww       n  www
 ww    ww   s      www
 wwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwww

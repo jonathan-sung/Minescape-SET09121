@@ -1,5 +1,6 @@
 #include "cmp_canary_ai.h"
 #include <engine.h>
+#include "cmp_animation.h"
 
 using namespace std;
 using namespace sf;
@@ -18,6 +19,8 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 
 void CanaryAIComponent::update(double dt) {
 	try {
+		turnedLeft = !(_direction.x > 0);
+		_parent->get_components<Animation>()[0]->FlipSprite(!turnedLeft);
 		if (auto pl = _player.lock()) {
 			switch (state)
 			{
@@ -32,8 +35,6 @@ void CanaryAIComponent::update(double dt) {
 						(_parent->getPosition().x > pl->getPosition().x && _direction.x > 0))
 					{
 						_direction.x = -_direction.x;
-						if (_direction.x > 0) turnedLeft = false;
-						else turnedLeft = true;
 					}
 
 					state = State::PlayerDetected;

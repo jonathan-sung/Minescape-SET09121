@@ -170,7 +170,7 @@ void Level1Scene::Update(const double& dt)
 	rocktime -= dt;
 
 	if (rocktime <= 0.f) {
-		rocktime = 5.f;
+		rocktime = 10.f;
 		for (sf::Vector2ul cr : ar) {
 			auto rock = makeEntity();
 			rock->addTag("rock");
