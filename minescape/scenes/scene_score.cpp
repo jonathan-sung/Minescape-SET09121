@@ -38,7 +38,8 @@ void ScoreScene::Load() {
 	}
 
 	auto next = makeEntity();
-	auto tc = next->addComponent<TextComponent>("Press H to continue.");
+	//cout << "hello " << Engine::keyControls[Engine::keybinds::Action1] << endl;
+	auto tc = next->addComponent<TextComponent>("Press Action 1 to continue.");
 	tc->SetSize(32);
 	tc->setPosition(Vector2f(0, tc->GetSize() * 2 + i * tc->GetSize()));
 
