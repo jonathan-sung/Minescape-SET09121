@@ -23,6 +23,10 @@ RopeComponent::RopeComponent(Entity* p, float maxlength, float delay) :Component
 	launchSpeed = 500;
 
 	impulseTime = 0.01f;
+	buffer_shoot.loadFromFile("res/sounds/fx/rope_shoot.wav");
+	rope_shoot_sound.setBuffer(buffer_shoot);
+	buffer_hit.loadFromFile("res/sounds/fx/rope_hit.wav");
+	rope_hit_sound.setBuffer(buffer_hit);
 }
 
 void RopeComponent::updateClickPos()
@@ -158,6 +162,7 @@ void RopeComponent::update(double dt)
 		//on mouse click
 		if (mouseClick())
 		{
+			rope_shoot_sound.play();
 			//handle calculation for rope firing
 			updateClickPos();
 			//set the direction vector
@@ -201,7 +206,7 @@ void RopeComponent::update(double dt)
 			createRopeJoint();
 
 			Vector2f addedImpulse = Vector2f(0, 0);
-
+			rope_hit_sound.play();
 			ropeState = RopeState::Latched;
 		}
 

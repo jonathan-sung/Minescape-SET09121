@@ -49,14 +49,14 @@ void ScoreScene::Load() {
 }
 
 void ScoreScene::UnLoad() {
-	cout << "Scene 1 UnLoad" << endl;
+	cout << "Score Scene UnLoad" << endl;
 
 	Scene::UnLoad();
 }
 
 void ScoreScene::Update(const double& dt) {
 	if (Engine::keyPressed[Engine::Action1]) {
-		Engine::ChangeScene((Scene*)&level1);
+		Engine::ChangeScene((Scene*)&menu);
 	}
 	Scene::Update(dt);
 }

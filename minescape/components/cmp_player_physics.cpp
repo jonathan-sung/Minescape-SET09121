@@ -165,7 +165,7 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
 	_body->SetBullet(true);
 	stun_time = STUN_TIME;
 	stunned = false;
-	stunSoundBuffer.loadFromFile("res/sounds/fx/rock_hit.wav");
+	stunSoundBuffer.loadFromFile("res/sounds/fx/new_rock_hit.wav");
 	stunSound.setBuffer(stunSoundBuffer);
 
 	jumpSoundBuffer.loadFromFile("res/sounds/fx/jump.wav");
