@@ -30,9 +30,15 @@ static shared_ptr<Entity> camera;
 sf::Music music;
 float timer;
 
+static shared_ptr<Entity> timer_txt;
+
 void Level1Scene::Load()
 {
 	timer = 0;
+	timer_txt = makeEntity();
+	auto t = timer_txt->addComponent<TextComponent>(to_string(timer));
+	t->SetSize(32);
+
 	paused = false;
 	cout << "Scene 1 Load" << endl;
 	music.setVolume(20);
@@ -154,12 +160,15 @@ void Level1Scene::UnLoad() {
 void Level1Scene::Update(const double& dt)
 {
 	timer += dt;
+	auto t = timer_txt->get_components<TextComponent>()[0];
+	t->SetText(to_string((int)(timer)));
+	t->setPosition(Vector2f(Engine::GetWindow().mapPixelToCoords(Vector2i(Engine::getResolution().x - Engine::getWindowSize().x / 2, 32))));
 	float delta = dt;
 	if (paused) delta = 0;
 
 
 	//Pause Menu
-	if ((Keyboard::isKeyPressed(Keyboard::Escape)||sf::Joystick::isButtonPressed(0,7)) && buttonCD <= 0)
+	if ((Keyboard::isKeyPressed(Keyboard::Escape) || sf::Joystick::isButtonPressed(0, 7)) && buttonCD <= 0)
 	{
 		togglePause();
 		buttonCD = 0.2f;
@@ -184,7 +193,8 @@ void Level1Scene::Update(const double& dt)
 
 	auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
-		string score = to_string(timer);
+		int int_timer = timer;
+		string score = to_string(int_timer);
 		cout << "Level completed in:" + score << endl;
 
 		//ofstream MyFile("scores.txt");

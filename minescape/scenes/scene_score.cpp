@@ -18,7 +18,7 @@ void ScoreScene::Load() {
 	t->SetSize(32);
 
 	string myText;
-	std::vector<float> scores;
+	std::vector<int> scores;
 
 	ifstream MyReadFile("scores.txt");
 	while (getline(MyReadFile, myText)) {
@@ -28,7 +28,7 @@ void ScoreScene::Load() {
 	std::sort(scores.begin(), scores.end());
 
 	int i = 0;
-	for (float time : scores) {
+	for (int time : scores) {
 		auto txt = makeEntity();
 		auto t = txt->addComponent<TextComponent>(to_string(time));
 		t->SetSize(32);
