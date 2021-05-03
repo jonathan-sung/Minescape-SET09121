@@ -9,7 +9,10 @@ using namespace sf;
 
 void MenuScene::Load() 
 {
-	music.setVolume(20);
+    buffer.loadFromFile("res/sounds/fx/blip_select.wav");
+    selection_sound.setBuffer(buffer);
+    selection_sound.setVolume(25);
+	music.setVolume(25);
 	music.setLoop(true);
 	cout << "Menu Load";
     Engine::GetWindow().setView(View(Vector2f(Engine::getResolution().x / 2, Engine::getResolution().y / 2), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
@@ -51,6 +54,7 @@ void MenuScene::Load()
 
 void MenuScene::UnLoad()
 {
+    cout << "Main menu unloaded" << endl;
     music.stop();
     Scene::UnLoad();
 }
@@ -59,6 +63,7 @@ void MenuScene::Update(const double& dt)
 {
     if (Engine::keyPressed[Engine::keybinds::Up] && buttonCD <= 0)
     {
+        selection_sound.play();
         if (selection == 0) selection = 2;
         else selection--;
         cout << "Selection: ";
@@ -70,6 +75,7 @@ void MenuScene::Update(const double& dt)
 
     if (Engine::keyPressed[Engine::keybinds::Down] && buttonCD <= 0)
     {
+        selection_sound.play();
         if (selection == 2) selection = 0;
         else selection++;
         cout << "Selection: ";

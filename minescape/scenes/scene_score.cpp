@@ -49,7 +49,7 @@ void ScoreScene::Load() {
 }
 
 void ScoreScene::UnLoad() {
-	cout << "Scene 1 UnLoad" << endl;
+	cout << "Score Scene UnLoad" << endl;
 
 	Scene::UnLoad();
 }

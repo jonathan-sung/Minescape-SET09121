@@ -28,6 +28,8 @@ static shared_ptr<Entity> pauseMenu;
 sf::Texture gasTex;
 static shared_ptr<Entity> camera;
 sf::Music music;
+sf::SoundBuffer buffer;
+sf::Sound pause_sound;
 float timer;
 
 static shared_ptr<Entity> timer_txt;
@@ -145,6 +147,8 @@ void Level1Scene::Load()
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	cout << " Scene 1 Load Done" << endl;
 
+	buffer.loadFromFile("res/sounds/fx/pause.wav");
+	pause_sound.setBuffer(buffer);
 
 	ar = ls::findTiles('r');
 	setLoaded(true);
@@ -219,9 +223,11 @@ void Level1Scene::Update(const double& dt)
 
 void Level1Scene::togglePause()
 {
+	pause_sound.play();
 	paused = !paused;
 	if (paused)
 	{
+		//music.pause();
 		pauseMenu->setPosition(Vector2f(Engine::GetWindow().mapPixelToCoords(Vector2i(Engine::getWindowSize().x - 250, Engine::getWindowSize().y - 250))));
 		pauseMenu->get_components<PauseMenu>()[0]->pauseGame();
 		cout << "Pause Menu Loc";
@@ -230,6 +236,7 @@ void Level1Scene::togglePause()
 	}
 	else
 	{
+		//music.play();
 		pauseMenu->setPosition(Vector2f(-1000, 1000));
 		pauseMenu->get_components<PauseMenu>()[0]->pauseGame();
 	}

@@ -11,6 +11,8 @@ private:
 	int selection;
 	shared_ptr<Entity> options[3];
 	Music music;
+	sf::Sound selection_sound;
+	sf::SoundBuffer buffer;
 
 public:
 	MenuScene() = default;
