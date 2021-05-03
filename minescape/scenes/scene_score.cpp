@@ -56,7 +56,7 @@ void ScoreScene::UnLoad() {
 
 void ScoreScene::Update(const double& dt) {
 	if (Engine::keyPressed[Engine::Action1]) {
-		Engine::ChangeScene((Scene*)&level1);
+		Engine::ChangeScene((Scene*)&menu);
 	}
 	Scene::Update(dt);
 }

@@ -52,6 +52,7 @@ void MenuScene::Load()
 void MenuScene::UnLoad()
 {
     music.stop();
+    Scene::UnLoad();
 }
 
 void MenuScene::Update(const double& dt)
