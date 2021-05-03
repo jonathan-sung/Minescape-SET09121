@@ -27,6 +27,21 @@ sf::Keyboard::Key Engine::keyControls[6] = {
     Keyboard::Space,
     Keyboard::Enter
 };
+
+int Engine::joypadControls[2] = {
+    0,
+    5
+};
+
+bool Engine::keyPressed[6] = {
+false,
+false,
+false,
+false,
+false,
+false
+};
+
 float Engine::musicVolume;
 float Engine::sfxVolume;
 
@@ -35,7 +50,6 @@ sf::Vector2f Engine::resolutions[4];
 int Engine::resSelection;
 
 bool Engine::_windowed = false;
-bool Engine::_gamepad;
 
 void Loading_update(float dt, const Scene* const scn) {
   //  cout << "Eng: Loading Screen\n";
@@ -68,6 +82,39 @@ void Engine::Update()
 {
   static sf::Clock clock;
   float dt = clock.restart().asSeconds();
+
+  bool joystickUsed = false;
+  ////joystick
+  if (sf::Joystick::isConnected(0))
+  {
+      keyPressed[keybinds::Up] = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -0.1f;
+      keyPressed[keybinds::Down] = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > 0.1f;
+      keyPressed[keybinds::Left] = sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -0.1f;
+      keyPressed[keybinds::Right] = sf::Joystick::getAxisPosition(0, sf::Joystick::X) > 0.1f;
+      keyPressed[keybinds::Action1] = sf::Joystick::isButtonPressed(0, joypadControls[0]);
+      keyPressed[keybinds::Action2] = sf::Joystick::isButtonPressed(0, joypadControls[1]);
+
+      //check if joystick was used to avoid overwrite
+      for (int i = 0; i < sizeof(keyPressed) / sizeof(keyPressed[0]); i++)
+      {
+          if (keyPressed[i])
+          {
+              joystickUsed = true;
+              break;
+          }
+      }
+  }
+
+  if (!joystickUsed) {
+      //keyboard
+      keyPressed[keybinds::Up] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Up]);
+      keyPressed[keybinds::Down] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Down]);
+      keyPressed[keybinds::Left] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Left]);
+      keyPressed[keybinds::Right] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Right]);
+      keyPressed[keybinds::Action1] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Action1]);
+      keyPressed[keybinds::Action2] = sf::Keyboard::isKeyPressed(keyControls[keybinds::Action2]);
+  }
+
   if (paused) dt = 0;
   {
     frametimes[++ftc] = dt;
@@ -146,9 +193,9 @@ void Engine::Start(unsigned int width, unsigned int height,
         window.close();
       }
     }
-    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+   /* if (Keyboard::isKeyPressed(Keyboard::Escape)) {
       window.close();
-    }
+    }*/
 
     window.clear();
     Update();
@@ -218,8 +265,6 @@ void Engine::setWindowMode(const bool iswindow)
     _windowed = iswindow; 
     
 }
-
-void Engine::setUseGamepad(const bool gamepad) { _gamepad = gamepad; }
 
 void Scene::Update(const double& dt) { ents.update(dt); }
 

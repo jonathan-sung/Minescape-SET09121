@@ -61,7 +61,7 @@ void OptionsScene::Update(const double& dt)
     // cout << "Menu Update "<<dt<<"\n";
     //static float buttonCD;
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Up]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Up] && buttonCD <= 0)
     {
         if (selection == 0) selection = 4;
         else selection--;
@@ -70,7 +70,7 @@ void OptionsScene::Update(const double& dt)
         changeText();
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Down]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Down] && buttonCD <= 0)
     {
         if (selection == 4) selection = 0;
         else selection++;
@@ -78,8 +78,8 @@ void OptionsScene::Update(const double& dt)
         changeText();
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) && !enterDown || 
-        sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]) && !enterDown)
+    if (Engine::keyPressed[Engine::keybinds::Action1] && !enterDown ||
+        Engine::keyPressed[Engine::keybinds::Action2] && !enterDown)
     {
         switch (selection)
         {
@@ -96,13 +96,13 @@ void OptionsScene::Update(const double& dt)
         enterDown = true;
     }
 
-    if (!sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action1]) && 
-        !sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Action2]))
+    if (!Engine::keyPressed[Engine::keybinds::Action1] &&
+        !Engine::keyPressed[Engine::keybinds::Action2])
     {
         enterDown = false;
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Left]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Left]) && buttonCD <= 0)
     {
         switch (selection)
         {
@@ -126,7 +126,7 @@ void OptionsScene::Update(const double& dt)
         buttonCD = 0.2f;
     }
 
-    if (sf::Keyboard::isKeyPressed(Engine::keyControls[Engine::keybinds::Right]) && buttonCD <= 0)
+    if (Engine::keyPressed[Engine::keybinds::Right]) && buttonCD <= 0)
     {
         switch (selection) 
         {
