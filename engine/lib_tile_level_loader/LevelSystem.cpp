@@ -189,9 +189,8 @@ std::vector<sf::Vector2ul> LevelSystem::findTiles(LevelSystem::Tile type) {
 
 LevelSystem::Tile LevelSystem::getTileAt(Vector2f v) {
 	auto a = v - _offset;
-	if (a.x < 0 || a.y < 0) {
-		throw string("Tile out of range ");
-	}
+	if (a.x < 0) v.x = 0;
+	if (a.y < 0) v.y = 0;
 	return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }
 
