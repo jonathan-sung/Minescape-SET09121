@@ -21,7 +21,7 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 
 void CanaryAIComponent::update(double dt) {
 	try {
-		turnedLeft = !(_direction.x > 0);
+		turnedLeft = (_direction.x < 0);
 		_parent->get_components<Animation>()[0]->FlipSprite(!turnedLeft);
 		if (auto pl = _player.lock()) {
 			switch (state)
