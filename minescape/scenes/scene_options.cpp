@@ -167,7 +167,7 @@ void OptionsScene::changeText()
     else t[0]->SetText("Windowed");
 
     t = options[3]->GetCompatibleComponent<TextComponent>();
-    string buttonText = to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y);
+    string buttonText = to_string((int)Engine::getResolution().x) + 'x' + to_string((int)Engine::getResolution().y);
     t[0]->SetText(buttonText);
 
     t = options[4]->GetCompatibleComponent<TextComponent>();
@@ -190,7 +190,7 @@ void OptionsScene::changeText()
           break;
       case(3):
           t = options[3]->GetCompatibleComponent<TextComponent>();
-          buttonText = "< " + to_string(Engine::getResolution().x) + ',' + to_string(Engine::getResolution().y) + " >";
+          buttonText = "< " + to_string((int)Engine::getResolution().x) + 'x' + to_string((int)Engine::getResolution().y) + " >";
           t[0]->SetText(buttonText);
           break;
       case(4):
