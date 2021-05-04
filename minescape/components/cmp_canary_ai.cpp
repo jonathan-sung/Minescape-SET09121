@@ -14,14 +14,15 @@ CanaryAIComponent::CanaryAIComponent(Entity* p, float visionRadius, float wait, 
 	_initialPos = p->getPosition();
 	_direction = sf::Vector2f(1, 1);
 	state = State::Waiting;
-	turnedLeft = false;
-	goingLeft = false;
+	turnedLeft = true;
+	goingLeft = true;
 	roamLimitx = 50.0f;
 }
 
 void CanaryAIComponent::update(double dt) {
 	try {
-		turnedLeft = (_direction.x < 0);
+		if (_direction.x < 0 && !turnedLeft)turnedLeft = true;
+		else if (_direction.x > 0 && turnedLeft)turnedLeft = false;
 		_parent->get_components<Animation>()[0]->FlipSprite(!turnedLeft);
 		if (auto pl = _player.lock()) {
 			switch (state)
