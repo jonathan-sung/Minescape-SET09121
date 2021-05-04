@@ -2,7 +2,6 @@
 
 #include "ecm.h"
 #include <Box2D/Box2D.h>
-#include <SFML/Audio.hpp>
 
 using namespace sf;
 
@@ -34,11 +33,6 @@ private:
 	bool _usable;
 	float _delay;
 	float delaytimer;
-	sf::Sound rope_shoot_sound;
-	sf::Sound rope_hit_sound;
-	sf::SoundBuffer buffer_shoot;
-	sf::SoundBuffer buffer_hit;
-
 
 	enum RopeState
 	{

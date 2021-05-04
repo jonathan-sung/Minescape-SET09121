@@ -27,9 +27,6 @@ static shared_ptr<Entity> pauseMenu;
 
 sf::Texture gasTex;
 static shared_ptr<Entity> camera;
-sf::Music music;
-sf::SoundBuffer buffer;
-sf::Sound pause_sound;
 float timer;
 
 static shared_ptr<Entity> timer_txt;
@@ -43,8 +40,6 @@ void Level1Scene::Load()
 
 	paused = false;
 	cout << "Scene 1 Load" << endl;
-	music.setVolume(20);
-	music.setLoop(true);
 	ls::loadLevelFile("res/level_1.txt", TILE_SIZE);
 	auto ho = Engine::getWindowSize().y - (ls::getHeight() * TILE_SIZE);
 	//ho = 0;
@@ -92,7 +87,6 @@ void Level1Scene::Load()
 			e->addComponent<PhysicsComponent>(false, Vector2f(TILE_SIZE, TILE_SIZE));
 		}
 		// *********************************
-		if (music.openFromFile("res/sounds/music/minescape_main_theme.ogg")) music.play();
 	}
 
 	//Enemies
@@ -146,10 +140,7 @@ void Level1Scene::Load()
 	//Simulate long loading times
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	cout << " Scene 1 Load Done" << endl;
-
-	buffer.loadFromFile("res/sounds/fx/pause.wav");
-	pause_sound.setBuffer(buffer);
-
+	SoundEngine::music_level1.play();
 	ar = ls::findTiles('r');
 	setLoaded(true);
 }
@@ -158,7 +149,7 @@ void Level1Scene::UnLoad() {
 	cout << "Scene 1 UnLoad" << endl;
 	player.reset();
 	ls::unload();
-	music.stop();
+	SoundEngine::music_level1.stop();
 	Scene::UnLoad();
 }
 
@@ -223,7 +214,7 @@ void Level1Scene::Update(const double& dt)
 
 void Level1Scene::togglePause()
 {
-	pause_sound.play();
+	SoundEngine::fx_pause.play();
 	paused = !paused;
 	if (paused)
 	{

@@ -245,7 +245,7 @@ void Engine::ChangeScene(Scene* s) {
 	}
 }
 
-void Engine::setMusicVolume(int vol) { musicVolume = vol; }
+void Engine::setMusicVolume(int vol) { musicVolume = vol; SoundEngine::UpdateVolumes(); }
 int Engine::getMusicVolume() { return musicVolume; }
 
 void Engine::setFXVolume(int vol) { sfxVolume = vol; }

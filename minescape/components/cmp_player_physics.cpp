@@ -104,7 +104,7 @@ void PlayerPhysicsComponent::update(double dt) {
 				setVelocity(Vector2f(getVelocity().x, 0.f));
 				teleport(Vector2f(pos.x, pos.y - 2.0f));
 				impulse(Vector2f(0, -10.f));
-				jumpSound.play();
+				SoundEngine::fx_jump.play();
 			}
 		}
 	}
@@ -134,7 +134,7 @@ void PlayerPhysicsComponent::stun() {
 		stun_time = STUN_TIME;
 		stunned = true;
 		setCollidable(false);
-		stunSound.play();
+		SoundEngine::fx_stun.play();
 	}
 }
 
@@ -165,9 +165,4 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
 	_body->SetBullet(true);
 	stun_time = STUN_TIME;
 	stunned = false;
-	stunSoundBuffer.loadFromFile("res/sounds/fx/new_rock_hit.wav");
-	stunSound.setBuffer(stunSoundBuffer);
-
-	jumpSoundBuffer.loadFromFile("res/sounds/fx/jump.wav");
-	jumpSound.setBuffer(jumpSoundBuffer);
 }
