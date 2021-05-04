@@ -13,7 +13,7 @@ using namespace sf;
 void ScoreScene::Load() {
 	Engine::GetWindow().setView(View(Vector2f(640, 360), Vector2f(Engine::getResolution().x, Engine::getResolution().y)));
 	auto title = makeEntity();
-	auto t = title->addComponent<TextComponent>("Times");
+	auto t = title->addComponent<TextComponent>("Score (Seconds)");
 	t->setPosition(Vector2f(0, 0));
 	t->SetSize(32);
 
@@ -39,7 +39,7 @@ void ScoreScene::Load() {
 
 	auto next = makeEntity();
 	//cout << "hello " << Engine::keyControls[Engine::keybinds::Action1] << endl;
-	auto tc = next->addComponent<TextComponent>("Press Action 1 to continue.");
+	auto tc = next->addComponent<TextComponent>("Press Action1 to continue.");
 	tc->SetSize(32);
 	tc->setPosition(Vector2f(0, tc->GetSize() * 2 + i * tc->GetSize()));
 

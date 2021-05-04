@@ -37,5 +37,6 @@ int main() {
     //Engine::keyControls[Engine::keybinds::Right] = Keyboard::D;
     //Engine::keyControls[Engine::keybinds::Action1] = Keyboard::Space;
     //Engine::keyControls[Engine::keybinds::Action2] = Keyboard::Enter;
+    SoundEngine::Start();
 	Engine::Start(1280, 720, "Minescape", &menu);
 }

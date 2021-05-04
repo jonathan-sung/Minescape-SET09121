@@ -9,6 +9,7 @@
 #include "scenes/scene_score.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
+#include "sound_engine.h"
 
 extern bool enterDown;
 
